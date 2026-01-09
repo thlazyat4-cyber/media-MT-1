@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دفتر مصروف ذكي - V1.1.2</title>
+    <title>دفتر مصروف ذكي - الإصدار V.1.5.0</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ===== أنماط الإصدار V1.1.2 ===== */
+        /* أنماط عامة */
         * {
             margin: 0;
             padding: 0;
@@ -15,22 +15,21 @@
         }
 
         :root {
-            --primary-color: #2a5298;
-            --secondary-color: #1e3c72;
-            --light-color: #ffffff;
-            --text-color: #000000;
-            --success-color: #4CAF50;
+            --primary-color: #1e3c72;
+            --secondary-color: #2a5298;
+            --accent-color: #4CAF50;
             --danger-color: #f44336;
             --warning-color: #ff9800;
-            --info-color: #2196F3;
+            --light-color: #f5f7fa;
+            --dark-color: #333;
             --border-radius: 8px;
-            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
         }
 
         body {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--light-color) 100%);
-            color: var(--text-color);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark-color);
             min-height: 100vh;
             line-height: 1.6;
         }
@@ -38,62 +37,7 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* تصميم الرأس مع الشعار */
-        header {
-            text-align: center;
-            margin-bottom: 25px;
-            padding: 25px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .app-logo {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid white;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .app-title {
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-        }
-
-        .subtitle {
-            font-size: 1.1rem;
-            opacity: 0.95;
-            margin-top: 5px;
-        }
-
-        .version-badge {
-            display: inline-block;
-            background: linear-gradient(45deg, #ff9800, #ff5722);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            margin-right: 10px;
+            padding: 15px;
         }
 
         /* تصميم الأزرار - مستطيل صغير 2:3 */
@@ -101,7 +45,7 @@
             background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
             color: white;
             border: none;
-            padding: 12px 18px;
+            padding: 10px 15px;
             font-size: 1rem;
             border-radius: var(--border-radius);
             cursor: pointer;
@@ -116,12 +60,11 @@
             gap: 8px;
             margin: 5px;
             text-decoration: none;
-            font-weight: 600;
         }
 
         .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(42, 82, 152, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(42, 82, 152, 0.2);
         }
 
         .btn:active {
@@ -148,21 +91,87 @@
             background: linear-gradient(to right, #757575, #616161);
         }
 
+        /* تصميم الرأس */
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .version-badge {
+            display: inline-block;
+            background-color: #ff9800;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .project-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .project-info-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        /* شريط الإشعارات */
+        .notification-bar {
+            background: linear-gradient(to right, #4CAF50, #2E7D32);
+            color: white;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--box-shadow);
+        }
+
+        .notification-text {
+            font-size: 0.95rem;
+        }
+
+        .close-notification {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
         /* تصميم الشاشات */
         .screen {
             display: none;
-            background-color: var(--light-color);
+            background-color: white;
             border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            margin-bottom: 25px;
-            min-height: 550px;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            padding: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+            min-height: 500px;
         }
 
         .screen.active {
@@ -173,37 +182,37 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
-            padding-bottom: 20px;
-            border-bottom: 3px solid #eee;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
         }
 
         .screen-title {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             color: var(--primary-color);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         /* الصفحة الرئيسية */
         .main-menu {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-            gap: 25px;
-            margin-top: 35px;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
         }
 
         .menu-item {
-            background: var(--light-color);
+            background: white;
             border-radius: var(--border-radius);
-            padding: 25px;
+            padding: 20px;
             text-align: center;
             box-shadow: var(--box-shadow);
             transition: var(--transition);
             cursor: pointer;
-            border: 3px solid transparent;
-            height: 160px;
+            border: 2px solid transparent;
+            height: 150px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -211,49 +220,47 @@
         }
 
         .menu-item:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-            border-color: var(--primary-color);
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+            border-color: var(--secondary-color);
         }
 
         .menu-icon {
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             color: var(--primary-color);
-            margin-bottom: 18px;
+            margin-bottom: 15px;
         }
 
         .menu-text {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--text-color);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark-color);
         }
 
         /* لوحة تسجيل مصروف */
         .expense-form-container {
-            padding: 20px;
+            padding: 15px;
         }
 
         .date-header {
             text-align: center;
             background: linear-gradient(to right, #E8F5E9, #C8E6C9);
-            padding: 20px;
+            padding: 15px;
             border-radius: var(--border-radius);
-            margin-bottom: 25px;
-            border: 2px solid #4CAF50;
+            margin-bottom: 20px;
         }
 
         .date-display {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--primary-color);
             font-weight: bold;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
         }
 
         .expense-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             background: white;
             border-radius: var(--border-radius);
             overflow: hidden;
@@ -263,13 +270,12 @@
         .expense-table th {
             background: var(--primary-color);
             color: white;
-            padding: 15px;
+            padding: 12px;
             text-align: center;
-            font-size: 1.1rem;
         }
 
         .expense-table td {
-            padding: 12px;
+            padding: 10px;
             border-bottom: 1px solid #eee;
             text-align: center;
         }
@@ -278,45 +284,35 @@
             border-bottom: none;
         }
 
-        .expense-table tr:hover {
-            background-color: #f9f9f9;
-        }
-
         .expense-input {
             width: 100%;
-            padding: 10px 12px;
-            border: 2px solid #ddd;
-            border-radius: 6px;
+            padding: 8px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
             font-size: 1rem;
             text-align: center;
-            transition: var(--transition);
         }
 
         .expense-input:focus {
             outline: none;
             border-color: var(--secondary-color);
-            box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.15);
+            box-shadow: 0 0 0 2px rgba(42, 82, 152, 0.1);
         }
 
         .stats-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin: 25px 0;
+            gap: 15px;
+            margin: 20px 0;
         }
 
         .stat-box {
             background: white;
             border-radius: var(--border-radius);
-            padding: 20px;
+            padding: 15px;
             text-align: center;
             box-shadow: var(--box-shadow);
-            border-top: 5px solid;
-            transition: var(--transition);
-        }
-
-        .stat-box:hover {
-            transform: translateY(-5px);
+            border-top: 4px solid;
         }
 
         .stat-given {
@@ -332,70 +328,68 @@
         }
 
         .stat-title {
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: #666;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 5px;
         }
 
         .stat-value {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: bold;
-            color: var(--text-color);
+            color: var(--dark-color);
         }
 
         .givers-display {
-            background: #f8f9fa;
+            background: #f9f9f9;
             border-radius: var(--border-radius);
-            padding: 20px;
-            margin: 25px 0;
-            min-height: 80px;
-            border: 2px dashed #ddd;
+            padding: 15px;
+            margin: 20px 0;
+            min-height: 60px;
         }
 
         .empty-message {
             text-align: center;
             color: #888;
             font-style: italic;
-            padding: 30px;
-            font-size: 1.1rem;
+            padding: 20px;
         }
 
         .action-buttons {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 30px;
-            padding: 25px 0;
-            border-top: 2px solid #eee;
+            gap: 10px;
+            margin-top: 20px;
+            padding: 20px 0;
+            border-top: 1px solid #eee;
         }
 
         /* لوحة أوراق مصروف محفوظة ومحذوفة */
         .expense-cards-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 25px;
-            margin-top: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
         }
 
         .expense-card {
             background: white;
             border-radius: var(--border-radius);
-            padding: 25px;
+            padding: 20px;
             box-shadow: var(--box-shadow);
-            border-left: 6px solid #4CAF50;
+            border-left: 5px solid #4CAF50;
             transition: var(--transition);
             cursor: pointer;
-            border: 3px solid transparent;
+            border: 2px solid transparent;
         }
 
         .expense-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
         .expense-card.selected {
@@ -411,128 +405,113 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #eee;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
         }
 
         .expense-date {
             font-weight: bold;
             color: var(--primary-color);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
 
         .expense-total {
             font-weight: bold;
             color: #f44336;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
         }
 
         .expense-items {
-            margin-bottom: 20px;
-            max-height: 220px;
+            margin-bottom: 15px;
+            max-height: 200px;
             overflow-y: auto;
-            padding-right: 10px;
-        }
-
-        .expense-items::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .expense-items::-webkit-scrollbar-thumb {
-            background: var(--primary-color);
-            border-radius: 3px;
         }
 
         .expense-item {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
-            padding-bottom: 10px;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
             border-bottom: 1px dashed #eee;
         }
 
         .item-name {
-            color: var(--text-color);
-            font-weight: 500;
+            color: var(--dark-color);
         }
 
         .item-amount {
             color: var(--primary-color);
-            font-weight: 700;
+            font-weight: 600;
         }
 
         .card-actions {
             display: flex;
             gap: 10px;
-            margin-top: 20px;
+            margin-top: 15px;
         }
 
         /* لوحة تعيين المعطين */
         .giver-form {
-            max-width: 550px;
-            margin: 0 auto 35px;
-            background: #f8f9fa;
-            padding: 30px;
+            max-width: 500px;
+            margin: 0 auto 30px;
+            background: #f9f9f9;
+            padding: 25px;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            border: 2px solid #e9ecef;
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 10px;
-            font-weight: 700;
+            margin-bottom: 8px;
+            font-weight: 600;
             color: var(--primary-color);
-            font-size: 1.1rem;
         }
 
         .form-group input {
             width: 100%;
-            padding: 14px 18px;
+            padding: 12px 15px;
             border: 2px solid #ddd;
             border-radius: var(--border-radius);
-            font-size: 1.1rem;
+            font-size: 1rem;
             transition: var(--transition);
         }
 
         .form-group input:focus {
             border-color: var(--secondary-color);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.2);
         }
 
         .givers-list-container {
-            margin-top: 35px;
+            margin-top: 30px;
         }
 
         .givers-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
         }
 
         .giver-card {
             background: white;
             border-radius: var(--border-radius);
-            padding: 25px;
+            padding: 20px;
             box-shadow: var(--box-shadow);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 3px solid transparent;
+            border: 2px solid transparent;
             transition: var(--transition);
             cursor: pointer;
         }
 
         .giver-card:hover {
             border-color: var(--secondary-color);
-            transform: translateY(-3px);
         }
 
         .giver-card.selected {
@@ -542,91 +521,88 @@
 
         .giver-info h4 {
             color: var(--primary-color);
-            margin-bottom: 8px;
-            font-size: 1.2rem;
+            margin-bottom: 5px;
         }
 
         .giver-amount {
             font-weight: bold;
             color: #4CAF50;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
         }
 
         .giver-actions {
             display: flex;
-            gap: 10px;
+            gap: 8px;
         }
 
         /* لوحة تعيين العملة */
         .flags-container {
-            margin-top: 25px;
+            margin-top: 20px;
         }
 
         .flags-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            max-height: 550px;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            max-height: 500px;
             overflow-y: auto;
-            padding: 15px;
-            border: 2px solid #eee;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            background: #f8f9fa;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            margin-bottom: 20px;
         }
 
         .flag-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
-            border-radius: 12px;
+            padding: 15px;
+            border-radius: 10px;
             cursor: pointer;
             transition: var(--transition);
-            border: 3px solid transparent;
-            background-color: white;
+            border: 2px solid transparent;
+            background-color: #f8f9fa;
             height: 100%;
             justify-content: center;
         }
 
         .flag-item:hover {
             background-color: #e3f2fd;
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .flag-item.selected {
             background-color: #e8f4ff;
             border-color: #2a5298;
-            box-shadow: 0 8px 20px rgba(42, 82, 152, 0.25);
+            box-shadow: 0 5px 15px rgba(42, 82, 152, 0.2);
         }
 
         .flag-img {
-            width: 160px;
-            height: 90px;
+            width: 80px;
+            height: 50px;
             object-fit: cover;
-            border-radius: 6px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-            margin-bottom: 15px;
-            border: 2px solid #eee;
+            border-radius: 5px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
         }
 
         .flag-name {
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             text-align: center;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--primary-color);
-            margin-bottom: 8px;
+            margin-bottom: 5px;
         }
 
         .flag-currency {
-            font-size: 0.95rem;
+            font-size: 0.8rem;
             text-align: center;
             color: #2E7D32;
-            font-weight: 600;
+            font-weight: 500;
             background-color: #E8F5E9;
-            padding: 6px 12px;
-            border-radius: 12px;
+            padding: 3px 8px;
+            border-radius: 10px;
             width: 100%;
         }
 
@@ -634,180 +610,158 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 35px;
-            padding-bottom: 30px;
-            border-bottom: 2px dashed #ddd;
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 1px dashed #ddd;
         }
 
         .selected-flag-img {
-            width: 320px;
-            height: 180px;
+            width: 200px;
+            height: 120px;
             object-fit: cover;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-            margin-bottom: 20px;
-            border: 3px solid var(--primary-color);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
         }
 
         .country-name {
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: var(--primary-color);
-            margin-bottom: 15px;
-            font-weight: 700;
+            margin-bottom: 10px;
         }
 
         .country-currency {
-            font-size: 1.4rem;
+            font-size: 1.1rem;
             color: #2E7D32;
             background-color: #E8F5E9;
-            padding: 12px 30px;
-            border-radius: 25px;
-            font-weight: 700;
-            border: 2px solid #4CAF50;
+            padding: 8px 25px;
+            border-radius: 20px;
+            font-weight: 600;
         }
 
         /* لوحة إعدادات الموقع */
         .color-settings-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
-            margin: 25px 0;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
         }
 
         .color-option {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
+            padding: 15px;
             border-radius: var(--border-radius);
             background: white;
             box-shadow: var(--box-shadow);
             cursor: pointer;
             transition: var(--transition);
-            border: 3px solid transparent;
+            border: 2px solid transparent;
         }
 
         .color-option:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
         }
 
         .color-option.selected {
             border-color: var(--primary-color);
             background-color: #f0f8ff;
-            transform: scale(1.05);
         }
 
         .color-preview {
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
-            margin-bottom: 15px;
-            border: 4px solid white;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+            border: 3px solid white;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
         }
 
         .color-name {
-            font-weight: 700;
-            color: var(--text-color);
-            font-size: 1rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            font-size: 0.9rem;
         }
 
         .color-selection-info {
-            margin: 25px 0;
-            padding: 20px;
-            background: #f8f9fa;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9f9;
             border-radius: var(--border-radius);
-            border: 2px solid #e9ecef;
-            font-size: 1.1rem;
         }
 
         /* لوحة تفاصيل الموقع */
         .project-details-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            margin: 30px 0;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
         }
 
         .detail-card {
             background: white;
             border-radius: var(--border-radius);
-            padding: 25px;
+            padding: 20px;
             box-shadow: var(--box-shadow);
             text-align: center;
             transition: var(--transition);
-            border: 2px solid transparent;
         }
 
         .detail-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-            border-color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         }
 
         .detail-card h3 {
             color: var(--primary-color);
-            margin-bottom: 18px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #eee;
-            font-size: 1.2rem;
-        }
-
-        .detail-card p {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
             font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-color);
         }
 
         .contact-channels-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            margin: 30px 0;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
         }
 
         .contact-channel {
             background: white;
             border-radius: var(--border-radius);
-            padding: 25px;
+            padding: 20px;
             box-shadow: var(--box-shadow);
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
             transition: var(--transition);
-            border: 2px solid transparent;
         }
 
         .contact-channel:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-            border-color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         }
 
         .channel-icon {
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: var(--primary-color);
-            min-width: 50px;
-        }
-
-        .channel-info {
-            flex-grow: 1;
         }
 
         .channel-info h4 {
             color: var(--primary-color);
-            margin-bottom: 8px;
-            font-size: 1.1rem;
+            margin-bottom: 5px;
+            font-size: 1rem;
         }
 
         .channel-link {
             color: #666;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             display: block;
-            margin-bottom: 12px;
-            word-break: break-all;
+            margin-bottom: 10px;
         }
 
         .channel-link:hover {
@@ -818,93 +772,69 @@
         .work-hours-info {
             background: linear-gradient(to right, #E8F5E9, #C8E6C9);
             border-radius: var(--border-radius);
-            padding: 30px;
+            padding: 25px;
             text-align: center;
-            margin: 35px 0;
-            border: 3px solid #4CAF50;
+            margin: 30px 0;
         }
 
         .work-hours-info h3 {
             color: var(--primary-color);
-            margin-bottom: 18px;
-            font-size: 1.3rem;
-        }
-
-        .work-hours-info p {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-color);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
         }
 
         /* إشعارات */
         .notification {
             position: fixed;
-            top: 25px;
-            right: 25px;
+            top: 20px;
+            right: 20px;
             background-color: #4CAF50;
             color: white;
-            padding: 18px 28px;
+            padding: 15px 25px;
             border-radius: var(--border-radius);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             display: none;
             z-index: 1000;
             animation: fadeIn 0.5s;
-            max-width: 350px;
-            font-weight: 600;
-            border-left: 5px solid #2E7D32;
+            max-width: 300px;
+        }
+
+        .notification.error {
+            background-color: #f44336;
+        }
+
+        .notification.warning {
+            background-color: #ff9800;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* التذييل */
         footer {
             text-align: center;
-            margin-top: 40px;
-            padding-top: 25px;
-            border-top: 2px solid #ddd;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
             color: #666;
-            font-size: 0.95rem;
-            padding: 25px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: var(--border-radius);
+            font-size: 0.9rem;
+            padding: 20px;
         }
 
         /* تجاوبية */
-        @media (max-width: 992px) {
+        @media (max-width: 768px) {
             .main-menu {
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            .flags-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .selected-flag-img {
-                width: 280px;
-                height: 157px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
-            
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            .app-logo {
-                width: 80px;
-                height: 80px;
-            }
-            
             .stats-container {
                 grid-template-columns: 1fr;
-                gap: 15px;
+            }
+            
+            .flags-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
             
             .expense-cards-container, .givers-grid {
@@ -913,7 +843,7 @@
             
             .screen-header {
                 flex-direction: column;
-                gap: 15px;
+                gap: 10px;
                 align-items: flex-start;
             }
             
@@ -924,118 +854,111 @@
             
             .btn {
                 width: 100%;
-                max-width: 350px;
-            }
-            
-            .main-menu {
-                grid-template-columns: 1fr;
+                max-width: 300px;
             }
         }
 
         @media (max-width: 480px) {
-            .menu-item {
-                height: 140px;
-                padding: 20px;
-            }
-            
-            .menu-icon {
-                font-size: 2.2rem;
-            }
-            
-            .menu-text {
-                font-size: 1.1rem;
-            }
-            
-            .selected-flag-img {
-                width: 240px;
-                height: 135px;
-            }
-            
-            .flag-img {
-                width: 140px;
-                height: 78px;
-            }
-            
-            .screen {
-                padding: 20px;
-            }
-            
-            .app-logo {
-                width: 70px;
-                height: 70px;
+            .main-menu {
+                grid-template-columns: 1fr;
             }
             
             h1 {
                 font-size: 1.6rem;
+            }
+            
+            .menu-item {
+                height: 120px;
+            }
+            
+            .menu-icon {
+                font-size: 2rem;
+            }
+            
+            .menu-text {
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- الرأس مع الشعار -->
+        <!-- الرأس -->
         <header>
-            <div class="header-content">
-                <img src="https://i.ibb.co/23bXMXCn/output-2.jpg" 
-                     alt="شعار دفتر المصروف الذكي" 
-                     class="app-logo">
-                
-                <div class="app-title">
-                    <h1><i class="fas fa-book"></i> دفتر مصروف ذكي <span class="version-badge">V1.1.2</span></h1>
-                    <p class="subtitle">نظام إدارة المصروفات الشخصية الذكي</p>
-                    <p class="subtitle">رقم المشروع: MT-0001 | المخطط التنفيذي: MP-0001</p>
-                </div>
+            <h1><i class="fas fa-book"></i> دفتر مصروف ذكي <span class="version-badge">V.1.5.0</span></h1>
+            <p class="subtitle">نظام إدارة المصروفات الشخصية الذكي - قيد التطوير</p>
+            <div class="project-info">
+                <div class="project-info-item"><strong>اسم المشروع:</strong> دفتر مصروف ذكي</div>
+                <div class="project-info-item"><strong>رقم المشروع:</strong> MR-0001</div>
+                <div class="project-info-item"><strong>نوع المشروع:</strong> متوسط</div>
+                <div class="project-info-item"><strong>المطور:</strong> شركة Master Taha</div>
             </div>
         </header>
+
+        <!-- شريط الإشعارات -->
+        <div id="notificationBar" class="notification-bar">
+            <div class="notification-text">
+                <i class="fas fa-bell"></i> هذا الإصدار V.1.5.0 قيد التطوير وتحديث الإصدارات القادمة
+            </div>
+            <button class="close-notification" onclick="closeNotificationBar()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
 
         <!-- الصفحة الرئيسية -->
         <div id="mainScreen" class="screen active">
             <div class="screen-header">
                 <h2 class="screen-title"><i class="fas fa-home"></i> الصفحة الرئيسية</h2>
+                <div class="current-currency" id="currentCurrencyDisplay">العملة: لم يتم اختيارها</div>
             </div>
             
             <div class="main-menu">
                 <div class="menu-item" onclick="showScreen('expenseRecord')">
                     <div class="menu-icon"><i class="fas fa-edit"></i></div>
-                    <div class="menu-text">صفحة تسجيل مصروف</div>
+                    <div class="menu-text">لوحة تسجيل مصروف</div>
                 </div>
                 
                 <div class="menu-item" onclick="showScreen('savedExpenses')">
                     <div class="menu-icon"><i class="fas fa-save"></i></div>
-                    <div class="menu-text">صفحة أوراق مصروف محفوظة</div>
+                    <div class="menu-text">لوحة أوراق مصروف محفوظة</div>
                 </div>
                 
                 <div class="menu-item" onclick="showScreen('deletedExpenses')">
                     <div class="menu-icon"><i class="fas fa-trash"></i></div>
-                    <div class="menu-text">صفحة أوراق مصروف محذوفة</div>
+                    <div class="menu-text">لوحة أوراق مصروف محذوفة</div>
                 </div>
                 
                 <div class="menu-item" onclick="showScreen('assignGivers')">
                     <div class="menu-icon"><i class="fas fa-users"></i></div>
-                    <div class="menu-text">صفحة تعيين المعطين</div>
+                    <div class="menu-text">لوحة تعيين المعطين</div>
                 </div>
                 
                 <div class="menu-item" onclick="showScreen('assignCurrency')">
                     <div class="menu-icon"><i class="fas fa-money-bill-wave"></i></div>
-                    <div class="menu-text">صفحة تعيين العملة</div>
+                    <div class="menu-text">لوحة تعيين العملة</div>
                 </div>
                 
                 <div class="menu-item" onclick="showScreen('siteSettings')">
                     <div class="menu-icon"><i class="fas fa-cog"></i></div>
-                    <div class="menu-text">صفحة إعدادات الموقع</div>
+                    <div class="menu-text">لوحة إعدادات الموقع</div>
                 </div>
                 
                 <div class="menu-item" onclick="showScreen('siteDetails')">
                     <div class="menu-icon"><i class="fas fa-info-circle"></i></div>
-                    <div class="menu-text">صفحة تفاصيل الموقع</div>
+                    <div class="menu-text">لوحة تفاصيل الموقع</div>
+                </div>
+                
+                <div class="menu-item" onclick="showScreen('contactCompany')">
+                    <div class="menu-icon"><i class="fas fa-phone"></i></div>
+                    <div class="menu-text">لوحة التواصل مع الشركة</div>
                 </div>
             </div>
         </div>
 
-        <!-- صفحة تسجيل مصروف -->
+        <!-- لوحة تسجيل مصروف -->
         <div id="expenseRecord" class="screen">
             <div class="screen-header">
-                <h2 class="screen-title"><i class="fas fa-edit"></i> صفحة تسجيل مصروف</h2>
+                <h2 class="screen-title"><i class="fas fa-edit"></i> لوحة تسجيل مصروف</h2>
                 <button class="btn btn-secondary" onclick="showScreen('mainScreen')">
                     <i class="fas fa-home"></i> الرئيسية
                 </button>
@@ -1044,7 +967,7 @@
             <div class="expense-form-container">
                 <div class="date-header">
                     <div class="date-display" id="currentDate">اليوم/الشهر/السنة</div>
-                    <p><strong>شاشة ورقة مصروف يومي</strong> - 10 أسطر ثابتة للمصروفات</p>
+                    <p>شاشة ورق مصروف يومي</p>
                 </div>
                 
                 <table class="expense-table">
@@ -1055,19 +978,19 @@
                         </tr>
                     </thead>
                     <tbody id="expenseRows">
-                        <!-- سيتم إضافة 10 أسطر ثابتة بواسطة JavaScript -->
+                        <!-- سيتم إضافة الصفوف هنا -->
                     </tbody>
                 </table>
                 
                 <div class="action-buttons">
                     <button class="btn btn-success" onclick="addExpenseRow()">
-                        <i class="fas fa-plus-circle"></i> إضافة سطر جديد
+                        <i class="fas fa-plus"></i> إضافة سطر
                     </button>
                 </div>
                 
                 <div class="stats-container">
                     <div class="stat-box stat-given">
-                        <div class="stat-title"><i class="fas fa-hand-holding-usd"></i> المبلغ المعطى</div>
+                        <div class="stat-title"><i class="fas fa-money-bill-wave"></i> المبلغ المعطى</div>
                         <div class="stat-value" id="totalGiven">0.00</div>
                     </div>
                     
@@ -1083,33 +1006,30 @@
                 </div>
                 
                 <div class="givers-display">
-                    <h3><i class="fas fa-users"></i> المعطين المرتبطين بهذه الورقة</h3>
+                    <h3><i class="fas fa-users"></i> المعطين المضافين</h3>
                     <div id="giversDisplay" class="empty-message">
-                        لا يوجد معطين مضافين حاليًا. الرجاء إضافة معطين من صفحة تعيين المعطين.
+                        حتى الآن لا يوجد أي معطي مضاف حاليًا.
                     </div>
                 </div>
                 
                 <div class="action-buttons">
                     <button class="btn btn-success" onclick="saveExpenseSheet()">
-                        <i class="fas fa-save"></i> حفظ ورقة المصروف
+                        <i class="fas fa-save"></i> حفظ ورقة
                     </button>
                     <button class="btn btn-info" onclick="showScreen('assignGivers')">
                         <i class="fas fa-user-plus"></i> تعيين المعطين
                     </button>
-                    <button class="btn btn-warning" onclick="clearExpenseForm()">
-                        <i class="fas fa-broom"></i> تفريغ النموذج
-                    </button>
-                    <button class="btn btn-secondary" onclick="showScreen('mainScreen')">
-                        <i class="fas fa-arrow-right"></i> رجوع للصفحة الرئيسية
+                    <button class="btn btn-warning" onclick="showScreen('mainScreen')">
+                        <i class="fas fa-arrow-right"></i> رجوع
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- صفحة أوراق مصروف محفوظة -->
+        <!-- لوحة أوراق مصروف محفوظة -->
         <div id="savedExpenses" class="screen">
             <div class="screen-header">
-                <h2 class="screen-title"><i class="fas fa-save"></i> صفحة أوراق مصروف محفوظة</h2>
+                <h2 class="screen-title"><i class="fas fa-save"></i> لوحة أوراق مصروف محفوظة</h2>
                 <button class="btn btn-secondary" onclick="showScreen('mainScreen')">
                     <i class="fas fa-home"></i> الرئيسية
                 </button>
@@ -1117,33 +1037,33 @@
             
             <div id="savedExpensesList" class="expense-cards-container">
                 <div class="empty-message">
-                    لا يوجد ورق مصروف محفوظ حاليًا. الرجاء تسجيل مصروفات جديدة من صفحة تسجيل المصروف.
+                    حتى الآن لا يوجد أي ورق مصروف محفوظ حاليًا.
                 </div>
             </div>
             
             <div class="action-buttons">
                 <button class="btn btn-danger" onclick="deleteSelectedExpense()">
-                    <i class="fas fa-trash-alt"></i> حذف إلى المحذوفات
+                    <i class="fas fa-trash"></i> حذف
                 </button>
                 <button class="btn btn-warning" onclick="editSelectedExpense()">
-                    <i class="fas fa-edit"></i> تعديل الورقة
+                    <i class="fas fa-edit"></i> تعديل
                 </button>
                 <button class="btn btn-success" id="saveEditBtn" style="display:none" onclick="saveExpenseEdit()">
-                    <i class="fas fa-save"></i> حفظ التعديلات
+                    <i class="fas fa-save"></i> حفظ
                 </button>
                 <button class="btn btn-info" onclick="reviewSelectedExpense()">
-                    <i class="fas fa-eye"></i> مراجعة تفاصيل الورقة
+                    <i class="fas fa-eye"></i> مراجعة
                 </button>
-                <button class="btn btn-secondary" onclick="showScreen('mainScreen')">
-                    <i class="fas fa-arrow-right"></i> رجوع للصفحة الرئيسية
+                <button class="btn btn-warning" onclick="showScreen('mainScreen')">
+                    <i class="fas fa-arrow-right"></i> رجوع
                 </button>
             </div>
         </div>
 
-        <!-- صفحة أوراق مصروف محذوفة -->
+        <!-- لوحة أوراق مصروف محذوفة -->
         <div id="deletedExpenses" class="screen">
             <div class="screen-header">
-                <h2 class="screen-title"><i class="fas fa-trash"></i> صفحة أوراق مصروف محذوفة</h2>
+                <h2 class="screen-title"><i class="fas fa-trash"></i> لوحة أوراق مصروف محذوفة</h2>
                 <button class="btn btn-secondary" onclick="showScreen('mainScreen')">
                     <i class="fas fa-home"></i> الرئيسية
                 </button>
@@ -1151,30 +1071,27 @@
             
             <div id="deletedExpensesList" class="expense-cards-container">
                 <div class="empty-message">
-                    لا يوجد ورق مصروف محذوف حاليًا.
+                    حتى الآن لا يوجد أي ورق مصروف محذوف حاليًا.
                 </div>
             </div>
             
             <div class="action-buttons">
                 <button class="btn btn-success" onclick="restoreSelectedExpense()">
-                    <i class="fas fa-undo"></i> استعادة إلى المحفوظات
+                    <i class="fas fa-undo"></i> استعادة
                 </button>
                 <button class="btn btn-danger" onclick="permanentDeleteExpense()">
-                    <i class="fas fa-trash"></i> حذف نهائي
+                    <i class="fas fa-trash-alt"></i> حذف نهائي
                 </button>
-                <button class="btn btn-warning" onclick="clearAllDeleted()">
-                    <i class="fas fa-broom"></i> تفريغ المحذوفات
-                </button>
-                <button class="btn btn-secondary" onclick="showScreen('mainScreen')">
-                    <i class="fas fa-arrow-right"></i> رجوع للصفحة الرئيسية
+                <button class="btn btn-warning" onclick="showScreen('mainScreen')">
+                    <i class="fas fa-arrow-right"></i> رجوع
                 </button>
             </div>
         </div>
 
-        <!-- صفحة تعيين المعطين -->
+        <!-- لوحة تعيين المعطين -->
         <div id="assignGivers" class="screen">
             <div class="screen-header">
-                <h2 class="screen-title"><i class="fas fa-users"></i> صفحة تعيين المعطين</h2>
+                <h2 class="screen-title"><i class="fas fa-users"></i> لوحة تعيين المعطين</h2>
                 <button class="btn btn-secondary" onclick="showScreen('mainScreen')">
                     <i class="fas fa-home"></i> الرئيسية
                 </button>
@@ -1183,66 +1100,65 @@
             <div class="giver-form">
                 <h3><i class="fas fa-user-plus"></i> إضافة معطي جديد</h3>
                 <div class="form-group">
-                    <label for="giverName"><i class="fas fa-user"></i> اسم المعطي:</label>
-                    <input type="text" id="giverName" placeholder="أدخل اسم المعطي (مثال: أحمد، محمد، الأب)">
+                    <label for="giverName">اسم المعطي:</label>
+                    <input type="text" id="giverName" placeholder="أدخل اسم المعطي">
                 </div>
                 
                 <div class="form-group">
-                    <label for="giverAmount"><i class="fas fa-money-bill"></i> مبلغ المعطى:</label>
+                    <label for="giverAmount">مبلغ المعطى:</label>
                     <input type="number" id="giverAmount" placeholder="أدخل المبلغ المعطى" min="0" step="0.01">
                 </div>
                 
                 <div class="action-buttons">
                     <button class="btn btn-success" onclick="addNewGiver()">
-                        <i class="fas fa-plus"></i> إضافة معطي جديد
+                        <i class="fas fa-plus"></i> إضافة
                     </button>
                     <button class="btn btn-warning" onclick="editSelectedGiver()">
-                        <i class="fas fa-edit"></i> تعديل المعطي المحدد
+                        <i class="fas fa-edit"></i> تعديل
                     </button>
                     <button class="btn btn-info" id="saveGiverBtn" style="display:none" onclick="saveGiverEdit()">
-                        <i class="fas fa-save"></i> حفظ التعديلات
+                        <i class="fas fa-save"></i> حفظ
                     </button>
                     <button class="btn btn-danger" onclick="deleteSelectedGiver()">
-                        <i class="fas fa-trash"></i> حذف المعطي المحدد
+                        <i class="fas fa-trash"></i> حذف
                     </button>
                 </div>
             </div>
             
             <div class="givers-list-container">
-                <h3><i class="fas fa-list"></i> قائمة المعطين المضافين</h3>
+                <h3><i class="fas fa-list"></i> قائمة المعطين</h3>
                 <div id="giversList" class="givers-grid">
                     <div class="empty-message">
-                        لا يوجد معطين مضافين بعد. قم بإضافة معطين أولاً.
+                        لا يوجد معطين مضافين بعد.
                     </div>
                 </div>
             </div>
             
             <div class="action-buttons">
-                <button class="btn btn-secondary" onclick="showScreen('mainScreen')">
-                    <i class="fas fa-arrow-right"></i> رجوع للصفحة الرئيسية
+                <button class="btn btn-warning" onclick="showScreen('mainScreen')">
+                    <i class="fas fa-arrow-right"></i> رجوع
                 </button>
             </div>
         </div>
 
-        <!-- صفحة تعيين العملة -->
+        <!-- لوحة تعيين العملة -->
         <div id="assignCurrency" class="screen">
             <div class="screen-header">
-                <h2 class="screen-title"><i class="fas fa-money-bill-wave"></i> صفحة تعيين العملة</h2>
+                <h2 class="screen-title"><i class="fas fa-money-bill-wave"></i> لوحة تعيين العملة</h2>
                 <button class="btn btn-secondary" onclick="showScreen('mainScreen')">
                     <i class="fas fa-home"></i> الرئيسية
                 </button>
             </div>
             
-            <h3><i class="fas fa-flag"></i> اختر علم وعملة الدولة العربية المفضلة</h3>
+            <h3><i class="fas fa-flag"></i> اختيار علم وعملة الدولة العربية (يدعم 22 دولة)</h3>
             
             <div class="selected-flag-display">
-                <img id="selectedFlagImg" src="" alt="العلم المختار" class="selected-flag-img">
-                <h2 id="selectedCountryName" class="country-name">اختر دولة من القائمة</h2>
+                <img id="selectedFlagImg" src="" alt="العلم المختار" class="selected-flag-img" style="display:none;">
+                <h2 id="selectedCountryName" class="country-name">اختر دولة</h2>
                 <div id="selectedCurrencyDisplay" class="country-currency">العملة: -</div>
             </div>
             
             <div class="flags-container">
-                <h4><i class="fas fa-globe-asia"></i> أعلام الدول العربية (22 دولة)</h4>
                 <div class="flags-grid" id="flagsGrid">
                     <!-- سيتم ملؤها بواسطة JavaScript -->
                 </div>
@@ -1250,18 +1166,18 @@
             
             <div class="action-buttons">
                 <button class="btn btn-success" onclick="saveSelectedCurrency()">
-                    <i class="fas fa-save"></i> حفظ العملة المختارة
+                    <i class="fas fa-save"></i> حفظ العملة
                 </button>
-                <button class="btn btn-secondary" onclick="showScreen('mainScreen')">
-                    <i class="fas fa-arrow-right"></i> رجوع للصفحة الرئيسية
+                <button class="btn btn-warning" onclick="showScreen('mainScreen')">
+                    <i class="fas fa-arrow-right"></i> رجوع
                 </button>
             </div>
         </div>
 
-        <!-- صفحة إعدادات الموقع -->
+        <!-- لوحة إعدادات الموقع -->
         <div id="siteSettings" class="screen">
             <div class="screen-header">
-                <h2 class="screen-title"><i class="fas fa-cog"></i> صفحة إعدادات الموقع</h2>
+                <h2 class="screen-title"><i class="fas fa-cog"></i> لوحة إعدادات الموقع</h2>
                 <button class="btn btn-secondary" onclick="showScreen('mainScreen')">
                     <i class="fas fa-home"></i> الرئيسية
                 </button>
@@ -1270,8 +1186,7 @@
             <h3><i class="fas fa-palette"></i> تعيين ألوان الموقع</h3>
             
             <div class="color-selection-info">
-                <p><strong><i class="fas fa-arrow-up"></i> لون خلفية الجزء العلوي:</strong> 
-                <span id="selectedTopColor">أزرق فاتح أنيق</span></p>
+                <p><strong>لون خلفية أعلى:</strong> <span id="selectedTopColor">أزرق داكن</span></p>
             </div>
             
             <div class="color-settings-container" id="topColorsContainer">
@@ -1279,8 +1194,7 @@
             </div>
             
             <div class="color-selection-info">
-                <p><strong><i class="fas fa-arrow-down"></i> لون خلفية الجزء السفلي:</strong> 
-                <span id="selectedBottomColor">أبيض فاتح</span></p>
+                <p><strong>لون خلفية أسفل:</strong> <span id="selectedBottomColor">أبيض فاتح</span></p>
             </div>
             
             <div class="color-settings-container" id="bottomColorsContainer">
@@ -1288,8 +1202,7 @@
             </div>
             
             <div class="color-selection-info">
-                <p><strong><i class="fas fa-font"></i> لون الخطوط:</strong> 
-                <span id="selectedTextColor">أسود غامق</span></p>
+                <p><strong>لون الخط:</strong> <span id="selectedTextColor">أسود داكن</span></p>
             </div>
             
             <div class="color-settings-container" id="textColorsContainer">
@@ -1298,21 +1211,21 @@
             
             <div class="action-buttons">
                 <button class="btn btn-success" onclick="applyThemeSettings()">
-                    <i class="fas fa-check-circle"></i> تطبيق النمط المختار
+                    <i class="fas fa-check"></i> تطبيق
                 </button>
                 <button class="btn btn-warning" onclick="resetThemeSettings()">
-                    <i class="fas fa-undo"></i> إعادة تعيين إلى الوضع الافتراضي
+                    <i class="fas fa-undo"></i> إعادة تعيين
                 </button>
                 <button class="btn btn-info" onclick="showScreen('mainScreen')">
-                    <i class="fas fa-arrow-right"></i> رجوع للصفحة الرئيسية
+                    <i class="fas fa-arrow-right"></i> رجوع
                 </button>
             </div>
         </div>
 
-        <!-- صفحة تفاصيل الموقع -->
+        <!-- لوحة تفاصيل الموقع -->
         <div id="siteDetails" class="screen">
             <div class="screen-header">
-                <h2 class="screen-title"><i class="fas fa-info-circle"></i> صفحة تفاصيل الموقع</h2>
+                <h2 class="screen-title"><i class="fas fa-info-circle"></i> لوحة تفاصيل الموقع</h2>
                 <button class="btn btn-secondary" onclick="showScreen('mainScreen')">
                     <i class="fas fa-home"></i> الرئيسية
                 </button>
@@ -1326,31 +1239,64 @@
                 
                 <div class="detail-card">
                     <h3><i class="fas fa-hashtag"></i> رقم المشروع</h3>
-                    <p>MT-0001</p>
+                    <p>MR-0001</p>
                 </div>
                 
                 <div class="detail-card">
-                    <h3><i class="fas fa-code-branch"></i> الإصدار المعتمد</h3>
-                    <p>V1.1.2</p>
+                    <h3><i class="fas fa-receipt"></i> رقم إيصال الطلب</h3>
+                    <p>MD-0001</p>
                 </div>
                 
                 <div class="detail-card">
-                    <h3><i class="fas fa-calendar-alt"></i> سنة التطوير</h3>
+                    <h3><i class="fas fa-code-branch"></i> رقم إصدار الموقع</h3>
+                    <p>V.1.5.0</p>
+                </div>
+                
+                <div class="detail-card">
+                    <h3><i class="fas fa-calendar"></i> سنة التطوير</h3>
                     <p>2026</p>
                 </div>
                 
                 <div class="detail-card">
-                    <h3><i class="fas fa-building"></i> المطور</h3>
+                    <h3><i class="fas fa-building"></i> تم تطويره بواسطة</h3>
                     <p>شركة Master Taha</p>
                 </div>
                 
                 <div class="detail-card">
-                    <h3><i class="fas fa-file-alt"></i> المخطط التنفيذي</h3>
-                    <p>MP-0001</p>
+                    <h3><i class="fas fa-project-diagram"></i> نوع المشروع</h3>
+                    <p>متوسط</p>
+                </div>
+                
+                <div class="detail-card">
+                    <h3><i class="fas fa-tasks"></i> حالة الإصدار</h3>
+                    <p>قيد التطوير</p>
                 </div>
             </div>
             
-            <h3><i class="fas fa-phone-alt"></i> قنوات التواصل الاجتماعي</h3>
+            <div class="work-hours-info">
+                <h3><i class="fas fa-clock"></i> ملاحظات عامة</h3>
+                <p>هذا المخطط خاص بإصدار V.1.5.0 فقط.</p>
+                <p>قيد التطوير وتحديث الإصدارات القادمة.</p>
+                <p>الإصدار سيظهر للمستخدمين بعد إتمام الاختبارات والتحديثات المطلوبة.</p>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn btn-warning" onclick="showScreen('mainScreen')">
+                    <i class="fas fa-arrow-right"></i> رجوع
+                </button>
+            </div>
+        </div>
+
+        <!-- لوحة التواصل مع الشركة -->
+        <div id="contactCompany" class="screen">
+            <div class="screen-header">
+                <h2 class="screen-title"><i class="fas fa-phone"></i> لوحة التواصل مع الشركة</h2>
+                <button class="btn btn-secondary" onclick="showScreen('mainScreen')">
+                    <i class="fas fa-home"></i> الرئيسية
+                </button>
+            </div>
+            
+            <h3><i class="fas fa-phone"></i> أرقام الهاتف</h3>
             
             <div class="contact-channels-grid">
                 <div class="contact-channel">
@@ -1374,15 +1320,17 @@
                         </button>
                     </div>
                 </div>
-                
+            </div>
+            
+            <h3><i class="fas fa-share-alt"></i> قنوات التواصل الاجتماعي</h3>
+            
+            <div class="contact-channels-grid">
                 <div class="contact-channel">
                     <div class="channel-icon"><i class="fab fa-youtube"></i></div>
                     <div class="channel-info">
                         <h4>قناة يوتيوب</h4>
-                        <a href="https://youtube.com/channel/UCqmWFUhb2RKW6LB94m-NAcg" target="_blank" class="channel-link">
-                            https://youtube.com/channel/UCqmWFUhb2RKW6LB94m-NAcg
-                        </a>
-                        <button class="btn btn-danger" onclick="openExternalLink('https://youtube.com/channel/UCqmWFUhb2RKW6LB94m-NAcg')">
+                        <a href="https://youtube.com/channel/UCqmWFUhb2RKW6LB94m-NAcg?si=FvR_tpNe7_q6X7wa" target="_blank" class="channel-link">https://youtube.com/channel/UCqmWFUhb2RKW6LB94m-NAcg</a>
+                        <button class="btn btn-danger" onclick="openExternalLink('https://youtube.com/channel/UCqmWFUhb2RKW6LB94m-NAcg?si=FvR_tpNe7_q6X7wa')">
                             <i class="fas fa-external-link-alt"></i> انتقال
                         </button>
                     </div>
@@ -1392,12 +1340,9 @@
                     <div class="channel-icon"><i class="fab fa-whatsapp"></i></div>
                     <div class="channel-info">
                         <h4>قناة واتساب</h4>
-                        <a href="https://whatsapp.com/channel/0029Vb7D9mWEFeXbgMwf7Z06" target="_blank" class="channel-link">
-                            https://whatsapp.com/channel/0029Vb7D9mWEFeXbgMwf7Z06
-                        </a>
-                        <button class="btn btn-success" style="background: linear-gradient(to right, #25D366, #128C7E);" 
-                                onclick="openExternalLink('https://whatsapp.com/channel/0029Vb7D9mWEFeXbgMwf7Z06')">
-                            <i class="fab fa-whatsapp"></i> انتقال
+                        <a href="https://whatsapp.com/channel/0029Vb7D9mWEFeXbgMwf7Z06" target="_blank" class="channel-link">https://whatsapp.com/channel/0029Vb7D9mWEFeXbgMwf7Z06</a>
+                        <button class="btn btn-success" onclick="openExternalLink('https://whatsapp.com/channel/0029Vb7D9mWEFeXbgMwf7Z06')">
+                            <i class="fas fa-external-link-alt"></i> انتقال
                         </button>
                     </div>
                 </div>
@@ -1405,13 +1350,10 @@
                 <div class="contact-channel">
                     <div class="channel-icon"><i class="fab fa-telegram"></i></div>
                     <div class="channel-info">
-                        <h4>قناة تيليجرام</h4>
-                        <a href="https://t.me/boost/mastertaha1" target="_blank" class="channel-link">
-                            https://t.me/boost/mastertaha1
-                        </a>
-                        <button class="btn btn-info" style="background: linear-gradient(to right, #0088cc, #006699);" 
-                                onclick="openExternalLink('https://t.me/boost/mastertaha1')">
-                            <i class="fab fa-telegram"></i> انتقال
+                        <h4>قناة التلجرام</h4>
+                        <a href="https://t.me/boost/mastertaha1" target="_blank" class="channel-link">https://t.me/boost/mastertaha1</a>
+                        <button class="btn btn-info" onclick="openExternalLink('https://t.me/boost/mastertaha1')">
+                            <i class="fas fa-external-link-alt"></i> انتقال
                         </button>
                     </div>
                 </div>
@@ -1420,12 +1362,9 @@
                     <div class="channel-icon"><i class="fab fa-instagram"></i></div>
                     <div class="channel-info">
                         <h4>قناة انستقرام</h4>
-                        <a href="https://www.instagram.com/mastrtaha" target="_blank" class="channel-link">
-                            https://www.instagram.com/mastrtaha
-                        </a>
-                        <button class="btn btn-warning" style="background: linear-gradient(to right, #E1306C, #C13584);" 
-                                onclick="openExternalLink('https://www.instagram.com/mastrtaha')">
-                            <i class="fab fa-instagram"></i> انتقال
+                        <a href="https://www.instagram.com/mastrtaha?igsh=MTJtMW4xa3J4M3JuMw==" target="_blank" class="channel-link">https://www.instagram.com/mastrtaha</a>
+                        <button class="btn btn-warning" onclick="openExternalLink('https://www.instagram.com/mastrtaha?igsh=MTJtMW4xa3J4M3JuMw==')">
+                            <i class="fas fa-external-link-alt"></i> انتقال
                         </button>
                     </div>
                 </div>
@@ -1434,345 +1373,520 @@
                     <div class="channel-icon"><i class="fab fa-twitter"></i></div>
                     <div class="channel-info">
                         <h4>قناة تويتر (X)</h4>
-                        <a href="https://x.com/MastrTh96665" target="_blank" class="channel-link">
-                            https://x.com/MastrTh96665
-                        </a>
-                        <button class="btn" style="background: linear-gradient(to right, #000000, #333333);" 
-                                onclick="openExternalLink('https://x.com/MastrTh96665')">
-                            <i class="fab fa-twitter"></i> انتقال
+                        <a href="https://x.com/MastrTh96665" target="_blank" class="channel-link">https://x.com/MastrTh96665</a>
+                        <button class="btn btn-primary" onclick="openExternalLink('https://x.com/MastrTh96665')">
+                            <i class="fas fa-external-link-alt"></i> انتقال
                         </button>
                     </div>
                 </div>
             </div>
             
             <div class="work-hours-info">
-                <h3><i class="fas fa-clock"></i> أوقات العمل والدعم الفني</h3>
-                <p>من الساعة 5:00 مساءً حتى الساعة 10:00 مساءً (بتوقيت دمشق)</p>
-                <p><i class="fas fa-info-circle"></i> للاستفسارات والدعم الفني، يرجى التواصل خلال أوقات العمل المحددة</p>
-            </div>
-            
-            <div class="work-hours-info" style="background: linear-gradient(to right, #E1F5FE, #B3E5FC); border-color: #2196F3;">
-                <h3><i class="fas fa-star"></i> ميزات الإصدار V1.1.2</h3>
-                <p>• تثبيت عدد أسطر المصروف (10 أسطر افتراضية)</p>
-                <p>• إضافة الأسطر فقط عبر زر مخصص</p>
-                <p>• تحسين دقة الحسابات المالية</p>
-                <p>• تحديث فوري للإحصائيات</p>
-                <p>• تحسين تجربة المستخدم وتوحيد التصميم</p>
-                <p>• تحسين استقرار النظام وأدائه</p>
+                <h3><i class="fas fa-clock"></i> أوقات العمل</h3>
+                <p>من الساعة 5:00 مساءً حتى الساعة 10:00 مساءً</p>
             </div>
             
             <div class="action-buttons">
-                <button class="btn btn-secondary" onclick="showScreen('mainScreen')">
-                    <i class="fas fa-arrow-right"></i> رجوع للصفحة الرئيسية
+                <button class="btn btn-warning" onclick="showScreen('mainScreen')">
+                    <i class="fas fa-arrow-right"></i> رجوع
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- إشعارات -->
+    <!-- إشعار -->
     <div id="notification" class="notification"></div>
 
+    <footer>
+        <p>© 2026 شركة Master Taha. جميع الحقوق محفوظة. | الإصدار V.1.5.0 | مخطط رقم: M-PL-A-0001</p>
+    </footer>
+
     <script>
-        // ============================================
-        // بيانات التطبيق - الإصدار V1.1.2
-        // ============================================
-        const APP_DATA = {
-            currentExpenseRows: 10,
-            maxExpenseRows: 50,
-            version: "V1.1.2",
-            projectNumber: "MT-0001",
-            
-            givers: [],
-            savedExpenses: [],
-            deletedExpenses: [],
-            selectedCurrency: null,
-            
-            selectedExpenseId: null,
-            selectedGiverId: null,
-            selectedCountry: null,
-            
-            themeSettings: {
-                topBg: '#2a5298',
-                bottomBg: '#ffffff',
-                textColor: '#000000'
-            },
-            
-            editingExpense: false,
-            editingGiver: false
+        // البيانات والتخزين
+        let currentScreen = 'mainScreen';
+        let expenses = [];
+        let deletedExpenses = [];
+        let givers = [];
+        let selectedExpenseId = null;
+        let selectedDeletedExpenseId = null;
+        let selectedGiverId = null;
+        let currentCurrency = null;
+        let selectedColors = {
+            top: '#1e3c72',
+            bottom: '#f5f7fa',
+            text: '#333'
+        };
+        let editingExpense = false;
+        let editingGiver = false;
+        let expenseRowCount = 10; // يبدأ بـ 10 صفوف
+        let expenseRowData = {};
+
+        // تعريف أعلام الدول العربية
+        const arabCountries = [
+            { code: 'SA', name: 'السعودية', currency: 'ريال سعودي (SAR)', flag: 'https://flagcdn.com/w320/sa.png' },
+            { code: 'AE', name: 'الإمارات', currency: 'درهم إماراتي (AED)', flag: 'https://flagcdn.com/w320/ae.png' },
+            { code: 'KW', name: 'الكويت', currency: 'دينار كويتي (KWD)', flag: 'https://flagcdn.com/w320/kw.png' },
+            { code: 'QA', name: 'قطر', currency: 'ريال قطري (QAR)', flag: 'https://flagcdn.com/w320/qa.png' },
+            { code: 'BH', name: 'البحرين', currency: 'دينار بحريني (BHD)', flag: 'https://flagcdn.com/w320/bh.png' },
+            { code: 'OM', name: 'عمان', currency: 'ريال عماني (OMR)', flag: 'https://flagcdn.com/w320/om.png' },
+            { code: 'JO', name: 'الأردن', currency: 'دينار أردني (JOD)', flag: 'https://flagcdn.com/w320/jo.png' },
+            { code: 'LB', name: 'لبنان', currency: 'ليرة لبنانية (LBP)', flag: 'https://flagcdn.com/w320/lb.png' },
+            { code: 'SY', name: 'سوريا', currency: 'ليرة سورية (SYP)', flag: 'https://flagcdn.com/w320/sy.png' },
+            { code: 'IQ', name: 'العراق', currency: 'دينار عراقي (IQD)', flag: 'https://flagcdn.com/w320/iq.png' },
+            { code: 'EG', name: 'مصر', currency: 'جنيه مصري (EGP)', flag: 'https://flagcdn.com/w320/eg.png' },
+            { code: 'SD', name: 'السودان', currency: 'جنيه سوداني (SDG)', flag: 'https://flagcdn.com/w320/sd.png' },
+            { code: 'LY', name: 'ليبيا', currency: 'دينار ليبي (LYD)', flag: 'https://flagcdn.com/w320/ly.png' },
+            { code: 'TN', name: 'تونس', currency: 'دينار تونسي (TND)', flag: 'https://flagcdn.com/w320/tn.png' },
+            { code: 'DZ', name: 'الجزائر', currency: 'دينار جزائري (DZD)', flag: 'https://flagcdn.com/w320/dz.png' },
+            { code: 'MA', name: 'المغرب', currency: 'درهم مغربي (MAD)', flag: 'https://flagcdn.com/w320/ma.png' },
+            { code: 'YE', name: 'اليمن', currency: 'ريال يمني (YER)', flag: 'https://flagcdn.com/w320/ye.png' },
+            { code: 'PS', name: 'فلسطين', currency: 'شيكل (ILS)', flag: 'https://flagcdn.com/w320/ps.png' },
+            { code: 'MR', name: 'موريتانيا', currency: 'أوقية موريتانية (MRU)', flag: 'https://flagcdn.com/w320/mr.png' },
+            { code: 'SO', name: 'الصومال', currency: 'شلن صومالي (SOS)', flag: 'https://flagcdn.com/w320/so.png' },
+            { code: 'DJ', name: 'جيبوتي', currency: 'فرنك جيبوتي (DJF)', flag: 'https://flagcdn.com/w320/dj.png' },
+            { code: 'KM', name: 'جزر القمر', currency: 'فرنك قمري (KMF)', flag: 'https://flagcdn.com/w320/km.png' }
+        ];
+
+        // تعريف خيارات الألوان
+        const colorOptions = {
+            top: [
+                { name: 'أزرق داكن', value: '#1e3c72' },
+                { name: 'أخضر داكن', value: '#2E7D32' },
+                { name: 'أحمر داكن', value: '#c62828' },
+                { name: 'بنفسجي', value: '#6A1B9A' },
+                { name: 'برتقالي داكن', value: '#EF6C00' }
+            ],
+            bottom: [
+                { name: 'أبيض فاتح', value: '#f5f7fa' },
+                { name: 'رمادي فاتح', value: '#f0f2f5' },
+                { name: 'أزرق فاتح', value: '#e3f2fd' },
+                { name: 'أخضر فاتح', value: '#e8f5e9' },
+                { name: 'بيج فاتح', value: '#faf3e0' }
+            ],
+            text: [
+                { name: 'أسود داكن', value: '#333' },
+                { name: 'رمادي داكن', value: '#555' },
+                { name: 'أزرق داكن', value: '#1a237e' },
+                { name: 'أخضر داكن', value: '#1b5e20' },
+                { name: 'بني داكن', value: '#4e342e' }
+            ]
         };
 
-        // ============================================
-        // بيانات الدول العربية
-        // ============================================
-        const ARAB_COUNTRIES = [
-            { id: 1, name: "مصر", currency: "جنيه مصري (EGP)", flagUrl: "https://flagcdn.com/w320/eg.png" },
-            { id: 2, name: "السعودية", currency: "ريال سعودي (SAR)", flagUrl: "https://flagcdn.com/w320/sa.png" },
-            { id: 3, name: "العراق", currency: "دينار عراقي (IQD)", flagUrl: "https://flagcdn.com/w320/iq.png" },
-            { id: 4, name: "الجزائر", currency: "دينار جزائري (DZD)", flagUrl: "https://flagcdn.com/w320/dz.png" },
-            { id: 5, name: "السودان", currency: "جنيه سوداني (SDG)", flagUrl: "https://flagcdn.com/w320/sd.png" },
-            { id: 6, name: "المغرب", currency: "درهم مغربي (MAD)", flagUrl: "https://flagcdn.com/w320/ma.png" },
-            { id: 7, name: "اليمن", currency: "ريال يمني (YER)", flagUrl: "https://flagcdn.com/w320/ye.png" },
-            { id: 8, name: "سوريا", currency: "ليرة سورية (SYP)", flagUrl: "https://flagcdn.com/w320/sy.png" },
-            { id: 9, name: "تونس", currency: "دينار تونسي (TND)", flagUrl: "https://flagcdn.com/w320/tn.png" },
-            { id: 10, name: "الإمارات العربية المتحدة", currency: "درهم إماراتي (AED)", flagUrl: "https://flagcdn.com/w320/ae.png" },
-            { id: 11, name: "ليبيا", currency: "دينار ليبي (LYD)", flagUrl: "https://flagcdn.com/w320/ly.png" },
-            { id: 12, name: "الأردن", currency: "دينار أردني (JOD)", flagUrl: "https://flagcdn.com/w320/jo.png" },
-            { id: 13, name: "لبنان", currency: "ليرة لبنانية (LBP)", flagUrl: "https://flagcdn.com/w320/lb.png" },
-            { id: 14, name: "عُمان", currency: "ريال عماني (OMR)", flagUrl: "https://flagcdn.com/w320/om.png" },
-            { id: 15, name: "الكويت", currency: "دينار كويتي (KWD)", flagUrl: "https://flagcdn.com/w320/kw.png" },
-            { id: 16, name: "موريتانيا", currency: "أوقية موريتانية (MRU)", flagUrl: "https://flagcdn.com/w320/mr.png" },
-            { id: 17, name: "قطر", currency: "ريال قطري (QAR)", flagUrl: "https://flagcdn.com/w320/qa.png" },
-            { id: 18, name: "البحرين", currency: "دينار بحريني (BHD)", flagUrl: "https://flagcdn.com/w320/bh.png" },
-            { id: 19, name: "جيبوتي", currency: "فرنك جيبوتي (DJF)", flagUrl: "https://flagcdn.com/w320/dj.png" },
-            { id: 20, name: "جزر القمر", currency: "فرنك قمري (KMF)", flagUrl: "https://flagcdn.com/w320/km.png" },
-            { id: 21, name: "فلسطين", currency: "شيكل إسرائيلي جديد (ILS)", flagUrl: "https://flagcdn.com/w320/ps.png" },
-            { id: 22, name: "الصومال", currency: "شلن صومالي (SOS)", flagUrl: "https://flagcdn.com/w320/so.png" }
-        ];
-
-        // ============================================
-        // ألوان التصميم
-        // ============================================
-        const TOP_COLORS = [
-            { name: "أزرق فاتح أنيق", value: "#2a5298" },
-            { name: "أخضر داكن", value: "#2E7D32" },
-            { name: "أحمر داكن", value: "#D32F2F" },
-            { name: "بنفسجي داكن", value: "#7B1FA2" },
-            { name: "برتقالي داكن", value: "#F57C00" },
-            { name: "رمادي داكن", value: "#455A64" },
-            { name: "بني داكن", value: "#5D4037" }
-        ];
-
-        const BOTTOM_COLORS = [
-            { name: "أبيض فاتح", value: "#ffffff" },
-            { name: "أخضر فاتح", value: "#E8F5E9" },
-            { name: "برتقالي فاتح", value: "#FFF3E0" },
-            { name: "بنفسجي فاتح", value: "#F3E5F5" },
-            { name: "أزرق فاتح", value: "#E1F5FE" },
-            { name: "أصفر فاتح", value: "#FFF8E1" },
-            { name: "وردي فاتح", value: "#FCE4EC" }
-        ];
-
-        const TEXT_COLORS = [
-            { name: "أسود غامق", value: "#000000" },
-            { name: "أزرق داكن", value: "#1e3c72" },
-            { name: "أخضر داكن", value: "#2E7D32" },
-            { name: "أحمر داكن", value: "#D32F2F" },
-            { name: "بني داكن", value: "#5D4037" },
-            { name: "رمادي داكن", value: "#455A64" },
-            { name: "بنفسجي داكن", value: "#7B1FA2" }
-        ];
-
-        // ============================================
-        // تهيئة التطبيق عند التحميل
-        // ============================================
+        // تهيئة التطبيق
         document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
             updateCurrentDate();
-            createExpenseRows();
-            updateExpenseStats();
-            loadSavedData();
-            renderFlags();
-            
-            if (ARAB_COUNTRIES.length > 0) {
-                selectCountry(ARAB_COUNTRIES[0]);
-            }
-            
-            loadThemeSettings();
-            createColorOptions();
-            
-            showNotification('مرحباً بك في دفتر المصروف الذكي - الإصدار V1.1.2', 'success');
-            updateSavedExpensesList();
+            setupExpenseRows();
+            loadFlags();
+            loadColorOptions();
+            loadDataFromStorage();
+            updateCurrencyDisplay();
         });
 
-        // ============================================
-        // وظائف الصفحة الرئيسية
-        // ============================================
+        // تهيئة التطبيق
+        function initializeApp() {
+            // تعيين التاريخ الحالي
+            updateCurrentDate();
+            
+            // إضافة 10 صفوف أولية
+            setupExpenseRows();
+            
+            // تحميل الأعلام
+            loadFlags();
+            
+            // تحميل خيارات الألوان
+            loadColorOptions();
+            
+            // تحميل البيانات من التخزين المحلي
+            loadDataFromStorage();
+            
+            // تحديث عرض العملة
+            updateCurrencyDisplay();
+            
+            // إظهار إشعار ترحيبي
+            showNotification('مرحبًا بك في دفتر مصروف ذكي - الإصدار V.1.5.0', 'success');
+        }
+
+        // تحديث التاريخ الحالي
+        function updateCurrentDate() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const dateString = now.toLocaleDateString('ar-SA', options);
+            document.getElementById('currentDate').textContent = dateString;
+        }
+
+        // إعداد صفوف المصروفات
+        function setupExpenseRows() {
+            const expenseRows = document.getElementById('expenseRows');
+            expenseRows.innerHTML = '';
+            
+            for (let i = 1; i <= expenseRowCount; i++) {
+                const row = document.createElement('tr');
+                row.id = `expenseRow${i}`;
+                
+                const nameCell = document.createElement('td');
+                const nameInput = document.createElement('input');
+                nameInput.type = 'text';
+                nameInput.className = 'expense-input expense-name';
+                nameInput.id = `expenseName${i}`;
+                nameInput.placeholder = `اسم مصروف ${i}`;
+                nameInput.addEventListener('input', updateExpenseStats);
+                nameCell.appendChild(nameInput);
+                
+                const amountCell = document.createElement('td');
+                const amountInput = document.createElement('input');
+                amountInput.type = 'number';
+                amountInput.className = 'expense-input expense-amount';
+                amountInput.id = `expenseAmount${i}`;
+                amountInput.placeholder = '0.00';
+                amountInput.min = '0';
+                amountInput.step = '0.01';
+                amountInput.addEventListener('input', updateExpenseStats);
+                amountCell.appendChild(amountInput);
+                
+                row.appendChild(nameCell);
+                row.appendChild(amountCell);
+                expenseRows.appendChild(row);
+            }
+            
+            // تحديث الإحصائيات
+            updateExpenseStats();
+        }
+
+        // تحميل أعلام الدول
+        function loadFlags() {
+            const flagsGrid = document.getElementById('flagsGrid');
+            flagsGrid.innerHTML = '';
+            
+            arabCountries.forEach(country => {
+                const flagItem = document.createElement('div');
+                flagItem.className = 'flag-item';
+                flagItem.dataset.countryCode = country.code;
+                flagItem.dataset.countryName = country.name;
+                flagItem.dataset.currency = country.currency;
+                flagItem.dataset.flagUrl = country.flag;
+                
+                flagItem.onclick = function() {
+                    selectFlag(country);
+                };
+                
+                const flagImg = document.createElement('img');
+                flagImg.src = country.flag;
+                flagImg.alt = `${country.name} flag`;
+                flagImg.className = 'flag-img';
+                
+                const flagName = document.createElement('div');
+                flagName.className = 'flag-name';
+                flagName.textContent = country.name;
+                
+                const flagCurrency = document.createElement('div');
+                flagCurrency.className = 'flag-currency';
+                flagCurrency.textContent = country.currency;
+                
+                flagItem.appendChild(flagImg);
+                flagItem.appendChild(flagName);
+                flagItem.appendChild(flagCurrency);
+                
+                flagsGrid.appendChild(flagItem);
+            });
+        }
+
+        // تحميل خيارات الألوان
+        function loadColorOptions() {
+            // خيارات الألوان العلوية
+            const topColorsContainer = document.getElementById('topColorsContainer');
+            topColorsContainer.innerHTML = '';
+            
+            colorOptions.top.forEach(color => {
+                const colorOption = document.createElement('div');
+                colorOption.className = 'color-option';
+                colorOption.dataset.colorType = 'top';
+                colorOption.dataset.colorValue = color.value;
+                colorOption.dataset.colorName = color.name;
+                
+                if (color.value === selectedColors.top) {
+                    colorOption.classList.add('selected');
+                }
+                
+                colorOption.onclick = function() {
+                    selectColor('top', color.value, color.name);
+                };
+                
+                const colorPreview = document.createElement('div');
+                colorPreview.className = 'color-preview';
+                colorPreview.style.backgroundColor = color.value;
+                
+                const colorName = document.createElement('div');
+                colorName.className = 'color-name';
+                colorName.textContent = color.name;
+                
+                colorOption.appendChild(colorPreview);
+                colorOption.appendChild(colorName);
+                topColorsContainer.appendChild(colorOption);
+            });
+            
+            // خيارات الألوان السفلية
+            const bottomColorsContainer = document.getElementById('bottomColorsContainer');
+            bottomColorsContainer.innerHTML = '';
+            
+            colorOptions.bottom.forEach(color => {
+                const colorOption = document.createElement('div');
+                colorOption.className = 'color-option';
+                colorOption.dataset.colorType = 'bottom';
+                colorOption.dataset.colorValue = color.value;
+                colorOption.dataset.colorName = color.name;
+                
+                if (color.value === selectedColors.bottom) {
+                    colorOption.classList.add('selected');
+                }
+                
+                colorOption.onclick = function() {
+                    selectColor('bottom', color.value, color.name);
+                };
+                
+                const colorPreview = document.createElement('div');
+                colorPreview.className = 'color-preview';
+                colorPreview.style.backgroundColor = color.value;
+                
+                const colorName = document.createElement('div');
+                colorName.className = 'color-name';
+                colorName.textContent = color.name;
+                
+                colorOption.appendChild(colorPreview);
+                colorOption.appendChild(colorName);
+                bottomColorsContainer.appendChild(colorOption);
+            });
+            
+            // خيارات ألوان النص
+            const textColorsContainer = document.getElementById('textColorsContainer');
+            textColorsContainer.innerHTML = '';
+            
+            colorOptions.text.forEach(color => {
+                const colorOption = document.createElement('div');
+                colorOption.className = 'color-option';
+                colorOption.dataset.colorType = 'text';
+                colorOption.dataset.colorValue = color.value;
+                colorOption.dataset.colorName = color.name;
+                
+                if (color.value === selectedColors.text) {
+                    colorOption.classList.add('selected');
+                }
+                
+                colorOption.onclick = function() {
+                    selectColor('text', color.value, color.name);
+                };
+                
+                const colorPreview = document.createElement('div');
+                colorPreview.className = 'color-preview';
+                colorPreview.style.backgroundColor = color.value;
+                
+                const colorName = document.createElement('div');
+                colorName.className = 'color-name';
+                colorName.textContent = color.name;
+                
+                colorOption.appendChild(colorPreview);
+                colorOption.appendChild(colorName);
+                textColorsContainer.appendChild(colorOption);
+            });
+        }
+
+        // تحميل البيانات من التخزين المحلي
+        function loadDataFromStorage() {
+            // تحميل المصروفات المحفوظة
+            const savedExpenses = localStorage.getItem('smartExpenseSaved');
+            if (savedExpenses) {
+                expenses = JSON.parse(savedExpenses);
+                updateSavedExpensesList();
+            }
+            
+            // تحميل المصروفات المحذوفة
+            const deletedExpensesData = localStorage.getItem('smartExpenseDeleted');
+            if (deletedExpensesData) {
+                deletedExpenses = JSON.parse(deletedExpensesData);
+                updateDeletedExpensesList();
+            }
+            
+            // تحميل المعطين
+            const savedGivers = localStorage.getItem('smartExpenseGivers');
+            if (savedGivers) {
+                givers = JSON.parse(savedGivers);
+                updateGiversList();
+                updateGiversDisplay();
+            }
+            
+            // تحميل العملة
+            const savedCurrency = localStorage.getItem('smartExpenseCurrency');
+            if (savedCurrency) {
+                currentCurrency = JSON.parse(savedCurrency);
+                highlightSelectedFlag();
+            }
+            
+            // تحميل الألوان
+            const savedColors = localStorage.getItem('smartExpenseColors');
+            if (savedColors) {
+                selectedColors = JSON.parse(savedColors);
+                updateSelectedColorsDisplay();
+            }
+        }
+
+        // حفظ البيانات في التخزين المحلي
+        function saveDataToStorage() {
+            localStorage.setItem('smartExpenseSaved', JSON.stringify(expenses));
+            localStorage.setItem('smartExpenseDeleted', JSON.stringify(deletedExpenses));
+            localStorage.setItem('smartExpenseGivers', JSON.stringify(givers));
+            localStorage.setItem('smartExpenseCurrency', JSON.stringify(currentCurrency));
+            localStorage.setItem('smartExpenseColors', JSON.stringify(selectedColors));
+        }
+
+        // تحديث عرض العملة
+        function updateCurrencyDisplay() {
+            const currencyDisplay = document.getElementById('currentCurrencyDisplay');
+            if (currentCurrency) {
+                currencyDisplay.textContent = `العملة: ${currentCurrency.name} - ${currentCurrency.currency}`;
+            } else {
+                currencyDisplay.textContent = 'العملة: لم يتم اختيارها';
+            }
+        }
+
+        // إظهار شاشة معينة
         function showScreen(screenId) {
+            // إخفاء جميع الشاشات
             document.querySelectorAll('.screen').forEach(screen => {
                 screen.classList.remove('active');
             });
             
-            const targetScreen = document.getElementById(screenId);
-            if (targetScreen) {
-                targetScreen.classList.add('active');
-                
-                switch(screenId) {
-                    case 'expenseRecord':
-                        updateCurrentDate();
-                        updateExpenseStats();
-                        updateGiversDisplay();
-                        break;
-                    case 'savedExpenses':
-                        updateSavedExpensesList();
-                        break;
-                    case 'deletedExpenses':
-                        updateDeletedExpensesList();
-                        break;
-                    case 'assignGivers':
-                        updateGiversList();
-                        break;
-                }
-            }
-        }
-
-        // ============================================
-        // صفحة تسجيل المصروف
-        // ============================================
-        function updateCurrentDate() {
-            const now = new Date();
-            const dateStr = `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
-            const dateElement = document.getElementById('currentDate');
-            if (dateElement) {
-                dateElement.textContent = dateStr;
-            }
-        }
-
-        function createExpenseRows() {
-            const expenseRows = document.getElementById('expenseRows');
-            if (!expenseRows) return;
+            // إظهار الشاشة المطلوبة
+            document.getElementById(screenId).classList.add('active');
+            currentScreen = screenId;
             
-            expenseRows.innerHTML = '';
-            
-            for (let i = 1; i <= APP_DATA.currentExpenseRows; i++) {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>
-                        <input type="text" class="expense-input" id="expenseName${i}" 
-                               placeholder="اسم مصروف ${i}" oninput="updateExpenseStats()">
-                    </td>
-                    <td>
-                        <input type="number" class="expense-input" id="expenseAmount${i}" 
-                               placeholder="مبلغ مصروف ${i}" min="0" step="0.01" oninput="updateExpenseStats()">
-                    </td>
-                `;
-                expenseRows.appendChild(row);
+            // تحديث البيانات عند الانتقال إلى شاشات معينة
+            if (screenId === 'savedExpenses') {
+                updateSavedExpensesList();
+            } else if (screenId === 'deletedExpenses') {
+                updateDeletedExpensesList();
+            } else if (screenId === 'assignGivers') {
+                updateGiversList();
             }
         }
 
+        // إضافة سطر جديد للمصروفات
         function addExpenseRow() {
-            if (APP_DATA.currentExpenseRows >= APP_DATA.maxExpenseRows) {
-                showNotification(`تم الوصول إلى الحد الأقصى للإضافة (${APP_DATA.maxExpenseRows} سطر)`, 'warning');
-                return;
-            }
+            expenseRowCount++;
+            const expenseRows = document.getElementById('expenseRows');
             
-            APP_DATA.currentExpenseRows++;
-            createExpenseRows();
+            const row = document.createElement('tr');
+            row.id = `expenseRow${expenseRowCount}`;
+            
+            const nameCell = document.createElement('td');
+            const nameInput = document.createElement('input');
+            nameInput.type = 'text';
+            nameInput.className = 'expense-input expense-name';
+            nameInput.id = `expenseName${expenseRowCount}`;
+            nameInput.placeholder = `اسم مصروف ${expenseRowCount}`;
+            nameInput.addEventListener('input', updateExpenseStats);
+            nameCell.appendChild(nameInput);
+            
+            const amountCell = document.createElement('td');
+            const amountInput = document.createElement('input');
+            amountInput.type = 'number';
+            amountInput.className = 'expense-input expense-amount';
+            amountInput.id = `expenseAmount${expenseRowCount}`;
+            amountInput.placeholder = '0.00';
+            amountInput.min = '0';
+            amountInput.step = '0.01';
+            amountInput.addEventListener('input', updateExpenseStats);
+            amountCell.appendChild(amountInput);
+            
+            row.appendChild(nameCell);
+            row.appendChild(amountCell);
+            expenseRows.appendChild(row);
+            
             showNotification('تمت إضافة سطر جديد للمصروفات', 'success');
         }
 
+        // تحديث إحصائيات المصروفات
         function updateExpenseStats() {
             let totalSpent = 0;
             
-            for (let i = 1; i <= APP_DATA.currentExpenseRows; i++) {
+            // حساب إجمالي المصروفات
+            for (let i = 1; i <= expenseRowCount; i++) {
                 const amountInput = document.getElementById(`expenseAmount${i}`);
                 if (amountInput && amountInput.value) {
                     totalSpent += parseFloat(amountInput.value) || 0;
                 }
             }
             
+            // حساب إجمالي المعطين
             let totalGiven = 0;
-            APP_DATA.givers.forEach(giver => {
-                totalGiven += parseFloat(giver.amount) || 0;
+            givers.forEach(giver => {
+                totalGiven += giver.amount;
             });
             
+            // حساب المتبقي
             const totalRemaining = totalGiven - totalSpent;
             
-            const totalGivenElement = document.getElementById('totalGiven');
-            const totalSpentElement = document.getElementById('totalSpent');
-            const totalRemainingElement = document.getElementById('totalRemaining');
-            
-            if (totalGivenElement) totalGivenElement.textContent = formatNumber(totalGiven);
-            if (totalSpentElement) totalSpentElement.textContent = formatNumber(totalSpent);
-            if (totalRemainingElement) totalRemainingElement.textContent = formatNumber(totalRemaining);
-            
-            updateGiversDisplay();
+            // تحديث العرض
+            document.getElementById('totalGiven').textContent = totalGiven.toFixed(2);
+            document.getElementById('totalSpent').textContent = totalSpent.toFixed(2);
+            document.getElementById('totalRemaining').textContent = totalRemaining.toFixed(2);
         }
 
-        function updateGiversDisplay() {
-            const giversDisplay = document.getElementById('giversDisplay');
-            if (!giversDisplay) return;
-            
-            if (APP_DATA.givers.length === 0) {
-                giversDisplay.innerHTML = '<div class="empty-message">لا يوجد معطين مضافين حاليًا. الرجاء إضافة معطين من صفحة تعيين المعطين.</div>';
-                return;
-            }
-            
-            let html = '<div class="givers-grid">';
-            APP_DATA.givers.forEach((giver) => {
-                html += `
-                    <div class="giver-card">
-                        <div class="giver-info">
-                            <h4>${giver.name}</h4>
-                            <div class="giver-amount">${formatNumber(giver.amount)}</div>
-                        </div>
-                    </div>
-                `;
-            });
-            html += '</div>';
-            giversDisplay.innerHTML = html;
-        }
-
-        function clearExpenseForm() {
-            if (confirm('هل أنت متأكد من تفريغ جميع الحقول؟ سيتم فقدان البيانات غير المحفوظة.')) {
-                for (let i = 1; i <= APP_DATA.currentExpenseRows; i++) {
-                    const nameInput = document.getElementById(`expenseName${i}`);
-                    const amountInput = document.getElementById(`expenseAmount${i}`);
-                    
-                    if (nameInput) nameInput.value = '';
-                    if (amountInput) amountInput.value = '';
-                }
-                
-                updateExpenseStats();
-                showNotification('تم تفريغ نموذج المصروفات', 'info');
-            }
-        }
-
+        // حفظ ورقة المصروف
         function saveExpenseSheet() {
+            // جمع بيانات المصروفات
             const expenseItems = [];
             let totalAmount = 0;
-            let hasData = false;
             
-            for (let i = 1; i <= APP_DATA.currentExpenseRows; i++) {
+            for (let i = 1; i <= expenseRowCount; i++) {
                 const nameInput = document.getElementById(`expenseName${i}`);
                 const amountInput = document.getElementById(`expenseAmount${i}`);
                 
-                if (nameInput && nameInput.value && amountInput && amountInput.value) {
-                    const amount = parseFloat(amountInput.value) || 0;
-                    if (amount > 0) {
-                        expenseItems.push({
-                            name: nameInput.value,
-                            amount: amount
-                        });
-                        totalAmount += amount;
-                        hasData = true;
-                    }
+                const name = nameInput.value.trim();
+                const amount = parseFloat(amountInput.value) || 0;
+                
+                if (name || amount > 0) {
+                    expenseItems.push({
+                        name: name || `مصروف ${i}`,
+                        amount: amount
+                    });
+                    totalAmount += amount;
                 }
             }
             
-            if (!hasData) {
-                showNotification('الرجاء إدخال مصروفات صحيحة قبل الحفظ', 'warning');
+            if (expenseItems.length === 0) {
+                showNotification('الرجاء إدخال بيانات المصروفات', 'error');
                 return;
             }
             
-            if (APP_DATA.givers.length === 0) {
-                showNotification('الرجاء إضافة معطين قبل حفظ ورقة المصروف', 'warning');
-                return;
-            }
-            
-            const now = new Date();
-            const expenseSheet = {
+            // إنشاء كائن المصروف
+            const expense = {
                 id: Date.now(),
-                date: `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`,
-                time: `${now.getHours()}:${now.getMinutes()}`,
+                date: document.getElementById('currentDate').textContent,
                 items: expenseItems,
-                total: totalAmount,
-                givers: [...APP_DATA.givers],
-                currency: APP_DATA.selectedCurrency ? APP_DATA.selectedCurrency.currency : 'غير محدد'
+                totalAmount: totalAmount,
+                givers: [...givers],
+                totalGiven: givers.reduce((sum, giver) => sum + giver.amount, 0),
+                currency: currentCurrency ? currentCurrency.currency : 'غير محدد'
             };
             
-            APP_DATA.savedExpenses.push(expenseSheet);
-            saveToLocalStorage();
+            // إضافة إلى القائمة
+            expenses.push(expense);
             
-            for (let i = 1; i <= APP_DATA.currentExpenseRows; i++) {
+            // حفظ في التخزين المحلي
+            saveDataToStorage();
+            
+            // تحديث العرض
+            updateSavedExpensesList();
+            
+            // إعادة تعيين النموذج
+            resetExpenseForm();
+            
+            showNotification('تم حفظ ورقة المصروف بنجاح', 'success');
+        }
+
+        // إعادة تعيين نموذج المصروف
+        function resetExpenseForm() {
+            for (let i = 1; i <= expenseRowCount; i++) {
                 const nameInput = document.getElementById(`expenseName${i}`);
                 const amountInput = document.getElementById(`expenseAmount${i}`);
                 
@@ -1780,767 +1894,857 @@
                 if (amountInput) amountInput.value = '';
             }
             
-            updateExpenseStats();
+            // إعادة ضبط عدد الصفوف إلى 10
+            while (expenseRowCount > 10) {
+                const row = document.getElementById(`expenseRow${expenseRowCount}`);
+                if (row) row.remove();
+                expenseRowCount--;
+            }
             
-            showNotification('تم حفظ ورقة المصروفات بنجاح', 'success');
-            showScreen('savedExpenses');
+            updateExpenseStats();
         }
 
-        // ============================================
-        // صفحة أوراق مصروف محفوظة
-        // ============================================
+        // تحديث قائمة المصروفات المحفوظة
         function updateSavedExpensesList() {
             const savedExpensesList = document.getElementById('savedExpensesList');
-            if (!savedExpensesList) return;
             
-            if (APP_DATA.savedExpenses.length === 0) {
-                savedExpensesList.innerHTML = '<div class="empty-message">لا يوجد ورق مصروف محفوظ حاليًا. الرجاء تسجيل مصروفات جديدة من صفحة تسجيل المصروف.</div>';
+            if (expenses.length === 0) {
+                savedExpensesList.innerHTML = '<div class="empty-message">حتى الآن لا يوجد أي ورق مصروف محفوظ حاليًا.</div>';
                 return;
             }
             
-            const sortedExpenses = [...APP_DATA.savedExpenses].sort((a, b) => b.id - a.id);
+            savedExpensesList.innerHTML = '';
             
-            let html = '';
-            sortedExpenses.forEach(expense => {
-                html += `
-                    <div class="expense-card ${APP_DATA.selectedExpenseId === expense.id ? 'selected' : ''}" 
-                         onclick="selectExpense(${expense.id}, 'saved')">
-                        <div class="expense-card-header">
-                            <div class="expense-date">${expense.date} - ${expense.time}</div>
-                            <div class="expense-total">${formatNumber(expense.total)}</div>
-                        </div>
-                        <div class="expense-items">
-                            ${expense.items.slice(0, 4).map(item => `
-                                <div class="expense-item">
-                                    <span class="item-name">${item.name}</span>
-                                    <span class="item-amount">${formatNumber(item.amount)}</span>
-                                </div>
-                            `).join('')}
-                            ${expense.items.length > 4 ? 
-                                `<div style="text-align: center; color: #666; margin-top: 10px; padding: 5px; background: #f5f5f5; border-radius: 4px;">
-                                    + ${expense.items.length - 4} عناصر أخرى
-                                </div>` : ''}
-                        </div>
-                        <div style="margin-top: 10px; font-size: 0.9rem; color: #666;">
-                            <i class="fas fa-users"></i> ${expense.givers.length} معطي | 
-                            <i class="fas fa-money-bill"></i> ${expense.currency}
-                        </div>
-                    </div>
-                `;
-            });
-            
-            savedExpensesList.innerHTML = html;
-        }
-
-        function selectExpense(id, type) {
-            APP_DATA.selectedExpenseId = id;
-            
-            if (type === 'saved') {
-                document.querySelectorAll('#savedExpensesList .expense-card').forEach(card => {
-                    card.classList.remove('selected');
-                });
-                const selectedCard = document.querySelector(`#savedExpensesList .expense-card[onclick="selectExpense(${id}, 'saved')"]`);
-                if (selectedCard) {
-                    selectedCard.classList.add('selected');
+            expenses.forEach(expense => {
+                const expenseCard = document.createElement('div');
+                expenseCard.className = 'expense-card';
+                if (selectedExpenseId === expense.id) {
+                    expenseCard.classList.add('selected');
                 }
-            } else if (type === 'deleted') {
-                document.querySelectorAll('#deletedExpensesList .expense-card').forEach(card => {
-                    card.classList.remove('selected');
-                });
-                const selectedCard = document.querySelector(`#deletedExpensesList .expense-card[onclick="selectExpense(${id}, 'deleted')"]`);
-                if (selectedCard) {
-                    selectedCard.classList.add('selected');
-                }
-            }
-        }
-
-        function deleteSelectedExpense() {
-            if (!APP_DATA.selectedExpenseId) {
-                showNotification('الرجاء اختيار ورقة مصروف أولاً', 'warning');
-                return;
-            }
-            
-            const index = APP_DATA.savedExpenses.findIndex(e => e.id === APP_DATA.selectedExpenseId);
-            if (index !== -1) {
-                const deletedExpense = APP_DATA.savedExpenses.splice(index, 1)[0];
-                APP_DATA.deletedExpenses.push(deletedExpense);
-                saveToLocalStorage();
+                expenseCard.dataset.expenseId = expense.id;
+                expenseCard.onclick = function() {
+                    selectExpense(expense.id);
+                };
                 
-                updateSavedExpensesList();
-                updateDeletedExpensesList();
-                APP_DATA.selectedExpenseId = null;
+                const cardHeader = document.createElement('div');
+                cardHeader.className = 'expense-card-header';
                 
-                showNotification('تم نقل ورقة المصروف إلى المحذوفات', 'success');
-            }
-        }
-
-        function editSelectedExpense() {
-            if (!APP_DATA.selectedExpenseId) {
-                showNotification('الرجاء اختيار ورقة مصروف أولاً', 'warning');
-                return;
-            }
-            
-            const expense = APP_DATA.savedExpenses.find(e => e.id === APP_DATA.selectedExpenseId);
-            if (!expense) return;
-            
-            showScreen('expenseRecord');
-            APP_DATA.editingExpense = true;
-            
-            setTimeout(() => {
-                for (let i = 1; i <= APP_DATA.currentExpenseRows; i++) {
-                    const nameInput = document.getElementById(`expenseName${i}`);
-                    const amountInput = document.getElementById(`expenseAmount${i}`);
+                const expenseDate = document.createElement('div');
+                expenseDate.className = 'expense-date';
+                expenseDate.textContent = expense.date;
+                
+                const expenseTotal = document.createElement('div');
+                expenseTotal.className = 'expense-total';
+                expenseTotal.textContent = `${expense.totalAmount.toFixed(2)} ${expense.currency}`;
+                
+                cardHeader.appendChild(expenseDate);
+                cardHeader.appendChild(expenseTotal);
+                
+                const expenseItems = document.createElement('div');
+                expenseItems.className = 'expense-items';
+                
+                // عرض أول 5 مصروفات فقط
+                const displayItems = expense.items.slice(0, 5);
+                displayItems.forEach(item => {
+                    const expenseItem = document.createElement('div');
+                    expenseItem.className = 'expense-item';
                     
-                    if (nameInput) nameInput.value = '';
-                    if (amountInput) amountInput.value = '';
+                    const itemName = document.createElement('div');
+                    itemName.className = 'item-name';
+                    itemName.textContent = item.name;
+                    
+                    const itemAmount = document.createElement('div');
+                    itemAmount.className = 'item-amount';
+                    itemAmount.textContent = `${item.amount.toFixed(2)} ${expense.currency}`;
+                    
+                    expenseItem.appendChild(itemName);
+                    expenseItem.appendChild(itemAmount);
+                    expenseItems.appendChild(expenseItem);
+                });
+                
+                if (expense.items.length > 5) {
+                    const moreItems = document.createElement('div');
+                    moreItems.className = 'expense-item';
+                    moreItems.style.fontStyle = 'italic';
+                    moreItems.textContent = `و ${expense.items.length - 5} عناصر أخرى...`;
+                    expenseItems.appendChild(moreItems);
                 }
                 
-                expense.items.forEach((item, index) => {
-                    if (index < APP_DATA.currentExpenseRows) {
-                        const nameInput = document.getElementById(`expenseName${index + 1}`);
-                        const amountInput = document.getElementById(`expenseAmount${index + 1}`);
-                        
-                        if (nameInput) nameInput.value = item.name;
-                        if (amountInput) amountInput.value = item.amount;
-                    }
-                });
+                const cardActions = document.createElement('div');
+                cardActions.className = 'card-actions';
                 
-                APP_DATA.givers = [...expense.givers];
-                updateExpenseStats();
+                expenseCard.appendChild(cardHeader);
+                expenseCard.appendChild(expenseItems);
                 
-                const saveEditBtn = document.getElementById('saveEditBtn');
-                if (saveEditBtn) saveEditBtn.style.display = 'inline-flex';
-                
-                showNotification('يمكنك الآن تعديل ورقة المصروف المحددة', 'info');
-            }, 100);
-        }
-
-        function saveExpenseEdit() {
-            if (!APP_DATA.selectedExpenseId) return;
-            
-            saveExpenseSheet();
-            
-            APP_DATA.savedExpenses = APP_DATA.savedExpenses.filter(e => e.id !== APP_DATA.selectedExpenseId);
-            saveToLocalStorage();
-            
-            APP_DATA.editingExpense = false;
-            APP_DATA.selectedExpenseId = null;
-            const saveEditBtn = document.getElementById('saveEditBtn');
-            if (saveEditBtn) saveEditBtn.style.display = 'none';
-            
-            showNotification('تم تعديل ورقة المصروف بنجاح', 'success');
-        }
-
-        function reviewSelectedExpense() {
-            if (!APP_DATA.selectedExpenseId) {
-                showNotification('الرجاء اختيار ورقة مصروف أولاً', 'warning');
-                return;
-            }
-            
-            const expense = APP_DATA.savedExpenses.find(e => e.id === APP_DATA.selectedExpenseId);
-            if (!expense) return;
-            
-            let message = `=== تفاصيل ورقة المصروف ===\n\n`;
-            message += `📅 التاريخ: ${expense.date}\n`;
-            message += `⏰ الوقت: ${expense.time}\n`;
-            message += `💰 المجموع الكلي: ${formatNumber(expense.total)}\n`;
-            message += `📊 عدد العناصر: ${expense.items.length}\n`;
-            message += `💱 العملة: ${expense.currency}\n\n`;
-            message += `📋 تفاصيل المصروفات:\n`;
-            
-            expense.items.forEach((item, index) => {
-                message += `${index + 1}. ${item.name}: ${formatNumber(item.amount)}\n`;
+                savedExpensesList.appendChild(expenseCard);
             });
-            
-            if (expense.givers.length > 0) {
-                message += `\n👥 المعطين:\n`;
-                expense.givers.forEach(giver => {
-                    message += `• ${giver.name}: ${formatNumber(giver.amount)}\n`;
-                });
-            }
-            
-            alert(message);
         }
 
-        // ============================================
-        // صفحة أوراق مصروف محذوفة
-        // ============================================
+        // تحديث قائمة المصروفات المحذوفة
         function updateDeletedExpensesList() {
             const deletedExpensesList = document.getElementById('deletedExpensesList');
-            if (!deletedExpensesList) return;
             
-            if (APP_DATA.deletedExpenses.length === 0) {
-                deletedExpensesList.innerHTML = '<div class="empty-message">لا يوجد ورق مصروف محذوف حاليًا.</div>';
+            if (deletedExpenses.length === 0) {
+                deletedExpensesList.innerHTML = '<div class="empty-message">حتى الآن لا يوجد أي ورق مصروف محذوف حاليًا.</div>';
                 return;
             }
             
-            let html = '';
-            APP_DATA.deletedExpenses.forEach(expense => {
-                html += `
-                    <div class="expense-card deleted ${APP_DATA.selectedExpenseId === expense.id ? 'selected' : ''}" 
-                         onclick="selectExpense(${expense.id}, 'deleted')">
-                        <div class="expense-card-header">
-                            <div class="expense-date">${expense.date}</div>
-                            <div class="expense-total">${formatNumber(expense.total)}</div>
-                        </div>
-                        <div class="expense-items">
-                            ${expense.items.slice(0, 3).map(item => `
-                                <div class="expense-item">
-                                    <span class="item-name">${item.name}</span>
-                                    <span class="item-amount">${formatNumber(item.amount)}</span>
-                                </div>
-                            `).join('')}
-                            ${expense.items.length > 3 ? 
-                                `<div style="text-align: center; color: #666; margin-top: 10px;">... و ${expense.items.length - 3} عناصر أخرى</div>` : ''}
-                        </div>
-                    </div>
-                `;
-            });
+            deletedExpensesList.innerHTML = '';
             
-            deletedExpensesList.innerHTML = html;
+            deletedExpenses.forEach(expense => {
+                const expenseCard = document.createElement('div');
+                expenseCard.className = 'expense-card deleted';
+                if (selectedDeletedExpenseId === expense.id) {
+                    expenseCard.classList.add('selected');
+                }
+                expenseCard.dataset.expenseId = expense.id;
+                expenseCard.onclick = function() {
+                    selectDeletedExpense(expense.id);
+                };
+                
+                const cardHeader = document.createElement('div');
+                cardHeader.className = 'expense-card-header';
+                
+                const expenseDate = document.createElement('div');
+                expenseDate.className = 'expense-date';
+                expenseDate.textContent = expense.date;
+                
+                const expenseTotal = document.createElement('div');
+                expenseTotal.className = 'expense-total';
+                expenseTotal.textContent = `${expense.totalAmount.toFixed(2)} ${expense.currency}`;
+                
+                cardHeader.appendChild(expenseDate);
+                cardHeader.appendChild(expenseTotal);
+                
+                const expenseItems = document.createElement('div');
+                expenseItems.className = 'expense-items';
+                
+                // عرض أول 3 مصروفات فقط
+                const displayItems = expense.items.slice(0, 3);
+                displayItems.forEach(item => {
+                    const expenseItem = document.createElement('div');
+                    expenseItem.className = 'expense-item';
+                    
+                    const itemName = document.createElement('div');
+                    itemName.className = 'item-name';
+                    itemName.textContent = item.name;
+                    
+                    const itemAmount = document.createElement('div');
+                    itemAmount.className = 'item-amount';
+                    itemAmount.textContent = `${item.amount.toFixed(2)} ${expense.currency}`;
+                    
+                    expenseItem.appendChild(itemName);
+                    expenseItem.appendChild(itemAmount);
+                    expenseItems.appendChild(expenseItem);
+                });
+                
+                if (expense.items.length > 3) {
+                    const moreItems = document.createElement('div');
+                    moreItems.className = 'expense-item';
+                    moreItems.style.fontStyle = 'italic';
+                    moreItems.textContent = `و ${expense.items.length - 3} عناصر أخرى...`;
+                    expenseItems.appendChild(moreItems);
+                }
+                
+                expenseCard.appendChild(cardHeader);
+                expenseCard.appendChild(expenseItems);
+                
+                deletedExpensesList.appendChild(expenseCard);
+            });
         }
 
-        function restoreSelectedExpense() {
-            if (!APP_DATA.selectedExpenseId) {
-                showNotification('الرجاء اختيار ورقة مصروف أولاً', 'warning');
+        // اختيار مصروف
+        function selectExpense(id) {
+            selectedExpenseId = id;
+            updateSavedExpensesList();
+        }
+
+        // اختيار مصروف محذوف
+        function selectDeletedExpense(id) {
+            selectedDeletedExpenseId = id;
+            updateDeletedExpensesList();
+        }
+
+        // حذف مصروف محفوظ
+        function deleteSelectedExpense() {
+            if (!selectedExpenseId) {
+                showNotification('الرجاء اختيار مصروف لحذفه', 'error');
                 return;
             }
             
-            const index = APP_DATA.deletedExpenses.findIndex(e => e.id === APP_DATA.selectedExpenseId);
-            if (index !== -1) {
-                const restoredExpense = APP_DATA.deletedExpenses.splice(index, 1)[0];
-                APP_DATA.savedExpenses.push(restoredExpense);
-                saveToLocalStorage();
+            const expenseIndex = expenses.findIndex(expense => expense.id === selectedExpenseId);
+            if (expenseIndex !== -1) {
+                const deletedExpense = expenses[expenseIndex];
+                deletedExpenses.push(deletedExpense);
+                expenses.splice(expenseIndex, 1);
                 
+                saveDataToStorage();
                 updateSavedExpensesList();
                 updateDeletedExpensesList();
-                APP_DATA.selectedExpenseId = null;
                 
-                showNotification('تم استعادة ورقة المصروف إلى المحفوظات', 'success');
+                selectedExpenseId = null;
+                
+                showNotification('تم نقل المصروف إلى الأوراق المحذوفة', 'success');
             }
         }
 
-        function permanentDeleteExpense() {
-            if (!APP_DATA.selectedExpenseId) {
-                showNotification('الرجاء اختيار ورقة مصروف أولاً', 'warning');
+        // تعديل مصروف محفوظ
+        function editSelectedExpense() {
+            if (!selectedExpenseId) {
+                showNotification('الرجاء اختيار مصروف لتعديله', 'error');
                 return;
             }
             
-            if (confirm('⚠️ هل أنت متأكد من الحذف النهائي؟\nلا يمكن استعادة البيانات بعد الحذف النهائي.')) {
-                APP_DATA.deletedExpenses = APP_DATA.deletedExpenses.filter(e => e.id !== APP_DATA.selectedExpenseId);
-                saveToLocalStorage();
+            const expense = expenses.find(exp => exp.id === selectedExpenseId);
+            if (!expense) return;
+            
+            // ملء النموذج بالمصروف المحدد
+            resetExpenseForm();
+            
+            // تعيين التاريخ
+            document.getElementById('currentDate').textContent = expense.date;
+            
+            // تعيين المصروفات
+            expense.items.forEach((item, index) => {
+                if (index + 1 > expenseRowCount) {
+                    addExpenseRow();
+                }
                 
-                updateDeletedExpensesList();
-                APP_DATA.selectedExpenseId = null;
+                const nameInput = document.getElementById(`expenseName${index + 1}`);
+                const amountInput = document.getElementById(`expenseAmount${index + 1}`);
                 
-                showNotification('تم الحذف النهائي لورقة المصروف', 'success');
-            }
-        }
-
-        function clearAllDeleted() {
-            if (APP_DATA.deletedExpenses.length === 0) {
-                showNotification('لا توجد أوراق محذوفة', 'info');
-                return;
-            }
-            
-            if (confirm(`⚠️ هل أنت متأكد من تفريغ جميع المحذوفات؟\nسيتم حذف ${APP_DATA.deletedExpenses.length} ورقة نهائياً.`)) {
-                APP_DATA.deletedExpenses = [];
-                saveToLocalStorage();
-                updateDeletedExpensesList();
-                showNotification('تم تفريغ جميع الأوراق المحذوفة', 'success');
-            }
-        }
-
-        // ============================================
-        // صفحة تعيين المعطين
-        // ============================================
-        function updateGiversList() {
-            const giversList = document.getElementById('giversList');
-            if (!giversList) return;
-            
-            if (APP_DATA.givers.length === 0) {
-                giversList.innerHTML = '<div class="empty-message">لا يوجد معطين مضافين بعد. قم بإضافة معطين أولاً.</div>';
-                return;
-            }
-            
-            let html = '';
-            APP_DATA.givers.forEach(giver => {
-                html += `
-                    <div class="giver-card ${APP_DATA.selectedGiverId === giver.id ? 'selected' : ''}" 
-                         onclick="selectGiver(${giver.id})">
-                        <div class="giver-info">
-                            <h4>${giver.name}</h4>
-                            <div class="giver-amount">${formatNumber(giver.amount)}</div>
-                        </div>
-                        <div class="giver-actions">
-                            <button class="btn btn-warning" style="padding: 8px 12px; min-width: auto;" 
-                                    onclick="event.stopPropagation(); editSelectedGiver(${giver.id})">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="btn btn-danger" style="padding: 8px 12px; min-width: auto;" 
-                                    onclick="event.stopPropagation(); deleteSelectedGiver(${giver.id})">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                `;
+                if (nameInput) nameInput.value = item.name;
+                if (amountInput) amountInput.value = item.amount;
             });
             
-            giversList.innerHTML = html;
+            // تعيين المعطين
+            givers = [...expense.givers];
+            updateGiversList();
+            updateGiversDisplay();
+            
+            // تمكين وضع التعديل
+            editingExpense = true;
+            document.getElementById('saveEditBtn').style.display = 'inline-flex';
+            
+            // الانتقال إلى شاشة تسجيل المصروف
+            showScreen('expenseRecord');
+            
+            showNotification('جاري تحميل المصروف للتعديل', 'success');
         }
 
+        // حفظ التعديلات على المصروف
+        function saveExpenseEdit() {
+            if (!selectedExpenseId) return;
+            
+            // جمع بيانات المصروفات
+            const expenseItems = [];
+            let totalAmount = 0;
+            
+            for (let i = 1; i <= expenseRowCount; i++) {
+                const nameInput = document.getElementById(`expenseName${i}`);
+                const amountInput = document.getElementById(`expenseAmount${i}`);
+                
+                const name = nameInput.value.trim();
+                const amount = parseFloat(amountInput.value) || 0;
+                
+                if (name || amount > 0) {
+                    expenseItems.push({
+                        name: name || `مصروف ${i}`,
+                        amount: amount
+                    });
+                    totalAmount += amount;
+                }
+            }
+            
+            if (expenseItems.length === 0) {
+                showNotification('الرجاء إدخال بيانات المصروفات', 'error');
+                return;
+            }
+            
+            // تحديث المصروف المحدد
+            const expenseIndex = expenses.findIndex(expense => expense.id === selectedExpenseId);
+            if (expenseIndex !== -1) {
+                expenses[expenseIndex].date = document.getElementById('currentDate').textContent;
+                expenses[expenseIndex].items = expenseItems;
+                expenses[expenseIndex].totalAmount = totalAmount;
+                expenses[expenseIndex].givers = [...givers];
+                expenses[expenseIndex].totalGiven = givers.reduce((sum, giver) => sum + giver.amount, 0);
+                expenses[expenseIndex].currency = currentCurrency ? currentCurrency.currency : 'غير محدد';
+                
+                saveDataToStorage();
+                updateSavedExpensesList();
+                
+                // إعادة تعيين النموذج
+                resetExpenseForm();
+                updateCurrentDate();
+                
+                // إعادة تعيين وضع التعديل
+                editingExpense = false;
+                document.getElementById('saveEditBtn').style.display = 'none';
+                selectedExpenseId = null;
+                
+                showNotification('تم حفظ التعديلات بنجاح', 'success');
+                
+                // العودة إلى شاشة المصروفات المحفوظة
+                showScreen('savedExpenses');
+            }
+        }
+
+        // مراجعة مصروف محفوظ
+        function reviewSelectedExpense() {
+            if (!selectedExpenseId) {
+                showNotification('الرجاء اختيار مصروف لمراجعته', 'error');
+                return;
+            }
+            
+            const expense = expenses.find(exp => exp.id === selectedExpenseId);
+            if (!expense) return;
+            
+            // عرض تفاصيل المصروف في نافذة منبثقة
+            let detailsHtml = `
+                <h3>تفاصيل ورقة المصروف</h3>
+                <p><strong>التاريخ:</strong> ${expense.date}</p>
+                <p><strong>العملة:</strong> ${expense.currency}</p>
+                <p><strong>إجمالي المبلغ المعطى:</strong> ${expense.totalGiven.toFixed(2)}</p>
+                <p><strong>إجمالي المبلغ المصروف:</strong> ${expense.totalAmount.toFixed(2)}</p>
+                <p><strong>المبلغ المتبقي:</strong> ${(expense.totalGiven - expense.totalAmount).toFixed(2)}</p>
+                <hr>
+                <h4>تفاصيل المصروفات:</h4>
+                <ul>
+            `;
+            
+            expense.items.forEach(item => {
+                detailsHtml += `<li><strong>${item.name}:</strong> ${item.amount.toFixed(2)}</li>`;
+            });
+            
+            detailsHtml += `
+                </ul>
+                <hr>
+                <h4>المعطين:</h4>
+                <ul>
+            `;
+            
+            if (expense.givers.length > 0) {
+                expense.givers.forEach(giver => {
+                    detailsHtml += `<li><strong>${giver.name}:</strong> ${giver.amount.toFixed(2)}</li>`;
+                });
+            } else {
+                detailsHtml += `<li>لا يوجد معطين</li>`;
+            }
+            
+            detailsHtml += `</ul>`;
+            
+            alertModal('مراجعة ورقة المصروف', detailsHtml);
+        }
+
+        // استعادة مصروف محذوف
+        function restoreSelectedExpense() {
+            if (!selectedDeletedExpenseId) {
+                showNotification('الرجاء اختيار مصروف لاستعادته', 'error');
+                return;
+            }
+            
+            const expenseIndex = deletedExpenses.findIndex(expense => expense.id === selectedDeletedExpenseId);
+            if (expenseIndex !== -1) {
+                const restoredExpense = deletedExpenses[expenseIndex];
+                expenses.push(restoredExpense);
+                deletedExpenses.splice(expenseIndex, 1);
+                
+                saveDataToStorage();
+                updateSavedExpensesList();
+                updateDeletedExpensesList();
+                
+                selectedDeletedExpenseId = null;
+                
+                showNotification('تم استعادة المصروف بنجاح', 'success');
+            }
+        }
+
+        // حذف نهائي لمصروف محذوف
+        function permanentDeleteExpense() {
+            if (!selectedDeletedExpenseId) {
+                showNotification('الرجاء اختيار مصروف لحذفه نهائيًا', 'error');
+                return;
+            }
+            
+            if (confirm('هل أنت متأكد من حذف هذا المصروف نهائيًا؟ لا يمكن التراجع عن هذا الإجراء.')) {
+                const expenseIndex = deletedExpenses.findIndex(expense => expense.id === selectedDeletedExpenseId);
+                if (expenseIndex !== -1) {
+                    deletedExpenses.splice(expenseIndex, 1);
+                    
+                    saveDataToStorage();
+                    updateDeletedExpensesList();
+                    
+                    selectedDeletedExpenseId = null;
+                    
+                    showNotification('تم حذف المصروف نهائيًا', 'success');
+                }
+            }
+        }
+
+        // تحديث قائمة المعطين
+        function updateGiversList() {
+            const giversList = document.getElementById('giversList');
+            
+            if (givers.length === 0) {
+                giversList.innerHTML = '<div class="empty-message">لا يوجد معطين مضافين بعد.</div>';
+                return;
+            }
+            
+            giversList.innerHTML = '';
+            
+            givers.forEach((giver, index) => {
+                const giverCard = document.createElement('div');
+                giverCard.className = 'giver-card';
+                if (selectedGiverId === giver.id) {
+                    giverCard.classList.add('selected');
+                }
+                giverCard.dataset.giverId = giver.id;
+                giverCard.onclick = function() {
+                    selectGiver(giver.id);
+                };
+                
+                const giverInfo = document.createElement('div');
+                giverInfo.className = 'giver-info';
+                
+                const giverName = document.createElement('h4');
+                giverName.textContent = giver.name;
+                
+                const giverAmount = document.createElement('div');
+                giverAmount.className = 'giver-amount';
+                giverAmount.textContent = `${giver.amount.toFixed(2)} ${currentCurrency ? currentCurrency.currency.split(' ')[0] : ''}`;
+                
+                giverInfo.appendChild(giverName);
+                giverInfo.appendChild(giverAmount);
+                
+                giverCard.appendChild(giverInfo);
+                giversList.appendChild(giverCard);
+            });
+        }
+
+        // تحديث عرض المعطين
+        function updateGiversDisplay() {
+            const giversDisplay = document.getElementById('giversDisplay');
+            
+            if (givers.length === 0) {
+                giversDisplay.innerHTML = '<div class="empty-message">حتى الآن لا يوجد أي معطي مضاف حاليًا.</div>';
+                return;
+            }
+            
+            let html = '<div class="givers-summary">';
+            let totalGiven = 0;
+            
+            givers.forEach(giver => {
+                html += `
+                    <div class="giver-summary-item">
+                        <strong>${giver.name}:</strong> ${giver.amount.toFixed(2)} ${currentCurrency ? currentCurrency.currency.split(' ')[0] : ''}
+                    </div>
+                `;
+                totalGiven += giver.amount;
+            });
+            
+            html += `<hr><div class="giver-total"><strong>الإجمالي:</strong> ${totalGiven.toFixed(2)} ${currentCurrency ? currentCurrency.currency.split(' ')[0] : ''}</div>`;
+            html += '</div>';
+            
+            giversDisplay.innerHTML = html;
+            
+            // تحديث إحصائيات المصروفات
+            updateExpenseStats();
+        }
+
+        // اختيار معطي
         function selectGiver(id) {
-            APP_DATA.selectedGiverId = id;
+            selectedGiverId = id;
             updateGiversList();
         }
 
+        // إضافة معطي جديد
         function addNewGiver() {
             const nameInput = document.getElementById('giverName');
             const amountInput = document.getElementById('giverAmount');
             
-            if (!nameInput || !amountInput) return;
-            
             const name = nameInput.value.trim();
-            const amount = amountInput.value;
+            const amount = parseFloat(amountInput.value);
             
             if (!name) {
-                showNotification('الرجاء إدخال اسم المعطي', 'warning');
-                nameInput.focus();
+                showNotification('الرجاء إدخال اسم المعطي', 'error');
                 return;
             }
             
-            if (!amount || parseFloat(amount) <= 0) {
-                showNotification('الرجاء إدخال مبلغ صحيح أكبر من الصفر', 'warning');
-                amountInput.focus();
+            if (isNaN(amount) || amount <= 0) {
+                showNotification('الرجاء إدخال مبلغ صحيح للمعطي', 'error');
                 return;
             }
             
-            const giver = {
+            // التحقق من عدم وجود معطي بنفس الاسم
+            if (givers.some(giver => giver.name === name)) {
+                showNotification('هذا المعطي موجود بالفعل', 'error');
+                return;
+            }
+            
+            const newGiver = {
                 id: Date.now(),
                 name: name,
-                amount: parseFloat(amount) || 0,
-                date: new Date().toLocaleDateString('ar-EG')
+                amount: amount
             };
             
-            APP_DATA.givers.push(giver);
-            updateGiversList();
-            updateExpenseStats();
+            givers.push(newGiver);
             
+            // تحديث العرض والحفظ
+            updateGiversList();
+            updateGiversDisplay();
+            saveDataToStorage();
+            
+            // إعادة تعيين الحقول
             nameInput.value = '';
             amountInput.value = '';
-            nameInput.focus();
             
-            showNotification(`تمت إضافة المعطي "${name}" بنجاح`, 'success');
+            showNotification('تم إضافة المعطي بنجاح', 'success');
         }
 
-        function editSelectedGiver(id) {
-            if (!id && !APP_DATA.selectedGiverId) {
-                showNotification('الرجاء اختيار معطي أولاً', 'warning');
+        // تعديل معطي
+        function editSelectedGiver() {
+            if (!selectedGiverId) {
+                showNotification('الرجاء اختيار معطي لتعديله', 'error');
                 return;
             }
             
-            const giverId = id || APP_DATA.selectedGiverId;
-            const giver = APP_DATA.givers.find(g => g.id === giverId);
-            
+            const giver = givers.find(g => g.id === selectedGiverId);
             if (!giver) return;
             
-            const nameInput = document.getElementById('giverName');
-            const amountInput = document.getElementById('giverAmount');
+            // تعيين الحقول بقيم المعطي المحدد
+            document.getElementById('giverName').value = giver.name;
+            document.getElementById('giverAmount').value = giver.amount;
             
-            if (nameInput && amountInput) {
-                nameInput.value = giver.name;
-                amountInput.value = giver.amount;
-            }
-            
-            APP_DATA.editingGiver = true;
-            APP_DATA.selectedGiverId = giverId;
-            
-            const saveGiverBtn = document.getElementById('saveGiverBtn');
-            const addBtn = document.querySelector('#assignGivers .btn-success');
-            
-            if (saveGiverBtn) saveGiverBtn.style.display = 'inline-flex';
-            if (addBtn) addBtn.style.display = 'none';
-            
-            showNotification('يمكنك الآن تعديل بيانات المعطي المحدد', 'info');
+            // تمكين وضع التعديل
+            editingGiver = true;
+            document.getElementById('saveGiverBtn').style.display = 'inline-flex';
         }
 
+        // حفظ تعديل المعطي
         function saveGiverEdit() {
-            if (!APP_DATA.selectedGiverId) return;
+            if (!selectedGiverId) return;
             
             const nameInput = document.getElementById('giverName');
             const amountInput = document.getElementById('giverAmount');
-            
-            if (!nameInput || !amountInput) return;
             
             const name = nameInput.value.trim();
-            const amount = amountInput.value;
+            const amount = parseFloat(amountInput.value);
             
-            if (!name || !amount || parseFloat(amount) <= 0) {
-                showNotification('الرجاء إدخال بيانات صحيحة', 'warning');
+            if (!name) {
+                showNotification('الرجاء إدخال اسم المعطي', 'error');
                 return;
             }
             
-            const index = APP_DATA.givers.findIndex(g => g.id === APP_DATA.selectedGiverId);
-            if (index !== -1) {
-                APP_DATA.givers[index].name = name;
-                APP_DATA.givers[index].amount = parseFloat(amount) || 0;
-                APP_DATA.givers[index].updatedAt = new Date().toLocaleDateString('ar-EG');
-            }
-            
-            updateGiversList();
-            updateExpenseStats();
-            
-            if (nameInput) nameInput.value = '';
-            if (amountInput) amountInput.value = '';
-            
-            const saveGiverBtn = document.getElementById('saveGiverBtn');
-            const addBtn = document.querySelector('#assignGivers .btn-success');
-            
-            if (saveGiverBtn) saveGiverBtn.style.display = 'none';
-            if (addBtn) addBtn.style.display = 'inline-flex';
-            
-            APP_DATA.editingGiver = false;
-            APP_DATA.selectedGiverId = null;
-            
-            showNotification('تم تعديل بيانات المعطي بنجاح', 'success');
-        }
-
-        function deleteSelectedGiver(id) {
-            if (!id && !APP_DATA.selectedGiverId) {
-                showNotification('الرجاء اختيار معطي أولاً', 'warning');
+            if (isNaN(amount) || amount <= 0) {
+                showNotification('الرجاء إدخال مبلغ صحيح للمعطي', 'error');
                 return;
             }
             
-            const giverId = id || APP_DATA.selectedGiverId;
-            const giver = APP_DATA.givers.find(g => g.id === giverId);
-            
-            if (!giver) return;
-            
-            if (confirm(`هل أنت متأكد من حذف المعطي "${giver.name}"؟`)) {
-                APP_DATA.givers = APP_DATA.givers.filter(g => g.id !== giverId);
-                updateGiversList();
-                updateExpenseStats();
-                APP_DATA.selectedGiverId = null;
-                
-                if (APP_DATA.editingGiver) {
-                    const saveGiverBtn = document.getElementById('saveGiverBtn');
-                    const addBtn = document.querySelector('#assignGivers .btn-success');
-                    
-                    if (saveGiverBtn) saveGiverBtn.style.display = 'none';
-                    if (addBtn) addBtn.style.display = 'inline-flex';
-                    APP_DATA.editingGiver = false;
+            // تحديث المعطي المحدد
+            const giverIndex = givers.findIndex(giver => giver.id === selectedGiverId);
+            if (giverIndex !== -1) {
+                // التحقق من عدم وجود معطي آخر بنفس الاسم
+                if (givers.some((giver, index) => giver.name === name && index !== giverIndex)) {
+                    showNotification('هذا المعطي موجود بالفعل', 'error');
+                    return;
                 }
                 
-                showNotification('تم حذف المعطي بنجاح', 'success');
+                givers[giverIndex].name = name;
+                givers[giverIndex].amount = amount;
+                
+                // تحديث العرض والحفظ
+                updateGiversList();
+                updateGiversDisplay();
+                saveDataToStorage();
+                
+                // إعادة تعيين الحقول
+                nameInput.value = '';
+                amountInput.value = '';
+                
+                // إعادة تعيين وضع التعديل
+                editingGiver = false;
+                document.getElementById('saveGiverBtn').style.display = 'none';
+                selectedGiverId = null;
+                
+                showNotification('تم تعديل المعطي بنجاح', 'success');
             }
         }
 
-        // ============================================
-        // صفحة تعيين العملة
-        // ============================================
-        function renderFlags() {
-            const flagsGrid = document.getElementById('flagsGrid');
-            if (!flagsGrid) return;
-            
-            flagsGrid.innerHTML = '';
-            
-            ARAB_COUNTRIES.forEach(country => {
-                const flagItem = document.createElement('div');
-                flagItem.className = 'flag-item';
-                flagItem.dataset.id = country.id;
-                
-                flagItem.innerHTML = `
-                    <img src="${country.flagUrl}" alt="علم ${country.name}" class="flag-img" 
-                         onerror="this.src='https://flagcdn.com/w320/un.png'">
-                    <div style="text-align: center;">
-                        <div class="flag-name">${country.name}</div>
-                        <div class="flag-currency">${country.currency}</div>
-                    </div>
-                `;
-                
-                flagItem.addEventListener('click', () => selectCountry(country));
-                flagsGrid.appendChild(flagItem);
-            });
-        }
-
-        function selectCountry(country) {
-            APP_DATA.selectedCountry = country;
-            
-            const flagImg = document.getElementById('selectedFlagImg');
-            const countryName = document.getElementById('selectedCountryName');
-            const currencyDisplay = document.getElementById('selectedCurrencyDisplay');
-            
-            if (flagImg) {
-                flagImg.src = country.flagUrl;
-                flagImg.alt = `علم ${country.name}`;
-                flagImg.onerror = function() {
-                    this.src = 'https://flagcdn.com/w320/un.png';
-                };
+        // حذف معطي
+        function deleteSelectedGiver() {
+            if (!selectedGiverId) {
+                showNotification('الرجاء اختيار معطي لحذفه', 'error');
+                return;
             }
             
-            if (countryName) countryName.textContent = country.name;
-            if (currencyDisplay) currencyDisplay.textContent = `العملة: ${country.currency}`;
-            
+            if (confirm('هل أنت متأكد من حذف هذا المعطي؟')) {
+                const giverIndex = givers.findIndex(giver => giver.id === selectedGiverId);
+                if (giverIndex !== -1) {
+                    givers.splice(giverIndex, 1);
+                    
+                    // تحديث العرض والحفظ
+                    updateGiversList();
+                    updateGiversDisplay();
+                    saveDataToStorage();
+                    
+                    selectedGiverId = null;
+                    
+                    showNotification('تم حذف المعطي بنجاح', 'success');
+                }
+            }
+        }
+
+        // اختيار علم دولة
+        function selectFlag(country) {
+            // إزالة التحديد من جميع الأعلام
             document.querySelectorAll('.flag-item').forEach(item => {
                 item.classList.remove('selected');
-                if (parseInt(item.dataset.id) === country.id) {
-                    item.classList.add('selected');
-                }
             });
+            
+            // إضافة التحديد للعلم المختار
+            const selectedFlag = document.querySelector(`.flag-item[data-country-code="${country.code}"]`);
+            if (selectedFlag) {
+                selectedFlag.classList.add('selected');
+            }
+            
+            // تحديث عرض العلم المختار
+            document.getElementById('selectedFlagImg').src = country.flag;
+            document.getElementById('selectedFlagImg').style.display = 'block';
+            document.getElementById('selectedCountryName').textContent = country.name;
+            document.getElementById('selectedCurrencyDisplay').textContent = `العملة: ${country.currency}`;
+            
+            // حفظ الاختيار
+            currentCurrency = {
+                code: country.code,
+                name: country.name,
+                currency: country.currency,
+                flag: country.flag
+            };
         }
 
+        // تسليط الضوء على العلم المختار
+        function highlightSelectedFlag() {
+            if (!currentCurrency) return;
+            
+            // إزالة التحديد من جميع الأعلام
+            document.querySelectorAll('.flag-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // إضافة التحديد للعلم المختار
+            const selectedFlag = document.querySelector(`.flag-item[data-country-code="${currentCurrency.code}"]`);
+            if (selectedFlag) {
+                selectedFlag.classList.add('selected');
+            }
+            
+            // تحديث عرض العلم المختار
+            document.getElementById('selectedFlagImg').src = currentCurrency.flag;
+            document.getElementById('selectedFlagImg').style.display = 'block';
+            document.getElementById('selectedCountryName').textContent = currentCurrency.name;
+            document.getElementById('selectedCurrencyDisplay').textContent = `العملة: ${currentCurrency.currency}`;
+        }
+
+        // حفظ العملة المختارة
         function saveSelectedCurrency() {
-            if (!APP_DATA.selectedCountry) {
-                showNotification('الرجاء اختيار دولة أولاً', 'warning');
+            if (!currentCurrency) {
+                showNotification('الرجاء اختيار عملة أولاً', 'error');
                 return;
             }
             
-            APP_DATA.selectedCurrency = APP_DATA.selectedCountry;
-            localStorage.setItem('selectedCurrency', JSON.stringify(APP_DATA.selectedCountry));
-            showNotification(`تم تعيين عملة ${APP_DATA.selectedCountry.name} كعملة افتراضية`, 'success');
+            saveDataToStorage();
+            updateCurrencyDisplay();
+            showNotification(`تم حفظ العملة: ${currentCurrency.name} - ${currentCurrency.currency}`, 'success');
         }
 
-        // ============================================
-        // صفحة إعدادات الموقع
-        // ============================================
-        function createColorOptions() {
-            const topColorsContainer = document.getElementById('topColorsContainer');
-            const bottomColorsContainer = document.getElementById('bottomColorsContainer');
-            const textColorsContainer = document.getElementById('textColorsContainer');
-            
-            if (topColorsContainer) {
-                TOP_COLORS.forEach(color => {
-                    const colorOption = document.createElement('div');
-                    colorOption.className = `color-option ${APP_DATA.themeSettings.topBg === color.value ? 'selected' : ''}`;
-                    colorOption.innerHTML = `
-                        <div class="color-preview" style="background: ${color.value};"></div>
-                        <div class="color-name">${color.name}</div>
-                    `;
-                    colorOption.addEventListener('click', () => selectColor('topBg', color.value, color.name));
-                    topColorsContainer.appendChild(colorOption);
-                });
-            }
-            
-            if (bottomColorsContainer) {
-                BOTTOM_COLORS.forEach(color => {
-                    const colorOption = document.createElement('div');
-                    colorOption.className = `color-option ${APP_DATA.themeSettings.bottomBg === color.value ? 'selected' : ''}`;
-                    colorOption.innerHTML = `
-                        <div class="color-preview" style="background: ${color.value};"></div>
-                        <div class="color-name">${color.name}</div>
-                    `;
-                    colorOption.addEventListener('click', () => selectColor('bottomBg', color.value, color.name));
-                    bottomColorsContainer.appendChild(colorOption);
-                });
-            }
-            
-            if (textColorsContainer) {
-                TEXT_COLORS.forEach(color => {
-                    const colorOption = document.createElement('div');
-                    colorOption.className = `color-option ${APP_DATA.themeSettings.textColor === color.value ? 'selected' : ''}`;
-                    colorOption.innerHTML = `
-                        <div class="color-preview" style="background: ${color.value};"></div>
-                        <div class="color-name">${color.name}</div>
-                    `;
-                    colorOption.addEventListener('click', () => selectColor('textColor', color.value, color.name));
-                    textColorsContainer.appendChild(colorOption);
-                });
-            }
-        }
-
+        // اختيار لون
         function selectColor(type, value, name) {
-            APP_DATA.themeSettings[type] = value;
+            // تحديث اللون المختار
+            selectedColors[type] = value;
             
-            if (type === 'topBg') {
-                const selectedTopColor = document.getElementById('selectedTopColor');
-                if (selectedTopColor) selectedTopColor.textContent = name;
-                updateColorSelection('topColorsContainer', value);
-            } else if (type === 'bottomBg') {
-                const selectedBottomColor = document.getElementById('selectedBottomColor');
-                if (selectedBottomColor) selectedBottomColor.textContent = name;
-                updateColorSelection('bottomColorsContainer', value);
-            } else if (type === 'textColor') {
-                const selectedTextColor = document.getElementById('selectedTextColor');
-                if (selectedTextColor) selectedTextColor.textContent = name;
-                updateColorSelection('textColorsContainer', value);
+            // إزالة التحديد من جميع الخيارات من نفس النوع
+            document.querySelectorAll(`.color-option[data-color-type="${type}"]`).forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // إضافة التحديد للخيار المختار
+            const selectedOption = document.querySelector(`.color-option[data-color-type="${type}"][data-color-value="${value}"]`);
+            if (selectedOption) {
+                selectedOption.classList.add('selected');
             }
+            
+            // تحديث العرض
+            document.getElementById(`selected${type.charAt(0).toUpperCase() + type.slice(1)}Color`).textContent = name;
         }
 
-        function updateColorSelection(containerId, selectedValue) {
-            const container = document.getElementById(containerId);
-            if (!container) return;
+        // تحديث عرض الألوان المختارة
+        function updateSelectedColorsDisplay() {
+            // تحديث عرض الألوان العلوية
+            const topColor = colorOptions.top.find(color => color.value === selectedColors.top);
+            if (topColor) {
+                document.getElementById('selectedTopColor').textContent = topColor.name;
+            }
             
-            document.querySelectorAll(`#${containerId} .color-option`).forEach(option => {
-                option.classList.remove('selected');
-                const colorPreview = option.querySelector('.color-preview');
-                if (colorPreview && colorPreview.style.background === selectedValue) {
-                    option.classList.add('selected');
+            // تحديث عرض الألوان السفلية
+            const bottomColor = colorOptions.bottom.find(color => color.value === selectedColors.bottom);
+            if (bottomColor) {
+                document.getElementById('selectedBottomColor').textContent = bottomColor.name;
+            }
+            
+            // تحديث عرض ألوان النص
+            const textColor = colorOptions.text.find(color => color.value === selectedColors.text);
+            if (textColor) {
+                document.getElementById('selectedTextColor').textContent = textColor.name;
+            }
+            
+            // تحديث التحديد في واجهة المستخدم
+            loadColorOptions();
+        }
+
+        // تطبيق إعدادات النمط
+        function applyThemeSettings() {
+            // تطبيق الألوان على الصفحة
+            document.querySelector('header').style.background = `linear-gradient(to right, ${selectedColors.top}, ${adjustColor(selectedColors.top, 20)})`;
+            document.body.style.background = `linear-gradient(135deg, ${selectedColors.bottom} 0%, ${adjustColor(selectedColors.bottom, -10)} 100%)`;
+            document.body.style.color = selectedColors.text;
+            
+            // تطبيق الألوان على الأزرار
+            document.querySelectorAll('.btn').forEach(btn => {
+                if (!btn.classList.contains('btn-success') && 
+                    !btn.classList.contains('btn-danger') && 
+                    !btn.classList.contains('btn-warning') && 
+                    !btn.classList.contains('btn-info') && 
+                    !btn.classList.contains('btn-secondary')) {
+                    btn.style.background = `linear-gradient(to right, ${selectedColors.top}, ${adjustColor(selectedColors.top, 20)})`;
                 }
             });
+            
+            // حفظ الإعدادات
+            saveDataToStorage();
+            
+            showNotification('تم تطبيق إعدادات النمط بنجاح', 'success');
         }
 
-        function applyThemeSettings() {
-            document.documentElement.style.setProperty('--primary-color', APP_DATA.themeSettings.topBg);
-            document.documentElement.style.setProperty('--secondary-color', APP_DATA.themeSettings.topBg);
-            document.documentElement.style.setProperty('--light-color', APP_DATA.themeSettings.bottomBg);
-            document.documentElement.style.setProperty('--text-color', APP_DATA.themeSettings.textColor);
-            
-            localStorage.setItem('themeSettings', JSON.stringify(APP_DATA.themeSettings));
-            
-            showNotification('تم تطبيق النمط الجديد بنجاح', 'success');
-        }
-
+        // إعادة تعيين إعدادات النمط
         function resetThemeSettings() {
-            APP_DATA.themeSettings = {
-                topBg: '#2a5298',
-                bottomBg: '#ffffff',
-                textColor: '#000000'
+            // إعادة تعيين الألوان إلى الافتراضية
+            selectedColors = {
+                top: '#1e3c72',
+                bottom: '#f5f7fa',
+                text: '#333'
             };
             
-            const selectedTopColor = document.getElementById('selectedTopColor');
-            const selectedBottomColor = document.getElementById('selectedBottomColor');
-            const selectedTextColor = document.getElementById('selectedTextColor');
+            // تحديث العرض
+            updateSelectedColorsDisplay();
             
-            if (selectedTopColor) selectedTopColor.textContent = 'أزرق فاتح أنيق';
-            if (selectedBottomColor) selectedBottomColor.textContent = 'أبيض فاتح';
-            if (selectedTextColor) selectedTextColor.textContent = 'أسود غامق';
-            
-            updateColorSelection('topColorsContainer', '#2a5298');
-            updateColorSelection('bottomColorsContainer', '#ffffff');
-            updateColorSelection('textColorsContainer', '#000000');
-            
+            // تطبيق الألوان الافتراضية
             applyThemeSettings();
-            showNotification('تم إعادة تعيين النمط إلى الوضع الافتراضي', 'info');
-        }
-
-        function loadThemeSettings() {
-            const savedSettings = localStorage.getItem('themeSettings');
-            if (savedSettings) {
-                APP_DATA.themeSettings = JSON.parse(savedSettings);
-                applyThemeSettings();
-            }
             
-            const savedCurrency = localStorage.getItem('selectedCurrency');
-            if (savedCurrency) {
-                APP_DATA.selectedCurrency = JSON.parse(savedCurrency);
-                if (APP_DATA.selectedCurrency) {
-                    selectCountry(APP_DATA.selectedCurrency);
-                }
+            showNotification('تم إعادة تعيين إعدادات النمط', 'success');
+        }
+
+        // تعديل اللون (جعل أفتح أو أغمق)
+        function adjustColor(color, percent) {
+            const num = parseInt(color.replace("#", ""), 16);
+            const amt = Math.round(2.55 * percent);
+            const R = (num >> 16) + amt;
+            const G = (num >> 8 & 0x00FF) + amt;
+            const B = (num & 0x0000FF) + amt;
+            
+            return "#" + (
+                0x1000000 +
+                (R < 255 ? (R < 1 ? 0 : R) : 255) * 0x10000 +
+                (G < 255 ? (G < 1 ? 0 : G) : 255) * 0x100 +
+                (B < 255 ? (B < 1 ? 0 : B) : 255)
+            ).toString(16).slice(1);
+        }
+
+        // إجراء مكالمة هاتفية
+        function callPhoneNumber(number) {
+            if (confirm(`هل تريد الاتصال بالرقم ${number}؟`)) {
+                window.location.href = `tel:${number}`;
             }
         }
 
-        // ============================================
-        // صفحة تفاصيل الموقع
-        // ============================================
-        function callPhoneNumber(phoneNumber) {
-            if (confirm(`هل تريد الاتصال بالرقم ${phoneNumber}؟`)) {
-                window.location.href = `tel:${phoneNumber}`;
-            }
-        }
-
+        // فتح رابط خارجي
         function openExternalLink(url) {
             window.open(url, '_blank');
         }
 
-        // ============================================
-        // وظائف التخزين والتحميل
-        // ============================================
-        function saveToLocalStorage() {
-            try {
-                localStorage.setItem('givers', JSON.stringify(APP_DATA.givers));
-                localStorage.setItem('savedExpenses', JSON.stringify(APP_DATA.savedExpenses));
-                localStorage.setItem('deletedExpenses', JSON.stringify(APP_DATA.deletedExpenses));
-                localStorage.setItem('appVersion', APP_DATA.version);
-            } catch (error) {
-                console.error('Error saving to localStorage:', error);
-            }
-        }
-
-        function loadSavedData() {
-            try {
-                const savedGivers = localStorage.getItem('givers');
-                if (savedGivers) {
-                    APP_DATA.givers = JSON.parse(savedGivers);
-                }
-                
-                const savedExpensesData = localStorage.getItem('savedExpenses');
-                if (savedExpensesData) {
-                    APP_DATA.savedExpenses = JSON.parse(savedExpensesData);
-                }
-                
-                const deletedExpensesData = localStorage.getItem('deletedExpenses');
-                if (deletedExpensesData) {
-                    APP_DATA.deletedExpenses = JSON.parse(deletedExpensesData);
-                }
-                
-                updateExpenseStats();
-            } catch (error) {
-                console.error('Error loading saved data:', error);
-            }
-        }
-
-        // ============================================
-        // وظائف مساعدة
-        // ============================================
-        function formatNumber(num) {
-            return parseFloat(num).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        }
-
+        // إظهار إشعار
         function showNotification(message, type = 'success') {
             const notification = document.getElementById('notification');
-            if (!notification) return;
+            notification.textContent = message;
+            notification.className = 'notification';
             
-            const colors = {
-                'success': '#4CAF50',
-                'info': '#2196F3',
-                'warning': '#FF9800',
-                'error': '#f44336'
-            };
+            if (type === 'error') {
+                notification.classList.add('error');
+            } else if (type === 'warning') {
+                notification.classList.add('warning');
+            }
             
-            const icons = {
-                'success': 'check-circle',
-                'info': 'info-circle',
-                'warning': 'exclamation-triangle',
-                'error': 'exclamation-circle'
-            };
-            
-            notification.style.backgroundColor = colors[type] || colors.success;
-            notification.innerHTML = `<i class="fas fa-${icons[type] || icons.success}"></i> ${message}`;
             notification.style.display = 'block';
             
+            // إخفاء الإشعار بعد 5 ثوانٍ
             setTimeout(() => {
                 notification.style.display = 'none';
-            }, 3000);
+            }, 5000);
         }
 
-        // ============================================
-        // تصدير الوظائف للاستخدام العام
-        // ============================================
-        window.showScreen = showScreen;
-        window.addExpenseRow = addExpenseRow;
-        window.saveExpenseSheet = saveExpenseSheet;
-        window.clearExpenseForm = clearExpenseForm;
-        window.selectExpense = selectExpense;
-        window.deleteSelectedExpense = deleteSelectedExpense;
-        window.editSelectedExpense = editSelectedExpense;
-        window.saveExpenseEdit = saveExpenseEdit;
-        window.reviewSelectedExpense = reviewSelectedExpense;
-        window.restoreSelectedExpense = restoreSelectedExpense;
-        window.permanentDeleteExpense = permanentDeleteExpense;
-        window.clearAllDeleted = clearAllDeleted;
-        window.selectGiver = selectGiver;
-        window.addNewGiver = addNewGiver;
-        window.editSelectedGiver = editSelectedGiver;
-        window.saveGiverEdit = saveGiverEdit;
-        window.deleteSelectedGiver = deleteSelectedGiver;
-        window.selectCountry = selectCountry;
-        window.saveSelectedCurrency = saveSelectedCurrency;
-        window.selectColor = selectColor;
-        window.applyThemeSettings = applyThemeSettings;
-        window.resetThemeSettings = resetThemeSettings;
-        window.callPhoneNumber = callPhoneNumber;
-        window.openExternalLink = openExternalLink;
-        window.updateExpenseStats = updateExpenseStats;
+        // إغلاق شريط الإشعارات
+        function closeNotificationBar() {
+            document.getElementById('notificationBar').style.display = 'none';
+        }
+
+        // عرض نافذة منبثقة
+        function alertModal(title, content) {
+            // إنشاء النافذة المنبثقة
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0,0,0,0.5);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 2000;
+            `;
+            
+            const modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                background-color: white;
+                padding: 20px;
+                border-radius: 10px;
+                max-width: 500px;
+                width: 90%;
+                max-height: 80vh;
+                overflow-y: auto;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            `;
+            
+            modalContent.innerHTML = `
+                <h3 style="margin-top: 0; color: var(--primary-color);">${title}</h3>
+                <div>${content}</div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button onclick="this.parentElement.parentElement.parentElement.remove()" style="padding: 10px 20px; background-color: var(--primary-color); color: white; border: none; border-radius: 5px; cursor: pointer;">
+                        إغلاق
+                    </button>
+                </div>
+            `;
+            
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+            
+            // إغلاق النافذة عند النقر خارجها
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.remove();
+                }
+            });
+        }
     </script>
 </body>
-</html>
+    </html>
