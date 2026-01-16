@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دفتر المصروف الذكي - Master Taha</title>
+    <title>دفتر مصروف ذكي - Master Taha</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* الأساسيات */
         * {
             margin: 0;
             padding: 0;
@@ -14,1357 +15,1130 @@
         }
         
         :root {
-            --top-bg: #0077FF; /* أزرق HD */
-            --bottom-bg: #FFFFFF; /* أبيض HD */
-            --text-color: #000000; /* أسود HD */
-            --primary-color: #0055CC; /* أزرق داكن HD */
-            --secondary-color: #28A745; /* أخضر HD */
-            --danger-color: #DC3545; /* أحمر HD */
-            --warning-color: #FFC107; /* أصفر HD */
-            --card-bg: #FFFFFF; /* أبيض HD */
-            --border-color: #E0E0E0; /* رمادي فاتح HD */
-            --shadow-color: rgba(0, 0, 0, 0.1);
-            --hover-shadow: rgba(0, 0, 0, 0.15);
+            --primary-blue: #0066ff;
+            --light-blue: #4d94ff;
+            --dark-blue: #0052cc;
+            --background-light: #f8f9fa;
+            --background-white: #ffffff;
+            --text-dark: #222222;
+            --text-light: #666666;
+            --button-primary: #0066ff;
+            --button-hover: #0052cc;
+            --button-danger: #ff4444;
+            --button-success: #00aa44;
+            --button-warning: #ffaa00;
+            --border-color: #e0e0e0;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-glow: 0 0 15px rgba(0, 102, 255, 0.4);
         }
         
         body {
-            background: linear-gradient(to bottom, var(--top-bg), var(--bottom-bg));
-            color: var(--text-color);
+            background-color: var(--background-light);
+            color: var(--text-dark);
+            line-height: 1.6;
             min-height: 100vh;
-            transition: all 0.3s ease;
+            overflow-x: hidden;
         }
         
-        .container {
+        /* شريط التنقل العلوي */
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            color: white;
+            padding: 15px 20px;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            animation: glow 3s infinite alternate;
+        }
+        
+        @keyframes glow {
+            0% { box-shadow: var(--shadow-glow); }
+            100% { box-shadow: 0 0 25px rgba(0, 102, 255, 0.6); }
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
         }
         
-        header {
-            text-align: center;
-            padding: 25px;
-            margin-bottom: 35px;
-            background-color: var(--card-bg);
-            border-radius: 16px;
-            box-shadow: 0 6px 18px var(--shadow-color);
-            border: 1px solid var(--border-color);
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
-        .company-info {
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 18px;
-            margin-bottom: 18px;
+        .logo i {
+            font-size: 28px;
+            color: #ffdd00;
         }
         
-        .company-info h1 {
-            color: var(--primary-color);
-            font-size: 2.4rem;
-            margin-bottom: 12px;
+        .logo h1 {
+            font-size: 22px;
             font-weight: 700;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
         
-        .company-info p {
-            font-size: 1.05rem;
-            margin: 6px 0;
-            color: #333333;
-            font-weight: 500;
+        .header-info {
+            text-align: left;
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
         }
         
-        .mplan-badge {
-            background: linear-gradient(135deg, var(--primary-color), #003D99);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 25px;
-            font-size: 0.95rem;
-            display: inline-block;
-            margin-top: 12px;
-            font-weight: 600;
-            box-shadow: 0 4px 8px rgba(0, 87, 255, 0.2);
+        /* الصفحة الرئيسية */
+        .main-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin: 25px 0;
+            font-size: 32px;
+            color: var(--primary-blue);
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         
         .dashboard {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 25px;
-            margin-bottom: 45px;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
         }
         
-        .panel-card {
-            background-color: var(--card-bg);
-            border-radius: 14px;
-            padding: 28px 22px;
-            text-align: center;
-            box-shadow: 0 5px 15px var(--shadow-color);
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            border: 1px solid var(--border-color);
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .panel-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 24px var(--hover-shadow);
-            border-color: var(--primary-color);
-        }
-        
-        .panel-icon {
-            font-size: 2.8rem;
-            margin-bottom: 18px;
-            color: var(--primary-color);
-            filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.1));
-        }
-        
-        .panel-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 12px;
-            color: var(--text-color);
-            font-weight: 700;
-        }
-        
-        .panel-card p {
-            color: #444444;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            font-weight: 400;
-        }
-        
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.85);
-            z-index: 1000;
-            overflow-y: auto;
-            backdrop-filter: blur(3px);
-        }
-        
-        .modal-content {
-            background-color: var(--card-bg);
-            margin: 40px auto;
-            padding: 35px;
-            border-radius: 18px;
-            width: 92%;
-            max-width: 850px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
-            position: relative;
-            animation: modalAppear 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid var(--border-color);
-        }
-        
-        @keyframes modalAppear {
-            from { opacity: 0; transform: translateY(-60px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 18px;
-            border-bottom: 2px solid var(--border-color);
-        }
-        
-        .modal-header h2 {
-            color: var(--primary-color);
-            font-size: 2rem;
-            font-weight: 700;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-        }
-        
-        .close-modal {
-            font-size: 2rem;
-            cursor: pointer;
-            color: #666666;
-            transition: all 0.3s ease;
-            background: none;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .close-modal:hover {
-            color: var(--danger-color);
-            background-color: rgba(220, 53, 69, 0.1);
-            transform: rotate(90deg);
-        }
-        
-        .form-group {
-            margin-bottom: 25px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 700;
-            color: var(--text-color);
-            font-size: 1.05rem;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 14px 18px;
-            border: 2px solid var(--border-color);
-            border-radius: 10px;
-            font-size: 1.05rem;
-            transition: all 0.3s ease;
-            background-color: var(--bottom-bg);
-            color: var(--text-color);
-            font-weight: 500;
-        }
-        
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(0, 119, 255, 0.2);
-        }
-        
+        /* الأزرار */
         .btn {
-            padding: 14px 28px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 1.05rem;
-            font-weight: 700;
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            letter-spacing: 0.3px;
-            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary-color), #0066EE);
+            background-color: var(--button-primary);
             color: white;
-            box-shadow: 0 5px 15px rgba(0, 119, 255, 0.3);
         }
         
         .btn-primary:hover {
-            background: linear-gradient(135deg, #0066EE, #0055CC);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 119, 255, 0.4);
+            background-color: var(--button-hover);
         }
         
         .btn-secondary {
-            background: linear-gradient(135deg, var(--secondary-color), #23963D);
+            background-color: #6c757d;
             color: white;
-            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
         }
         
-        .btn-secondary:hover {
-            background: linear-gradient(135deg, #23963D, #1E7E34);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4);
+        .btn-success {
+            background-color: var(--button-success);
+            color: white;
         }
         
         .btn-danger {
-            background: linear-gradient(135deg, var(--danger-color), #C82333);
+            background-color: var(--button-danger);
             color: white;
-            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
-        }
-        
-        .btn-danger:hover {
-            background: linear-gradient(135deg, #C82333, #BD2130);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(220, 53, 69, 0.4);
         }
         
         .btn-warning {
-            background: linear-gradient(135deg, var(--warning-color), #E0A800);
-            color: #000000;
-            box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3);
-        }
-        
-        .btn-warning:hover {
-            background: linear-gradient(135deg, #E0A800, #D39E00);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(255, 193, 7, 0.4);
-        }
-        
-        .btn-back {
-            background: linear-gradient(135deg, #6C757D, #5A6268);
+            background-color: var(--button-warning);
             color: white;
-            box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
         }
         
-        .btn-back:hover {
-            background: linear-gradient(135deg, #5A6268, #495057);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(108, 117, 125, 0.4);
+        .btn-info {
+            background-color: #17a2b8;
+            color: white;
         }
         
-        .button-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 25px;
+        /* أزرار الصفحة الرئيسية */
+        .dashboard-btn {
+            height: 100px;
+            width: 200px;
+            font-size: 18px;
+            flex-direction: column;
+            gap: 10px;
+            margin: 0 auto;
         }
         
-        /* تصميم جديد للصفوف - حقلين جنباً إلى جنب */
-        .expense-row {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-            align-items: center;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 249, 250, 0.9));
-            padding: 15px;
-            border-radius: 10px;
-            border: 2px solid var(--border-color);
+        .dashboard-btn i {
+            font-size: 28px;
+        }
+        
+        /* أزرار اللوحات */
+        .panel-btn {
+            width: 120px;
+            height: 50px;
+            font-size: 14px;
+            margin: 5px;
+        }
+        
+        /* اللوحات */
+        .panel {
+            background-color: var(--background-white);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
             transition: all 0.3s ease;
         }
         
-        .expense-row:hover {
-            border-color: var(--primary-color);
-            box-shadow: 0 5px 15px rgba(0, 119, 255, 0.1);
-            transform: translateY(-2px);
+        .panel:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
         }
         
-        .expense-row-header {
-            display: flex;
-            gap: 15px;
+        .panel-title {
+            font-size: 22px;
             margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid var(--primary-color);
-            font-weight: 700;
-            color: var(--primary-color);
-            background: linear-gradient(135deg, rgba(0, 119, 255, 0.1), rgba(0, 119, 255, 0.05));
-            padding: 15px;
-            border-radius: 10px;
-        }
-        
-        .expense-name {
-            flex: 3;
-        }
-        
-        .expense-amount {
-            flex: 2;
-        }
-        
-        .expense-rows-container {
-            max-height: 400px;
-            overflow-y: auto;
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.02);
-            border-radius: 12px;
-            margin: 20px 0;
-            border: 2px solid var(--border-color);
-        }
-        
-        .stats-container {
-            background: linear-gradient(135deg, rgba(0, 119, 255, 0.12), rgba(0, 119, 255, 0.08));
-            border-radius: 12px;
-            padding: 25px;
-            margin: 25px 0;
-            border: 2px solid rgba(0, 119, 255, 0.2);
-            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
-        
-        .stats-row {
+            color: var(--primary-blue);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
             display: flex;
-            justify-content: space-between;
-            margin-bottom: 12px;
-            font-size: 1.15rem;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(0, 119, 255, 0.1);
+            align-items: center;
+            gap: 10px;
         }
         
-        .stats-row:last-child {
-            margin-bottom: 0;
-            border-bottom: none;
+        .panel-title i {
+            color: var(--primary-blue);
         }
         
-        .stats-label {
-            font-weight: 700;
-            color: var(--text-color);
-        }
-        
-        .stats-value {
-            font-weight: 800;
-            color: var(--primary-color);
-            font-size: 1.2rem;
-        }
-        
-        .empty-state {
-            text-align: center;
-            padding: 45px 25px;
-            color: #666666;
-            font-size: 1.15rem;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.01));
-            border-radius: 12px;
-            margin: 25px 0;
-            border: 2px dashed var(--border-color);
-        }
-        
-        .empty-state i {
-            font-size: 3.5rem;
-            margin-bottom: 18px;
-            color: #AAAAAA;
-            filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.1));
-        }
-        
-        .country-grid {
+        /* لوحة تسجيل المصروف */
+        .expense-inputs {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-            gap: 18px;
-            margin: 25px 0;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
         }
         
-        .country-card {
-            background: linear-gradient(135deg, var(--bottom-bg), #F8F9FA);
-            border-radius: 12px;
-            padding: 18px;
+        .input-group {
             display: flex;
             flex-direction: column;
-            align-items: center;
+        }
+        
+        .input-group label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .input-group input, .input-group select {
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            height: 50px;
+            width: 100%;
+        }
+        
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
+        }
+        
+        .statistics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+            padding: 20px;
+            background: linear-gradient(to right, #f8f9fa, #e9ecef);
+            border-radius: 12px;
+            border: 1px dashed var(--border-color);
+        }
+        
+        .stat-item {
             text-align: center;
-            border: 2px solid var(--border-color);
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: 0 4px 10px var(--shadow-color);
-            cursor: pointer;
-            position: relative;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
         }
         
-        .country-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 10px 25px var(--hover-shadow);
-            border-color: var(--primary-color);
+        .stat-label {
+            font-size: 16px;
+            color: var(--text-light);
+            margin-bottom: 8px;
         }
         
-        .country-card.selected {
-            border-color: var(--primary-color);
-            background: linear-gradient(135deg, rgba(0, 119, 255, 0.1), rgba(0, 119, 255, 0.05));
-            box-shadow: 0 8px 20px rgba(0, 119, 255, 0.3);
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-blue);
         }
         
-        .country-card.selected::after {
-            content: "✓";
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background-color: var(--primary-color);
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
+        /* لوحة الأعلام */
+        .flags-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .flag-item {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-            box-shadow: 0 3px 8px rgba(0, 119, 255, 0.5);
+            gap: 10px;
+            padding: 10px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
         }
         
-        .country-flag {
-            width: 70px;
-            height: 46px;
+        .flag-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .flag-img {
+            width: 44px;
+            height: 29.33px; /* نسبة 3:2 */
+            border-radius: 4px;
             object-fit: cover;
-            border-radius: 6px;
-            margin-bottom: 12px;
-            border: 2px solid var(--border-color);
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+            border: 1px solid var(--border-color);
         }
         
-        .selected-currency {
-            background: linear-gradient(135deg, rgba(0, 119, 255, 0.15), rgba(0, 119, 255, 0.1));
-            border-radius: 12px;
+        .flag-info {
+            flex: 1;
+        }
+        
+        .flag-name {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
+        
+        .flag-currency {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+        
+        /* جهات الاتصال */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .contact-item {
             padding: 20px;
-            margin: 20px 0;
-            border: 2px solid var(--primary-color);
-            text-align: center;
-            display: none;
-        }
-        
-        .selected-currency.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .selected-flag {
-            width: 100px;
-            height: 65px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin: 15px auto;
-            border: 3px solid var(--primary-color);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
         }
         
         .social-links {
             display: flex;
-            flex-direction: column;
-            gap: 18px;
-            margin: 25px 0;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
         }
         
         .social-link {
             display: flex;
             align-items: center;
-            gap: 18px;
-            padding: 18px;
-            background: linear-gradient(135deg, var(--bottom-bg), #F8F9FA);
-            border-radius: 12px;
+            gap: 10px;
+            padding: 12px 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
             text-decoration: none;
-            color: var(--text-color);
-            border: 2px solid var(--border-color);
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: 0 4px 10px var(--shadow-color);
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 200px;
         }
         
         .social-link:hover {
-            background: linear-gradient(135deg, rgba(0, 119, 255, 0.1), rgba(0, 119, 255, 0.05));
-            border-color: var(--primary-color);
-            transform: translateX(-5px);
-            box-shadow: 0 8px 20px var(--hover-shadow);
-        }
-        
-        .social-icon {
-            font-size: 1.8rem;
-            width: 35px;
-            text-align: center;
-        }
-        
-        .social-link .fa-youtube { color: #FF0000; }
-        .social-link .fa-whatsapp { color: #25D366; }
-        .social-link .fa-telegram { color: #0088CC; }
-        .social-link .fa-instagram { color: #E4405F; }
-        .social-link .fa-twitter { color: #1DA1F2; }
-        
-        .color-picker {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin: 25px 0;
-            justify-content: center;
-        }
-        
-        .color-option {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .color-box {
-            width: 70px;
-            height: 70px;
-            border-radius: 12px;
-            cursor: pointer;
-            border: 3px solid transparent;
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-        }
-        
-        .color-box:hover {
-            transform: scale(1.1) rotate(5deg);
-        }
-        
-        .color-box.selected {
-            border-color: var(--text-color);
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-        }
-        
-        .giver-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 18px;
-            background: linear-gradient(135deg, var(--bottom-bg), #F8F9FA);
-            border-radius: 12px;
-            margin-bottom: 12px;
-            border: 2px solid var(--border-color);
-            box-shadow: 0 4px 10px var(--shadow-color);
-            transition: all 0.3s ease;
-        }
-        
-        .giver-item:hover {
-            transform: translateX(-5px);
-            box-shadow: 0 8px 18px var(--hover-shadow);
-        }
-        
-        .hidden {
-            display: none;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 25px;
-            margin-top: 50px;
-            color: #555555;
-            font-size: 0.95rem;
-            border-top: 2px solid var(--border-color);
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        .phone-link {
-            text-decoration: none;
-            color: inherit;
-            display: inline-block;
-            width: 100%;
-        }
-        
-        .phone-link:hover .btn-primary {
+            background: var(--primary-blue);
+            color: white;
             transform: translateY(-3px);
         }
         
+        /* الرسائل */
+        .message {
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .message-info {
+            background-color: #e7f3ff;
+            color: var(--primary-blue);
+            border: 1px solid #b3d7ff;
+        }
+        
+        .message-warning {
+            background-color: #fff8e1;
+            color: #ff9800;
+            border: 1px solid #ffecb3;
+        }
+        
+        .message-success {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+        }
+        
+        /* عناصر القائمة */
+        .list-items {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--primary-blue);
+        }
+        
+        /* أزرار التحكم */
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        /* تاريخ يدوي */
+        .date-input-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        /* إخفاء العناصر المحظورة */
+        .hidden-info {
+            display: none !important;
+        }
+        
+        /* شاشات التحميل */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-light);
+            font-size: 18px;
+        }
+        
+        .loading i {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: var(--primary-blue);
+            animation: spin 2s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* الحاسبة المخفية */
+        .calculator {
+            opacity: 0;
+            position: absolute;
+            pointer-events: none;
+            height: 0;
+            overflow: hidden;
+        }
+        
+        /* تذييل الصفحة */
+        .footer {
+            background-color: var(--background-white);
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-light);
+            font-size: 14px;
+        }
+        
+        /* التجاوب مع الشاشات */
         @media (max-width: 768px) {
             .dashboard {
-                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-                gap: 20px;
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             }
             
-            .modal-content {
-                width: 96%;
-                padding: 25px;
-                margin: 20px auto;
-            }
-            
-            .button-group {
-                flex-direction: column;
-            }
-            
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .expense-row {
-                flex-direction: column;
-                gap: 12px;
-            }
-            
-            .expense-row-header {
-                flex-direction: column;
-                gap: 8px;
-            }
-            
-            .expense-name, .expense-amount {
+            .dashboard-btn {
                 width: 100%;
             }
             
-            .country-grid {
-                grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            .panel-title {
+                font-size: 18px;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .header-info {
+                width: 100%;
+                text-align: center;
             }
         }
         
         @media (max-width: 480px) {
-            .company-info h1 {
-                font-size: 1.8rem;
+            .dashboard {
+                grid-template-columns: 1fr;
             }
             
-            .panel-card h3 {
-                font-size: 1.2rem;
+            .controls {
+                flex-direction: column;
+                align-items: center;
             }
             
-            .modal-header h2 {
-                font-size: 1.6rem;
+            .panel-btn {
+                width: 100%;
+                max-width: 200px;
             }
             
-            .country-grid {
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            .expense-inputs {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="company-info">
-                <h1>Master Taha</h1>
-                <p>شركة رقمية لتطوير مواقع ويب</p>
-                <p>المدير العام: ChatGPT</p>
-                <p>المدير التنفيذي: Deep Seek</p>
-                <p>صاحب القرار: سيد رئيس تنفيذي طه زيات</p>
-                <div class="mplan-badge">مخطط رقم: MTPLAN0001</div>
+    <!-- شريط العنوان العلوي -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-book"></i>
+                <h1>دفتر مصروف ذكي - Master Taha</h1>
             </div>
-            <h2>دفتر المصروف الذكي</h2>
-            <p>مشروع رقم: MT-0001 | إصدار: V.1.0.0</p>
-        </header>
-        
-        <main>
-            <div class="dashboard">
-                <!-- لوحة تسجيل مصروف -->
-                <div class="panel-card" onclick="openPanel('expense-registration')">
-                    <div class="panel-icon"><i class="fas fa-file-invoice-dollar"></i></div>
-                    <h3>لوحة تسجيل مصروف</h3>
-                    <p>تسجيل المصروفات اليومية وحساب الإحصائيات</p>
-                </div>
-                
-                <!-- لوحة أوراق مصروف محفوظة -->
-                <div class="panel-card" onclick="openPanel('saved-expenses')">
-                    <div class="panel-icon"><i class="fas fa-save"></i></div>
-                    <h3>لوحة أوراق مصروف محفوظة</h3>
-                    <p>عرض وتعديل وحذف أوراق المصروف المحفوظة</p>
-                </div>
-                
-                <!-- لوحة أوراق مصروف محذوفة -->
-                <div class="panel-card" onclick="openPanel('deleted-expenses')">
-                    <div class="panel-icon"><i class="fas fa-trash"></i></div>
-                    <h3>لوحة أوراق مصروف محذوفة</h3>
-                    <p>استعادة أو حذف نهائي لأوراق المصروف المحذوفة</p>
-                </div>
-                
-                <!-- لوحة تعيين المعطين -->
-                <div class="panel-card" onclick="openPanel('assign-givers')">
-                    <div class="panel-icon"><i class="fas fa-hand-holding-usd"></i></div>
-                    <h3>لوحة تعيين المعطين</h3>
-                    <p>إدارة بيانات المعطين والمبالغ المعطاة</p>
-                </div>
-                
-                <!-- لوحة تعيين العملة -->
-                <div class="panel-card" onclick="openPanel('assign-currency')">
-                    <div class="panel-icon"><i class="fas fa-coins"></i></div>
-                    <h3>لوحة تعيين العملة</h3>
-                    <p>اختيار العملة المناسبة من بين العملات العربية</p>
-                </div>
-                
-                <!-- لوحة إعدادات موقع -->
-                <div class="panel-card" onclick="openPanel('site-settings')">
-                    <div class="panel-icon"><i class="fas fa-cog"></i></div>
-                    <h3>لوحة إعدادات موقع</h3>
-                    <p>تخصيص ألوان الموقع والإعدادات العامة</p>
-                </div>
-                
-                <!-- لوحة تفاصيل موقع -->
-                <div class="panel-card" onclick="openPanel('site-details')">
-                    <div class="panel-icon"><i class="fas fa-info-circle"></i></div>
-                    <h3>لوحة تفاصيل موقع</h3>
-                    <p>عرض معلومات المشروع وأرقام الإصدار</p>
-                </div>
-                
-                <!-- لوحة تواصل مع شركة -->
-                <div class="panel-card" onclick="openPanel('company-contact')">
-                    <div class="panel-icon"><i class="fas fa-headset"></i></div>
-                    <h3>لوحة تواصل مع شركة</h3>
-                    <p>اتصال ومراسلة شركة Master Taha</p>
-                </div>
-            </div>
-        </main>
-        
-        <footer>
-            <p>© 2023 Master Taha - جميع الحقوق محفوظة</p>
-            <p>هذا الموقع مبني حسب مخطط رقم MTPLAN0001</p>
-        </footer>
-    </div>
-    
-    <!-- نافذة لوحة تسجيل مصروف -->
-    <div id="expense-registration-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>لوحة تسجيل مصروف</h2>
-                <button class="close-modal" onclick="closeModal('expense-registration-modal')">&times;</button>
-            </div>
-            
-            <div class="form-group">
-                <label>شاشة ورق مصروف اليومي</label>
-                <button class="btn btn-primary" onclick="setTodayDate()">
-                    <i class="fas fa-calendar-alt"></i> تعيين تاريخ اليوم
-                </button>
-                <input type="date" id="expense-date" class="form-control" style="margin-top: 15px;">
-            </div>
-            
-            <div class="expense-row-header">
-                <div class="expense-name">اسم مصروف</div>
-                <div class="expense-amount">مبلغ مصروف</div>
-            </div>
-            
-            <div class="expense-rows-container" id="expense-rows-container">
-                <!-- سيتم إضافة 10 صفوف مبدئية هنا ديناميكيًا -->
-            </div>
-            
-            <div class="stats-container">
-                <h3 style="text-align: center; margin-bottom: 20px; color: var(--primary-color);">الإحصائيات</h3>
-                <div class="stats-row">
-                    <span class="stats-label">المبلغ المعطى:</span>
-                    <span class="stats-value" id="total-given">0</span>
-                </div>
-                <div class="stats-row">
-                    <span class="stats-label">المبلغ المصروف:</span>
-                    <span class="stats-value" id="total-expense">0</span>
-                </div>
-                <div class="stats-row">
-                    <span class="stats-label">المبلغ المتبقي:</span>
-                    <span class="stats-value" id="remaining-amount">0</span>
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label>شاشة المعطين تم تعيين</label>
-                <div id="givers-list" class="empty-state">
-                    <i class="fas fa-users-slash"></i>
-                    <p>حتى الآن لا يوجد أي معطي مضاف حاليا</p>
-                </div>
-            </div>
-            
-            <div class="button-group">
-                <button class="btn btn-secondary" onclick="saveExpensePaper()">
-                    <i class="fas fa-save"></i> حفظ ورق
-                </button>
-                <button class="btn btn-primary" onclick="addExpenseRow()">
-                    <i class="fas fa-plus"></i> إضافة سطر
-                </button>
-                <button class="btn btn-danger" onclick="deleteExpenseRow()">
-                    <i class="fas fa-minus"></i> حذف سطر
-                </button>
-                <button class="btn btn-warning" onclick="openPanel('assign-givers')">
-                    <i class="fas fa-user-tag"></i> تعيين معطين
-                </button>
-                <button class="btn btn-back" onclick="closeModal('expense-registration-modal')">
-                    <i class="fas fa-arrow-right"></i> رجوع
-                </button>
+            <div class="header-info">
+                <p>مشروع: دفتر مصروف ذكي | رقم المشروع: MT-0001</p>
+                <p class="hidden-info">مخطط قيد العمل رقم: MT-BQF-0001 | المبلغ: 300 عملة MT | نوع المشروع: متوسط</p>
             </div>
         </div>
-    </div>
-    
-    <!-- نافذة لوحة أوراق مصروف محفوظة -->
-    <div id="saved-expenses-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>لوحة أوراق مصروف محفوظة</h2>
-                <button class="close-modal" onclick="closeModal('saved-expenses-modal')">&times;</button>
-            </div>
+    </header>
+
+    <!-- الصفحة الرئيسية -->
+    <div class="main-container" id="mainPage">
+        <h1 class="page-title">دفتر المصروف الذكي</h1>
+        
+        <div class="dashboard">
+            <!-- لوحة تسجيل مصروف -->
+            <button class="btn btn-primary dashboard-btn" onclick="showPanel('expenseRegister')">
+                <i class="fas fa-pen-alt"></i>
+                <span>لوحة تسجيل مصروف</span>
+            </button>
             
-            <div id="saved-expenses-list" class="empty-state">
-                <i class="fas fa-inbox"></i>
-                <p>حتى الآن لا يوجد ورق مصروف محفوظ</p>
-            </div>
+            <!-- لوحة أوراق مصروف محفوظة -->
+            <button class="btn btn-success dashboard-btn" onclick="showPanel('savedExpenses')">
+                <i class="fas fa-save"></i>
+                <span>أوراق مصروف محفوظة</span>
+            </button>
             
-            <div class="button-group">
-                <button class="btn btn-danger" onclick="deleteSavedExpense()">
-                    <i class="fas fa-trash"></i> حذف
-                </button>
-                <button class="btn btn-warning" onclick="editSavedExpense()">
-                    <i class="fas fa-edit"></i> تعديل
-                </button>
-                <button class="btn btn-secondary" onclick="saveEditedExpense()">
-                    <i class="fas fa-save"></i> حفظ
-                </button>
-                <button class="btn btn-primary" onclick="reviewExpense()">
-                    <i class="fas fa-eye"></i> مراجعة
-                </button>
-                <button class="btn btn-back" onclick="closeModal('saved-expenses-modal')">
-                    <i class="fas fa-arrow-right"></i> رجوع
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- نافذة لوحة أوراق مصروف محذوفة -->
-    <div id="deleted-expenses-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>لوحة أوراق مصروف محذوفة</h2>
-                <button class="close-modal" onclick="closeModal('deleted-expenses-modal')">&times;</button>
-            </div>
-            
-            <div id="deleted-expenses-list" class="empty-state">
+            <!-- لوحة أوراق مصروف محذوفة -->
+            <button class="btn btn-warning dashboard-btn" onclick="showPanel('deletedExpenses')">
                 <i class="fas fa-trash-alt"></i>
-                <p>حتى الآن لا يوجد ورق مصروف محذوف</p>
-            </div>
+                <span>أوراق مصروف محذوفة</span>
+            </button>
             
-            <div class="button-group">
-                <button class="btn btn-secondary" onclick="restoreExpense()">
-                    <i class="fas fa-undo"></i> استعادة
-                </button>
-                <button class="btn btn-danger" onclick="permanentDeleteExpense()">
-                    <i class="fas fa-fire"></i> حذف نهائي
-                </button>
-                <button class="btn btn-back" onclick="closeModal('deleted-expenses-modal')">
-                    <i class="fas fa-arrow-right"></i> رجوع
-                </button>
-            </div>
+            <!-- لوحة تعيين المعطين -->
+            <button class="btn btn-info dashboard-btn" onclick="showPanel('assignGivers')">
+                <i class="fas fa-users"></i>
+                <span>تعيين المعطين</span>
+            </button>
+            
+            <!-- لوحة تعيين العملة -->
+            <button class="btn btn-secondary dashboard-btn" onclick="showPanel('assignCurrency')">
+                <i class="fas fa-coins"></i>
+                <span>تعيين العملة</span>
+            </button>
+            
+            <!-- لوحة اعدادات موقع -->
+            <button class="btn btn-primary dashboard-btn" onclick="showPanel('siteSettings')">
+                <i class="fas fa-cog"></i>
+                <span>اعدادات الموقع</span>
+            </button>
+            
+            <!-- لوحة تفاصيل موقع -->
+            <button class="btn btn-info dashboard-btn" onclick="showPanel('siteDetails')">
+                <i class="fas fa-info-circle"></i>
+                <span>تفاصيل الموقع</span>
+            </button>
+            
+            <!-- لوحة تواصل مع شركة -->
+            <button class="btn btn-success dashboard-btn" onclick="showPanel('contactCompany')">
+                <i class="fas fa-phone-alt"></i>
+                <span>تواصل مع الشركة</span>
+            </button>
         </div>
-    </div>
-    
-    <!-- نافذة لوحة تعيين المعطين -->
-    <div id="assign-givers-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>لوحة تعيين المعطين</h2>
-                <button class="close-modal" onclick="closeModal('assign-givers-modal')">&times;</button>
-            </div>
-            
-            <div class="form-group">
-                <label>اسم معطي:</label>
-                <input type="text" id="giver-name" class="form-control" placeholder="أدخل اسم المعطي">
-            </div>
-            
-            <div class="form-group">
-                <label>مبلغ المعطى:</label>
-                <input type="number" id="giver-amount" class="form-control" placeholder="أدخل المبلغ المعطى">
-            </div>
-            
-            <div id="givers-container">
-                <!-- سيتم عرض المعطين هنا ديناميكيًا -->
-            </div>
-            
-            <div class="button-group">
-                <button class="btn btn-primary" onclick="addGiver()">
-                    <i class="fas fa-plus"></i> إضافة
-                </button>
-                <button class="btn btn-warning" onclick="editGiver()">
-                    <i class="fas fa-edit"></i> تعديل
-                </button>
-                <button class="btn btn-secondary" onclick="saveGiverEdit()">
-                    <i class="fas fa-save"></i> حفظ
-                </button>
-                <button class="btn btn-danger" onclick="deleteGiver()">
-                    <i class="fas fa-trash"></i> حذف
-                </button>
-                <button class="btn btn-back" onclick="closeModal('assign-givers-modal')">
-                    <i class="fas fa-arrow-right"></i> رجوع
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- نافذة لوحة تعيين العملة -->
-    <div id="assign-currency-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>لوحة تعيين العملة</h2>
-                <button class="close-modal" onclick="closeModal('assign-currency-modal')">&times;</button>
-            </div>
-            
-            <p style="text-align: center; margin-bottom: 25px; font-size: 1.1rem; font-weight: 600;">شاشة تعيين عملة بين 22 دولة عربية</p>
-            
-            <div id="selected-currency-container" class="selected-currency">
-                <h3 style="color: var(--primary-color); margin-bottom: 10px;">العملة المختارة</h3>
-                <img id="selected-flag" src="" alt="العلم المختار" class="selected-flag">
-                <p id="selected-country-name" style="font-weight: 700; font-size: 1.2rem;"></p>
-                <p id="selected-currency-name" style="color: #666; margin-top: 5px;"></p>
-            </div>
-            
-            <div class="country-grid" id="countries-container">
-                <!-- سيتم عرض الدول هنا ديناميكيًا -->
-            </div>
-            
-            <div class="button-group" style="justify-content: center;">
-                <button class="btn btn-secondary" onclick="saveSelectedCurrency()">
-                    <i class="fas fa-save"></i> حفظ العلم المختار
-                </button>
-                <button class="btn btn-back" onclick="closeModal('assign-currency-modal')">
-                    <i class="fas fa-arrow-right"></i> رجوع
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- نافذة لوحة إعدادات موقع -->
-    <div id="site-settings-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>لوحة إعدادات موقع</h2>
-                <button class="close-modal" onclick="closeModal('site-settings-modal')">&times;</button>
-            </div>
-            
-            <p style="text-align: center; margin-bottom: 25px; font-size: 1.1rem; font-weight: 600;">شاشة تعيين ألوان الموقع</p>
-            
-            <div class="color-picker">
-                <div class="color-option">
-                    <div class="color-box selected" style="background-color: #0077FF;" onclick="selectColor('top-bg', '#0077FF')"></div>
-                    <span style="font-weight: 600;">لون خلفية أعلى</span>
-                </div>
-                
-                <div class="color-option">
-                    <div class="color-box selected" style="background-color: #FFFFFF;" onclick="selectColor('bottom-bg', '#FFFFFF')"></div>
-                    <span style="font-weight: 600;">لون خلفية أسفل</span>
-                </div>
-                
-                <div class="color-option">
-                    <div class="color-box selected" style="background-color: #000000;" onclick="selectColor('text-color', '#000000')"></div>
-                    <span style="font-weight: 600;">لون الخطوط</span>
-                </div>
-            </div>
-            
-            <div class="color-picker">
-                <div class="color-option">
-                    <div class="color-box" style="background-color: #4CAF50;" onclick="selectColor('top-bg', '#4CAF50')"></div>
-                    <span>أخضر</span>
-                </div>
-                
-                <div class="color-option">
-                    <div class="color-box" style="background-color: #FF9800;" onclick="selectColor('top-bg', '#FF9800')"></div>
-                    <span>برتقالي</span>
-                </div>
-                
-                <div class="color-option">
-                    <div class="color-box" style="background-color: #9C27B0;" onclick="selectColor('top-bg', '#9C27B0')"></div>
-                    <span>بنفسجي</span>
-                </div>
-                
-                <div class="color-option">
-                    <div class="color-box" style="background-color: #F44336;" onclick="selectColor('top-bg', '#F44336')"></div>
-                    <span>أحمر</span>
-                </div>
-            </div>
-            
-            <div class="button-group">
-                <button class="btn btn-primary" onclick="applyStyle()">
-                    <i class="fas fa-check"></i> تطبيق نمط
-                </button>
-                <button class="btn btn-warning" onclick="resetStyle()">
-                    <i class="fas fa-undo"></i> إعادة تعيين
-                </button>
-                <button class="btn btn-back" onclick="closeModal('site-settings-modal')">
-                    <i class="fas fa-arrow-right"></i> رجوع
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- نافذة لوحة تفاصيل موقع -->
-    <div id="site-details-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>لوحة تفاصيل موقع</h2>
-                <button class="close-modal" onclick="closeModal('site-details-modal')">&times;</button>
-            </div>
-            
-            <div style="text-align: center; padding: 35px 0;">
-                <h3 style="color: var(--primary-color); margin-bottom: 25px; font-size: 1.8rem;">دفتر المصروف الذكي</h3>
-                
-                <div style="background: linear-gradient(135deg, var(--bottom-bg), #F8F9FA); padding: 25px; border-radius: 12px; margin: 25px 0; border: 2px solid var(--border-color); box-shadow: 0 5px 15px var(--shadow-color);">
-                    <p style="margin-bottom: 12px; font-size: 1.15rem; font-weight: 600;"><strong>اسم المشروع:</strong> دفتر مصروف ذكي</p>
-                    <p style="margin-bottom: 12px; font-size: 1.15rem; font-weight: 600;"><strong>رقم المشروع:</strong> MT-0001</p>
-                    <p style="margin-bottom: 12px; font-size: 1.15rem; font-weight: 600;"><strong>رقم الإصدار:</strong> V.1.0.0</p>
-                    <p style="margin-bottom: 12px; font-size: 1.15rem; font-weight: 600;"><strong>مخطط رقم:</strong> MTPLAN0001</p>
-                </div>
-                
-                <p style="margin-top: 25px; color: #666; font-size: 1.05rem;">تم تطوير هذا الموقع حسب مخطط MTPLAN0001 الكامل والنهائي</p>
-            </div>
-            
-            <div class="button-group" style="justify-content: center;">
-                <button class="btn btn-back" onclick="closeModal('site-details-modal')">
-                    <i class="fas fa-arrow-right"></i> رجوع
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- نافذة لوحة تواصل مع شركة -->
-    <div id="company-contact-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>لوحة تواصل مع شركة</h2>
-                <button class="close-modal" onclick="closeModal('company-contact-modal')">&times;</button>
-            </div>
-            
-            <div style="margin: 25px 0;">
-                <h3 style="margin-bottom: 20px; color: var(--primary-color); font-size: 1.5rem;">أرقام الهاتف:</h3>
-                
-                <div style="background: linear-gradient(135deg, var(--bottom-bg), #F8F9FA); padding: 20px; border-radius: 12px; margin-bottom: 20px; border: 2px solid var(--border-color); box-shadow: 0 5px 15px var(--shadow-color);">
-                    <p style="margin-bottom: 15px; font-size: 1.15rem; font-weight: 600;"><strong>رقم الهاتف الأول:</strong> 0959570730</p>
-                    <a href="tel:+963959570730" class="phone-link">
-                        <button class="btn btn-primary">
-                            <i class="fas fa-phone"></i> اتصال مباشر
-                        </button>
-                    </a>
-                </div>
-                
-                <div style="background: linear-gradient(135deg, var(--bottom-bg), #F8F9FA); padding: 20px; border-radius: 12px; margin-bottom: 30px; border: 2px solid var(--border-color); box-shadow: 0 5px 15px var(--shadow-color);">
-                    <p style="margin-bottom: 15px; font-size: 1.15rem; font-weight: 600;"><strong>رقم الهاتف الثاني:</strong> 0982944894</p>
-                    <a href="tel:+963982944894" class="phone-link">
-                        <button class="btn btn-primary">
-                            <i class="fas fa-phone"></i> اتصال مباشر
-                        </button>
-                    </a>
-                </div>
-                
-                <h3 style="margin-bottom: 20px; color: var(--primary-color); font-size: 1.5rem;">روابط قنوات التواصل الاجتماعي:</h3>
-                
-                <div class="social-links">
-                    <a href="https://youtube.com/@mastertaha-f2m?si=Y6sA-6zdYDuvda3I" target="_blank" class="social-link">
-                        <div class="social-icon"><i class="fab fa-youtube"></i></div>
-                        <div>
-                            <strong style="font-size: 1.1rem;">يوتيوب</strong>
-                            <p style="font-size: 0.95rem; color: #666; margin-top: 5px;">youtube.com/@mastertaha-f2m</p>
-                        </div>
-                    </a>
-                    
-                    <a href="https://whatsapp.com/channel/0029VbCYfmm9sBI6squLAT0f" target="_blank" class="social-link">
-                        <div class="social-icon"><i class="fab fa-whatsapp"></i></div>
-                        <div>
-                            <strong style="font-size: 1.1rem;">واتساب</strong>
-                            <p style="font-size: 0.95rem; color: #666; margin-top: 5px;">whatsapp.com/channel/mastertaha</p>
-                        </div>
-                    </a>
-                    
-                    <a href="https://t.me/boost/mastertaha2" target="_blank" class="social-link">
-                        <div class="social-icon"><i class="fab fa-telegram"></i></div>
-                        <div>
-                            <strong style="font-size: 1.1rem;">تلغرام</strong>
-                            <p style="font-size: 0.95rem; color: #666; margin-top: 5px;">t.me/boost/mastertaha2</p>
-                        </div>
-                    </a>
-                    
-                    <a href="https://www.instagram.com/mastertahamt" target="_blank" class="social-link">
-                        <div class="social-icon"><i class="fab fa-instagram"></i></div>
-                        <div>
-                            <strong style="font-size: 1.1rem;">إنستغرام</strong>
-                            <p style="font-size: 0.95rem; color: #666; margin-top: 5px;">instagram.com/mastertahamt</p>
-                        </div>
-                    </a>
-                    
-                    <a href="https://x.com/MasterTaha34396" target="_blank" class="social-link">
-                        <div class="social-icon"><i class="fab fa-twitter"></i></div>
-                        <div>
-                            <strong style="font-size: 1.1rem;">تويتر</strong>
-                            <p style="font-size: 0.95rem; color: #666; margin-top: 5px;">x.com/MasterTaha34396</p>
-                        </div>
-                    </a>
-                </div>
-                
-                <h3 style="margin: 30px 0 20px; color: var(--primary-color); font-size: 1.5rem;">أوقات الدوام:</h3>
-                
-                <div style="background: linear-gradient(135deg, var(--bottom-bg), #F8F9FA); padding: 20px; border-radius: 12px; border: 2px solid var(--border-color); box-shadow: 0 5px 15px var(--shadow-color);">
-                    <p style="margin-bottom: 8px; font-size: 1.1rem; font-weight: 600;"><strong>من الساعة 5:00 مساء حتى 10:00 مساء</strong></p>
-                    <p style="margin-bottom: 8px; font-size: 1.1rem;"><strong>أيام العمل:</strong> الأحد والخميس</p>
-                    <p style="font-size: 1.1rem;"><strong>الإجازة:</strong> الجمعة والسبت</p>
-                </div>
-            </div>
-            
-            <div class="button-group" style="justify-content: center;">
-                <button class="btn btn-back" onclick="closeModal('company-contact-modal')">
-                    <i class="fas fa-arrow-right"></i> رجوع
-                </button>
-            </div>
+        
+        <!-- آلة حاسبة مخفية -->
+        <div class="calculator" id="calculator">
+            <input type="number" id="calcInput1" value="0">
+            <input type="number" id="calcInput2" value="0">
+            <input type="number" id="calcResult" value="0">
         </div>
     </div>
 
+    <!-- لوحة تسجيل المصروف -->
+    <div class="panel" id="expenseRegister" style="display: none;">
+        <div class="panel-title">
+            <i class="fas fa-pen-alt"></i>
+            <span>شاشة ورق مصروف اليومي</span>
+        </div>
+        
+        <!-- تاريخ يدوي -->
+        <div class="date-input-container">
+            <label for="manualDate" style="font-weight: 600;">تعيين التاريخ يدويًا:</label>
+            <input type="date" id="manualDate" style="padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+            <button class="btn btn-primary panel-btn" onclick="setManualDate()">
+                <i class="fas fa-calendar-day"></i> تعيين
+            </button>
+            <span id="currentDateDisplay" style="color: var(--primary-blue); font-weight: 600;"></span>
+        </div>
+        
+        <div id="expenseInputsContainer" class="expense-inputs">
+            <!-- سيتم إضافة حقول الإدخال ديناميكيًا -->
+        </div>
+        
+        <div class="controls">
+            <button class="btn btn-success panel-btn" onclick="addExpenseLine()">
+                <i class="fas fa-plus"></i> إضافة سطر
+            </button>
+            <button class="btn btn-danger panel-btn" onclick="deleteExpenseLine()">
+                <i class="fas fa-minus"></i> حذف سطر
+            </button>
+        </div>
+        
+        <div class="statistics">
+            <div class="stat-item">
+                <div class="stat-label">المبلغ المعطى</div>
+                <div class="stat-value" id="totalGiven">0</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">المبلغ مصروف</div>
+                <div class="stat-value" id="totalExpense">0</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">المبلغ المتبقي</div>
+                <div class="stat-value" id="remainingAmount">0</div>
+            </div>
+        </div>
+        
+        <div class="message message-info">
+            <p>شاشة المعطين الذي تم اضافة</p>
+            <p id="giversStatus">حتى الآن لايوجد اي معطي مضاف حاليا</p>
+        </div>
+        
+        <div class="controls">
+            <button class="btn btn-success panel-btn" onclick="saveExpense()">
+                <i class="fas fa-save"></i> حفظ ورق
+            </button>
+            <button class="btn btn-primary panel-btn" onclick="showPanel('assignGivers')">
+                <i class="fas fa-users"></i> تعيين معطين
+            </button>
+            <button class="btn btn-secondary panel-btn" onclick="showPanel('mainPage')">
+                <i class="fas fa-arrow-right"></i> رجوع
+            </button>
+        </div>
+    </div>
+
+    <!-- لوحة أوراق مصروف محفوظة -->
+    <div class="panel" id="savedExpenses" style="display: none;">
+        <div class="panel-title">
+            <i class="fas fa-save"></i>
+            <span>شاشة أوراق مصروف محفوظة</span>
+        </div>
+        
+        <div class="message message-info" id="savedExpensesMessage">
+            <p>حتى الآن لايوجد اي ورق مصروف محفوظة حاليا</p>
+        </div>
+        
+        <div id="savedExpensesList" class="list-items">
+            <!-- سيتم عرض العناصر المحفوظة هنا -->
+        </div>
+        
+        <div class="controls">
+            <button class="btn btn-danger panel-btn" onclick="deleteSavedExpense()">
+                <i class="fas fa-trash-alt"></i> حذف
+            </button>
+            <button class="btn btn-warning panel-btn" onclick="editSavedExpense()">
+                <i class="fas fa-edit"></i> تعديل
+            </button>
+            <button class="btn btn-success panel-btn" onclick="reviewSavedExpense()">
+                <i class="fas fa-eye"></i> مراجعة
+            </button>
+            <button class="btn btn-secondary panel-btn" onclick="showPanel('mainPage')">
+                <i class="fas fa-arrow-right"></i> رجوع
+            </button>
+        </div>
+    </div>
+
+    <!-- لوحة أوراق مصروف محذوفة -->
+    <div class="panel" id="deletedExpenses" style="display: none;">
+        <div class="panel-title">
+            <i class="fas fa-trash-alt"></i>
+            <span>شاشة أوراق مصروف محذوفة</span>
+        </div>
+        
+        <div class="message message-info" id="deletedExpensesMessage">
+            <p>حتى الآن لايوجد اي ورق مصروف محذوفة حاليا</p>
+        </div>
+        
+        <div id="deletedExpensesList" class="list-items">
+            <!-- سيتم عرض العناصر المحذوفة هنا -->
+        </div>
+        
+        <div class="controls">
+            <button class="btn btn-success panel-btn" onclick="restoreDeletedExpense()">
+                <i class="fas fa-undo"></i> استعادة
+            </button>
+            <button class="btn btn-danger panel-btn" onclick="permanentDeleteExpense()">
+                <i class="fas fa-fire-alt"></i> حذف نهائي
+            </button>
+            <button class="btn btn-secondary panel-btn" onclick="showPanel('mainPage')">
+                <i class="fas fa-arrow-right"></i> رجوع
+            </button>
+        </div>
+    </div>
+
+    <!-- لوحة تعيين المعطين -->
+    <div class="panel" id="assignGivers" style="display: none;">
+        <div class="panel-title">
+            <i class="fas fa-users"></i>
+            <span>تعيين المعطين</span>
+        </div>
+        
+        <div class="input-group" style="max-width: 400px; margin: 0 auto 20px;">
+            <label for="giverName">اسم المعطي:</label>
+            <input type="text" id="giverName" placeholder="أدخل اسم المعطي">
+        </div>
+        
+        <div class="input-group" style="max-width: 400px; margin: 0 auto 20px;">
+            <label for="giverAmount">مبلغ المعطى:</label>
+            <input type="number" id="giverAmount" placeholder="أدخل المبلغ المعطى">
+        </div>
+        
+        <div class="controls">
+            <button class="btn btn-success panel-btn" onclick="addGiver()">
+                <i class="fas fa-plus"></i> اضافة
+            </button>
+            <button class="btn btn-warning panel-btn" onclick="editGiver()">
+                <i class="fas fa-edit"></i> تعديل
+            </button>
+            <button class="btn btn-primary panel-btn" onclick="saveGiver()">
+                <i class="fas fa-save"></i> حفظ
+            </button>
+            <button class="btn btn-secondary panel-btn" onclick="showPanel('mainPage')">
+                <i class="fas fa-arrow-right"></i> رجوع
+            </button>
+        </div>
+        
+        <div class="message message-info" id="giversListMessage">
+            <p>شاشة المعطين محفوظة</p>
+            <p>حتى الان لا يوجد أي معطي مضاف حاليًا</p>
+        </div>
+        
+        <div id="giversList" class="list-items">
+            <!-- سيتم عرض قائمة المعطين هنا -->
+        </div>
+    </div>
+
+    <!-- لوحة تعيين العملة -->
+    <div class="panel" id="assignCurrency" style="display: none;">
+        <div class="panel-title">
+            <i class="fas fa-coins"></i>
+            <span>شاشة أعلام الدول العربية 22 وعملاتها</span>
+        </div>
+        
+        <!-- رسالة اختيار العملة -->
+        <div class="message message-info" id="currencySelectionMessage">
+            <p>يرجى اختيار العملة المفضلة من القائمة أدناه</p>
+            <p id="selectedCurrencyDisplay">لم يتم اختيار أي عملة حتى الآن</p>
+        </div>
+        
+        <div class="flags-grid" id="flagsContainer">
+            <!-- سيتم عرض الأعلام هنا -->
+        </div>
+        
+        <!-- أزرار التحكم في لوحة العملة -->
+        <div class="controls">
+            <button class="btn btn-success panel-btn" onclick="saveCurrency()">
+                <i class="fas fa-save"></i> حفظ
+            </button>
+            <button class="btn btn-danger panel-btn" onclick="cancelCurrency()">
+                <i class="fas fa-times"></i> الغاء
+            </button>
+            <button class="btn btn-secondary panel-btn" onclick="showPanel('mainPage')">
+                <i class="fas fa-arrow-right"></i> رجوع
+            </button>
+        </div>
+    </div>
+
+    <!-- لوحة اعدادات موقع -->
+    <div class="panel" id="siteSettings" style="display: none;">
+        <div class="panel-title">
+            <i class="fas fa-cog"></i>
+            <span>شاشة تعيين الوان موقع</span>
+        </div>
+        
+        <div class="input-group" style="margin-bottom: 20px;">
+            <label>نافذة تعيين الوان خلفية شريط اعلى</label>
+            <input type="color" id="topBarColor" value="#0066ff">
+            <button class="btn btn-primary panel-btn" style="margin-top: 10px;" onclick="setTopBarColor()">
+                <i class="fas fa-palette"></i> تعيين
+            </button>
+        </div>
+        
+        <div class="input-group" style="margin-bottom: 20px;">
+            <label>نافذة تعيين الوان خلفية اسفل</label>
+            <input type="color" id="bottomColor" value="#f8f9fa">
+            <button class="btn btn-primary panel-btn" style="margin-top: 10px;" onclick="setBottomColor()">
+                <i class="fas fa-palette"></i> تعيين
+            </button>
+        </div>
+        
+        <div class="input-group" style="margin-bottom: 20px;">
+            <label>نافذة تعيين الوان خطوط</label>
+            <input type="color" id="textColor" value="#222222">
+            <button class="btn btn-primary panel-btn" style="margin-top: 10px;" onclick="setTextColor()">
+                <i class="fas fa-palette"></i> تعيين
+            </button>
+        </div>
+        
+        <div class="controls">
+            <button class="btn btn-success panel-btn" onclick="saveStyle()">
+                <i class="fas fa-save"></i> حفظ نمط
+            </button>
+            <button class="btn btn-warning panel-btn" onclick="resetStyle()">
+                <i class="fas fa-undo"></i> إعادة تعيين
+            </button>
+            <button class="btn btn-secondary panel-btn" onclick="showPanel('mainPage')">
+                <i class="fas fa-arrow-right"></i> رجوع
+            </button>
+        </div>
+    </div>
+
+    <!-- لوحة تفاصيل موقع -->
+    <div class="panel" id="siteDetails" style="display: none;">
+        <div class="panel-title">
+            <i class="fas fa-info-circle"></i>
+            <span>شاشة تفاصيل موقع</span>
+        </div>
+        
+        <div class="message message-success" style="text-align: right; padding: 25px;">
+            <h3 style="margin-bottom: 15px; color: var(--primary-blue);">تفاصيل المشروع</h3>
+            <p style="margin: 10px 0; font-size: 18px;"><strong>اسم مشروع:</strong> دفتر مصروف ذكي</p>
+            <p style="margin: 10px 0; font-size: 18px;"><strong>رقم مشروع:</strong> MT-0001</p>
+            <p style="margin: 10px 0; font-size: 18px;"><strong>تم تطوير من قبل شركة:</strong> Master Taha</p>
+            <p style="margin-top: 20px; font-size: 16px; color: var(--text-light);">
+                تطبيق ويب متكامل لإدارة المصروفات اليومية مع ميزات متقدمة للتتبع والإحصاء
+            </p>
+        </div>
+        
+        <div class="controls">
+            <button class="btn btn-secondary panel-btn" onclick="showPanel('mainPage')">
+                <i class="fas fa-arrow-right"></i> رجوع
+            </button>
+        </div>
+    </div>
+
+    <!-- لوحة تواصل مع شركة -->
+    <div class="panel" id="contactCompany" style="display: none;">
+        <div class="panel-title">
+            <i class="fas fa-phone-alt"></i>
+            <span>تواصل مع شركة Master Taha</span>
+        </div>
+        
+        <div class="contact-grid">
+            <div class="contact-item">
+                <h3 style="margin-bottom: 15px; color: var(--primary-blue);">أرقام الهاتف</h3>
+                <div style="margin-bottom: 15px;">
+                    <p style="font-weight: 600; margin-bottom: 5px;">رقم هاتف الأول: 0959570730</p>
+                    <button class="btn btn-success panel-btn" onclick="callNumber('0959570730')">
+                        <i class="fas fa-phone"></i> اتصال
+                    </button>
+                </div>
+                <div>
+                    <p style="font-weight: 600; margin-bottom: 5px;">رقم هاتف الثاني: 0982944894</p>
+                    <button class="btn btn-success panel-btn" onclick="callNumber('0982944894')">
+                        <i class="fas fa-phone"></i> اتصال
+                    </button>
+                </div>
+            </div>
+            
+            <div class="contact-item">
+                <h3 style="margin-bottom: 15px; color: var(--primary-blue);">اوقات الدوام</h3>
+                <p style="margin-bottom: 10px;">تبدأ من ساعة 5:00 مساء وتغلق حتى ساعة 10:00 مساء</p>
+                <p style="margin-bottom: 10px;">أيام دوام من الأحد إلى يوم الخميس</p>
+                <p style="margin-bottom: 10px;">أيام عطلة الجمعة والسبت</p>
+            </div>
+        </div>
+        
+        <h3 style="margin: 30px 0 15px; color: var(--primary-blue);">روابط قنوات التواصل الاجتماعي</h3>
+        
+        <div class="social-links">
+            <a href="https://youtube.com/@mastertaha-f2m?si=AiR8MQ9v9Qx1HRSt" target="_blank" class="social-link">
+                <i class="fab fa-youtube" style="color: #ff0000;"></i>
+                <span>قناة اليوتيوب</span>
+            </a>
+            
+            <a href="https://t.me/boost/mastertaha2" target="_blank" class="social-link">
+                <i class="fab fa-telegram" style="color: #0088cc;"></i>
+                <span>قناة التلجرام</span>
+            </a>
+            
+            <a href="https://whatsapp.com/channel/0029VbCYfmm9sBI6squLAT0f" target="_blank" class="social-link">
+                <i class="fab fa-whatsapp" style="color: #25d366;"></i>
+                <span>قناة واتساب</span>
+            </a>
+            
+            <a href="https://www.instagram.com/mastertahamt?igsh=ejkydmUycXZ2bXp6" target="_blank" class="social-link">
+                <i class="fab fa-instagram" style="color: #e4405f;"></i>
+                <span>قناة انستغرام</span>
+            </a>
+            
+            <a href="https://x.com/MasterTaha34396" target="_blank" class="social-link">
+                <i class="fab fa-twitter" style="color: #1da1f2;"></i>
+                <span>قناة تويتر</span>
+            </a>
+        </div>
+        
+        <div class="controls">
+            <button class="btn btn-secondary panel-btn" onclick="showPanel('mainPage')">
+                <i class="fas fa-arrow-right"></i> رجوع
+            </button>
+        </div>
+    </div>
+
+    <!-- تذييل الصفحة -->
+    <footer class="footer">
+        <p>© 2023 جميع الحقوق محفوظة لشركة Master Taha لتطوير مواقع الويب</p>
+        <p class="hidden-info">مخطط قيد العمل رقم: MT-BQF-0001</p>
+    </footer>
+
     <script>
         // بيانات التطبيق
-        let expenseRows = 10;
-        let givers = [];
+        let expenses = [];
         let savedExpenses = [];
         let deletedExpenses = [];
-        let selectedGiverIndex = -1;
-        let selectedCountry = null;
-        let selectedColor = {
-            'top-bg': '#0077FF',
-            'bottom-bg': '#FFFFFF',
-            'text-color': '#000000'
-        };
+        let givers = [];
+        let currentExpenseLines = 10;
+        let selectedGiver = null;
+        let selectedExpense = null;
+        let selectedCurrency = null;
+        let currentDate = new Date().toLocaleDateString('ar-EG');
         
-        // بيانات الدول العربية
+        // الأعلام والعملات العربية
         const arabCountries = [
-            { name: "السعودية", flag: "https://flagcdn.com/w320/sa.png", currency: "الريال السعودي", code: "sa" },
-            { name: "الإمارات", flag: "https://flagcdn.com/w320/ae.png", currency: "الدرهم الإماراتي", code: "ae" },
-            { name: "قطر", flag: "https://flagcdn.com/w320/qa.png", currency: "الريال القطري", code: "qa" },
-            { name: "الكويت", flag: "https://flagcdn.com/w320/kw.png", currency: "الدينار الكويتي", code: "kw" },
-            { name: "عمان", flag: "https://flagcdn.com/w320/om.png", currency: "الريال العماني", code: "om" },
-            { name: "البحرين", flag: "https://flagcdn.com/w320/bh.png", currency: "الدينار البحريني", code: "bh" },
-            { name: "اليمن", flag: "https://flagcdn.com/w320/ye.png", currency: "الريال اليمني", code: "ye" },
-            { name: "مصر", flag: "https://flagcdn.com/w320/eg.png", currency: "الجنيه المصري", code: "eg" },
-            { name: "السودان", flag: "https://flagcdn.com/w320/sd.png", currency: "الجنيه السوداني", code: "sd" },
-            { name: "ليبيا", flag: "https://flagcdn.com/w320/ly.png", currency: "الدينار الليبي", code: "ly" },
-            { name: "تونس", flag: "https://flagcdn.com/w320/tn.png", currency: "الدينار التونسي", code: "tn" },
-            { name: "الجزائر", flag: "https://flagcdn.com/w320/dz.png", currency: "الدينار الجزائري", code: "dz" },
-            { name: "المغرب", flag: "https://flagcdn.com/w320/ma.png", currency: "الدرهم المغربي", code: "ma" },
-            { name: "موريتانيا", flag: "https://flagcdn.com/w320/mr.png", currency: "الأوقية الموريتانية", code: "mr" },
-            { name: "سوريا", flag: "https://flagcdn.com/w320/sy.png", currency: "الليرة السورية", code: "sy" },
-            { name: "لبنان", flag: "https://flagcdn.com/w320/lb.png", currency: "الليرة اللبنانية", code: "lb" },
-            { name: "الأردن", flag: "https://flagcdn.com/w320/jo.png", currency: "الدينار الأردني", code: "jo" },
-            { name: "العراق", flag: "https://flagcdn.com/w320/iq.png", currency: "الدينار العراقي", code: "iq" },
-            { name: "فلسطين", flag: "https://flagcdn.com/w320/ps.png", currency: "الشيكل الإسرائيلي", code: "ps" },
-            { name: "الصومال", flag: "https://flagcdn.com/w320/so.png", currency: "الشلن الصومالي", code: "so" },
-            { name: "جيبوتي", flag: "https://flagcdn.com/w320/dj.png", currency: "الفرنك الجيبوتي", code: "dj" },
-            { name: "جزر القمر", flag: "https://flagcdn.com/w320/km.png", currency: "الفرنك القمري", code: "km" }
+            { name: "مصر", flag: "https://flagcdn.com/w320/eg.png", currency: "الجنيه المصري (EGP)" },
+            { name: "السعودية", flag: "https://flagcdn.com/w320/sa.png", currency: "الريال السعودي (SAR)" },
+            { name: "العراق", flag: "https://flagcdn.com/w320/iq.png", currency: "الدينار العراقي (IQD)" },
+            { name: "الجزائر", flag: "https://flagcdn.com/w320/dz.png", currency: "الدينار الجزائري (DZD)" },
+            { name: "المغرب", flag: "https://flagcdn.com/w320/ma.png", currency: "الدرهم المغربي (MAD)" },
+            { name: "الأردن", flag: "https://flagcdn.com/w320/jo.png", currency: "الدينار الأردني (JOD)" },
+            { name: "الإمارات العربية المتحدة", flag: "https://flagcdn.com/w320/ae.png", currency: "الدرهم الإماراتي (AED)" },
+            { name: "الكويت", flag: "https://flagcdn.com/w320/kw.png", currency: "الدينار الكويتي (KWD)" },
+            { name: "السودان", flag: "https://flagcdn.com/w320/sd.png", currency: "الجنيه السوداني (SDG)" },
+            { name: "اليمن", flag: "https://flagcdn.com/w320/ye.png", currency: "الريال اليمني (YER)" },
+            { name: "سوريا", flag: "https://flagcdn.com/w320/sy.png", currency: "الليرة السورية (SYP)" },
+            { name: "ليبيا", flag: "https://flagcdn.com/w320/ly.png", currency: "الدينار الليبي (LYD)" },
+            { name: "لبنان", flag: "https://flagcdn.com/w320/lb.png", currency: "الليرة اللبنانية (LBP)" },
+            { name: "تونس", flag: "https://flagcdn.com/w320/tn.png", currency: "الدينار التونسي (TND)" },
+            { name: "عُمان", flag: "https://flagcdn.com/w320/om.png", currency: "الريال العماني (OMR)" },
+            { name: "قطر", flag: "https://flagcdn.com/w320/qa.png", currency: "الريال القطري (QAR)" },
+            { name: "البحرين", flag: "https://flagcdn.com/w320/bh.png", currency: "الدينار البحريني (BHD)" },
+            { name: "الصومال", flag: "https://flagcdn.com/w320/so.png", currency: "الشلن الصومالي (SOS)" },
+            { name: "جيبوتي", flag: "https://flagcdn.com/w320/dj.png", currency: "الفرنك الجيبوتي (DJF)" },
+            { name: "موريتانيا", flag: "https://flagcdn.com/w320/mr.png", currency: "الأوقية الموريتانية (MRU)" },
+            { name: "جزر القمر", flag: "https://flagcdn.com/w320/km.png", currency: "الفرنك القمري (KMF)" },
+            { name: "فلسطين", flag: "https://flagcdn.com/w320/ps.png", currency: "الشيكل (₪)" }
         ];
         
-        // تهيئة التطبيق
+        // تهيئة التطبيق عند التحميل
         document.addEventListener('DOMContentLoaded', function() {
-            // تعيين تاريخ اليوم
-            setTodayDate();
-            
-            // إنشاء 10 صفوف مبدئية مع حقلين جنباً إلى جنب
-            initializeExpenseRows();
-            
-            // إنشاء قائمة الدول
-            initializeCountries();
-            
-            // تحميل البيانات من التخزين المحلي إن وجدت
+            initExpenseInputs();
+            loadFlags();
+            updateCalculations();
             loadFromLocalStorage();
+            updateDateDisplay();
             
-            // تحديث الإحصائيات
-            updateStatistics();
-            
-            // تحديث قائمة المعطين
-            updateGiversList();
+            // تعيين التاريخ الافتراضي في حقل التاريخ
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('manualDate').value = today;
         });
         
-        // وظائف فتح وإغلاق النوافذ
-        function openPanel(panelName) {
-            const modalId = `${panelName}-modal`;
-            document.getElementById(modalId).style.display = 'block';
-            
-            // تحديث المحتوى بناءً على اللوحة المفتوحة
-            if (panelName === 'expense-registration') {
-                updateGiversDisplay();
-            } else if (panelName === 'assign-currency') {
-                updateSelectedCurrencyDisplay();
-            }
-        }
-        
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
-        
-        // وظائف لوحة تسجيل المصروف
-        function setTodayDate() {
-            const today = new Date();
-            const formattedDate = today.toISOString().split('T')[0];
-            document.getElementById('expense-date').value = formattedDate;
-        }
-        
-        function initializeExpenseRows() {
-            const container = document.getElementById('expense-rows-container');
-            container.innerHTML = '';
-            
-            // إنشاء 10 صفوف مبدئية
-            for (let i = 1; i <= 10; i++) {
-                const row = document.createElement('div');
-                row.className = 'expense-row';
-                row.innerHTML = `
-                    <div class="expense-name">
-                        <input type="text" class="form-control expense-name-input" placeholder="اسم المصروف ${i}" oninput="updateStatistics()">
-                    </div>
-                    <div class="expense-amount">
-                        <input type="number" class="form-control expense-amount-input" placeholder="مبلغ المصروف ${i}" oninput="updateStatistics()">
-                    </div>
-                `;
-                container.appendChild(row);
-            }
-        }
-        
-        function addExpenseRow() {
-            expenseRows++;
-            const container = document.getElementById('expense-rows-container');
-            
-            const row = document.createElement('div');
-            row.className = 'expense-row';
-            row.innerHTML = `
-                <div class="expense-name">
-                    <input type="text" class="form-control expense-name-input" placeholder="اسم المصروف ${expenseRows}" oninput="updateStatistics()">
-                </div>
-                <div class="expense-amount">
-                    <input type="number" class="form-control expense-amount-input" placeholder="مبلغ المصروف ${expenseRows}" oninput="updateStatistics()">
-                </div>
-            `;
-            container.appendChild(row);
-        }
-        
-        function deleteExpenseRow() {
-            if (expenseRows > 1) {
-                const container = document.getElementById('expense-rows-container');
-                container.removeChild(container.lastChild);
-                expenseRows--;
-                updateStatistics();
-            } else {
-                alert('يجب أن يبقى سطر واحد على الأقل');
-            }
-        }
-        
-        function updateStatistics() {
-            let totalExpense = 0;
-            const amountInputs = document.querySelectorAll('.expense-amount-input');
-            
-            amountInputs.forEach(input => {
-                const value = parseFloat(input.value) || 0;
-                totalExpense += value;
+        // عرض وإخفاء اللوحات
+        function showPanel(panelId) {
+            // إخفاء جميع اللوحات
+            const panels = document.querySelectorAll('.panel, .main-container');
+            panels.forEach(panel => {
+                panel.style.display = 'none';
             });
             
+            // إظهار اللوحة المطلوبة
+            const panel = document.getElementById(panelId);
+            if (panel) {
+                panel.style.display = 'block';
+                
+                // تحديث البيانات إذا كانت اللوحة تتطلب ذلك
+                if (panelId === 'savedExpenses') {
+                    updateSavedExpensesList();
+                } else if (panelId === 'deletedExpenses') {
+                    updateDeletedExpensesList();
+                } else if (panelId === 'assignGivers') {
+                    updateGiversList();
+                } else if (panelId === 'assignCurrency') {
+                    updateCurrencyDisplay();
+                }
+            }
+        }
+        
+        // تهيئة حقول إدخال المصروفات (بدون تسميات)
+        function initExpenseInputs() {
+            const container = document.getElementById('expenseInputsContainer');
+            container.innerHTML = '';
+            
+            for (let i = 1; i <= currentExpenseLines; i++) {
+                const inputGroup = document.createElement('div');
+                inputGroup.className = 'input-group';
+                inputGroup.innerHTML = `
+                    <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 5px;">
+                        <span style="font-weight: 600; color: var(--primary-blue); width: 30px;">${i}.</span>
+                        <div style="flex: 1; display: flex; gap: 10px;">
+                            <input type="text" id="expenseName${i}" placeholder="اسم المصروف" style="flex: 2;">
+                            <input type="number" id="expenseAmount${i}" placeholder="المبلغ" style="flex: 1;" oninput="updateCalculations()">
+                        </div>
+                    </div>
+                `;
+                container.appendChild(inputGroup);
+            }
+        }
+        
+        // إضافة سطر جديد للمصروفات
+        function addExpenseLine() {
+            currentExpenseLines++;
+            initExpenseInputs();
+        }
+        
+        // حذف سطر من المصروفات
+        function deleteExpenseLine() {
+            if (currentExpenseLines > 1) {
+                currentExpenseLines--;
+                initExpenseInputs();
+                updateCalculations();
+            } else {
+                alert('ممنوع مسح - يجب أن يبقى سطر واحد على الأقل');
+            }
+        }
+        
+        // تعيين التاريخ يدويًا
+        function setManualDate() {
+            const dateInput = document.getElementById('manualDate').value;
+            
+            if (!dateInput) {
+                alert('يرجى اختيار تاريخ');
+                return;
+            }
+            
+            const date = new Date(dateInput);
+            currentDate = date.toLocaleDateString('ar-EG', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            updateDateDisplay();
+            alert(`تم تعيين التاريخ إلى: ${currentDate}`);
+        }
+        
+        // تحديث عرض التاريخ
+        function updateDateDisplay() {
+            document.getElementById('currentDateDisplay').textContent = `التاريخ الحالي: ${currentDate}`;
+        }
+        
+        // تحديث الحسابات والإحصائيات
+        function updateCalculations() {
+            let totalExpense = 0;
+            
+            // حساب إجمالي المصروفات
+            for (let i = 1; i <= currentExpenseLines; i++) {
+                const amountInput = document.getElementById(`expenseAmount${i}`);
+                if (amountInput && amountInput.value) {
+                    totalExpense += parseFloat(amountInput.value) || 0;
+                }
+            }
+            
+            // حساب إجمالي المبالغ المعطاة
             let totalGiven = 0;
             givers.forEach(giver => {
                 totalGiven += parseFloat(giver.amount) || 0;
             });
             
-            const remaining = totalGiven - totalExpense;
+            // تحديث القيم في واجهة المستخدم
+            document.getElementById('totalExpense').textContent = totalExpense.toFixed(2);
+            document.getElementById('totalGiven').textContent = totalGiven.toFixed(2);
+            document.getElementById('remainingAmount').textContent = (totalGiven - totalExpense).toFixed(2);
             
-            document.getElementById('total-given').textContent = totalGiven.toFixed(2);
-            document.getElementById('total-expense').textContent = totalExpense.toFixed(2);
-            document.getElementById('remaining-amount').textContent = remaining.toFixed(2);
-            
-            // تغيير لون المبلغ المتبقي إذا كان سالبًا
-            const remainingElement = document.getElementById('remaining-amount');
-            if (remaining < 0) {
-                remainingElement.style.color = 'var(--danger-color)';
-            } else {
-                remainingElement.style.color = 'var(--primary-color)';
-            }
-            
-            // تحديث قائمة المعطين
-            updateGiversDisplay();
-        }
-        
-        function updateGiversDisplay() {
-            const giversList = document.getElementById('givers-list');
-            
+            // تحديث حالة المعطين
+            const giversStatus = document.getElementById('giversStatus');
             if (givers.length > 0) {
-                giversList.innerHTML = '';
-                
-                givers.forEach((giver, index) => {
-                    const giverElement = document.createElement('div');
-                    giverElement.className = 'giver-item';
-                    giverElement.innerHTML = `
-                        <div>
-                            <strong>${giver.name}</strong>
-                            <p style="color: #666; margin-top: 5px;">${parseFloat(giver.amount).toFixed(2)}</p>
-                        </div>
-                        <div>
-                            <button class="btn btn-danger btn-sm" onclick="removeGiver(${index})" style="padding: 6px 12px; font-size: 0.9rem; border-radius: 8px;">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                    `;
-                    giversList.appendChild(giverElement);
-                });
+                giversStatus.textContent = `تم إضافة ${givers.length} معطي/معطين`;
             } else {
-                giversList.innerHTML = `
-                    <i class="fas fa-users-slash"></i>
-                    <p>حتى الآن لا يوجد أي معطي مضاف حاليا</p>
-                `;
-                giversList.className = 'empty-state';
+                giversStatus.textContent = 'حتى الآن لايوجد اي معطي مضاف حاليا';
             }
+            
+            // تحديث الحاسبة المخفية
+            document.getElementById('calcInput1').value = totalGiven;
+            document.getElementById('calcInput2').value = totalExpense;
+            document.getElementById('calcResult').value = totalGiven - totalExpense;
         }
         
-        function saveExpensePaper() {
-            const date = document.getElementById('expense-date').value;
+        // حفظ المصروف
+        function saveExpense() {
             const expenseItems = [];
+            let totalAmount = 0;
             
-            const nameInputs = document.querySelectorAll('.expense-name-input');
-            const amountInputs = document.querySelectorAll('.expense-amount-input');
-            
-            for (let i = 0; i < nameInputs.length; i++) {
-                const name = nameInputs[i].value.trim();
-                const amount = parseFloat(amountInputs[i].value) || 0;
+            // جمع بيانات المصروفات
+            for (let i = 1; i <= currentExpenseLines; i++) {
+                const nameInput = document.getElementById(`expenseName${i}`);
+                const amountInput = document.getElementById(`expenseAmount${i}`);
                 
-                if (name || amount > 0) {
+                if (nameInput && nameInput.value.trim() !== '') {
+                    const amount = parseFloat(amountInput.value) || 0;
                     expenseItems.push({
-                        name: name || `مصروف ${i+1}`,
+                        name: nameInput.value.trim(),
                         amount: amount
                     });
+                    totalAmount += amount;
                 }
             }
             
@@ -1373,401 +1147,536 @@
                 return;
             }
             
-            const totalExpense = expenseItems.reduce((sum, item) => sum + item.amount, 0);
-            const totalGiven = givers.reduce((sum, giver) => sum + parseFloat(giver.amount), 0);
-            const remaining = totalGiven - totalExpense;
-            
-            const expensePaper = {
+            // إنشاء كائن المصروف
+            const expense = {
                 id: Date.now(),
-                date: date || new Date().toISOString().split('T')[0],
+                date: currentDate,
                 items: expenseItems,
-                givers: [...givers],
-                totalGiven: totalGiven,
-                totalExpense: totalExpense,
-                remaining: remaining
+                totalAmount: totalAmount,
+                giver: givers.length > 0 ? givers[0].name : 'غير محدد',
+                currency: selectedCurrency ? selectedCurrency.currency : 'غير محدد'
             };
             
-            savedExpenses.push(expensePaper);
+            // إضافة إلى المصروفات المحفوظة
+            savedExpenses.push(expense);
             saveToLocalStorage();
             
             // إعادة تعيين الحقول
-            document.querySelectorAll('.expense-name-input').forEach(input => input.value = '');
-            document.querySelectorAll('.expense-amount-input').forEach(input => input.value = '');
-            givers = [];
-            updateStatistics();
-            updateGiversDisplay();
+            for (let i = 1; i <= currentExpenseLines; i++) {
+                const nameInput = document.getElementById(`expenseName${i}`);
+                const amountInput = document.getElementById(`expenseAmount${i}`);
+                
+                if (nameInput) nameInput.value = '';
+                if (amountInput) amountInput.value = '';
+            }
             
-            alert('تم حفظ ورق المصروف بنجاح في لوحة الأوراق المحفوظة');
+            updateCalculations();
+            alert('تم حفظ المصروف بنجاح!');
+            showPanel('savedExpenses');
         }
         
-        // وظائف لوحة تعيين المعطين
-        function addGiver() {
-            const nameInput = document.getElementById('giver-name');
-            const amountInput = document.getElementById('giver-amount');
+        // تحديث قائمة المصروفات المحفوظة
+        function updateSavedExpensesList() {
+            const container = document.getElementById('savedExpensesList');
+            const message = document.getElementById('savedExpensesMessage');
             
-            const name = nameInput.value.trim();
-            const amount = amountInput.value.trim();
-            
-            if (!name) {
-                alert('يرجى إدخال اسم المعطي');
+            if (savedExpenses.length === 0) {
+                container.innerHTML = '';
+                message.innerHTML = '<p>حتى الآن لايوجد اي ورق مصروف محفوظة حاليا</p>';
                 return;
             }
             
-            if (!amount || isNaN(parseFloat(amount)) || parseFloat(amount) <= 0) {
-                alert('يرجى إدخال مبلغ صحيح للمعطي');
-                return;
-            }
-            
-            givers.push({
-                name: name,
-                amount: parseFloat(amount)
-            });
-            
-            nameInput.value = '';
-            amountInput.value = '';
-            
-            updateGiversList();
-            updateStatistics();
-            saveToLocalStorage();
-        }
-        
-        function updateGiversList() {
-            const container = document.getElementById('givers-container');
+            message.innerHTML = `<p>تم العثور على ${savedExpenses.length} مصروف محفوظ</p>`;
             container.innerHTML = '';
             
-            if (givers.length === 0) {
-                container.innerHTML = '<p style="text-align: center; color: #888; padding: 20px;">لا يوجد معطين مضافين حالياً</p>';
-                return;
-            }
-            
-            givers.forEach((giver, index) => {
-                const giverElement = document.createElement('div');
-                giverElement.className = 'giver-item';
-                giverElement.innerHTML = `
+            savedExpenses.forEach(expense => {
+                const item = document.createElement('div');
+                item.className = 'list-item';
+                item.innerHTML = `
                     <div>
-                        <strong>${giver.name}</strong>
-                        <p style="color: #666; margin-top: 5px;">${parseFloat(giver.amount).toFixed(2)}</p>
+                        <strong>${expense.date}</strong>
+                        <div style="font-size: 14px; color: #666;">المجموع: ${expense.totalAmount} ${expense.currency} | المعطي: ${expense.giver}</div>
                     </div>
-                    <div>
-                        <button class="btn btn-warning btn-sm" onclick="selectGiverForEdit(${index})" style="padding: 6px 12px; font-size: 0.9rem; border-radius: 8px; margin-right: 5px;">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="btn btn-danger btn-sm" onclick="removeGiver(${index})" style="padding: 6px 12px; font-size: 0.9rem; border-radius: 8px;">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
+                    <input type="radio" name="selectedExpense" value="${expense.id}" onchange="selectExpense(${expense.id}, 'saved')">
                 `;
-                container.appendChild(giverElement);
+                container.appendChild(item);
             });
         }
         
-        function selectGiverForEdit(index) {
-            selectedGiverIndex = index;
-            const giver = givers[index];
+        // تحديث قائمة المصروفات المحذوفة
+        function updateDeletedExpensesList() {
+            const container = document.getElementById('deletedExpensesList');
+            const message = document.getElementById('deletedExpensesMessage');
             
-            document.getElementById('giver-name').value = giver.name;
-            document.getElementById('giver-amount').value = giver.amount;
+            if (deletedExpenses.length === 0) {
+                container.innerHTML = '';
+                message.innerHTML = '<p>حتى الآن لايوجد اي ورق مصروف محذوفة حاليا</p>';
+                return;
+            }
+            
+            message.innerHTML = `<p>تم العثور على ${deletedExpenses.length} مصروف محذوف</p>`;
+            container.innerHTML = '';
+            
+            deletedExpenses.forEach(expense => {
+                const item = document.createElement('div');
+                item.className = 'list-item';
+                item.innerHTML = `
+                    <div>
+                        <strong>${expense.date}</strong>
+                        <div style="font-size: 14px; color: #666;">المجموع: ${expense.totalAmount} ${expense.currency} | المعطي: ${expense.giver}</div>
+                    </div>
+                    <input type="radio" name="selectedDeletedExpense" value="${expense.id}" onchange="selectExpense(${expense.id}, 'deleted')">
+                `;
+                container.appendChild(item);
+            });
         }
         
-        function editGiver() {
-            if (selectedGiverIndex === -1) {
-                alert('يرجى اختيار معطي للتعديل');
+        // تحديد مصروف
+        function selectExpense(id, type) {
+            if (type === 'saved') {
+                selectedExpense = savedExpenses.find(exp => exp.id === id);
+            } else {
+                selectedExpense = deletedExpenses.find(exp => exp.id === id);
+            }
+        }
+        
+        // حذف مصروف محفوظ
+        function deleteSavedExpense() {
+            if (!selectedExpense) {
+                alert('يرجى اختيار مصروف لحذفه');
                 return;
             }
             
-            const nameInput = document.getElementById('giver-name');
-            const amountInput = document.getElementById('giver-amount');
+            // نقل المصروف إلى المحذوفات
+            deletedExpenses.push(selectedExpense);
             
-            const name = nameInput.value.trim();
-            const amount = amountInput.value.trim();
+            // حذف المصروف من المحفوظات
+            savedExpenses = savedExpenses.filter(exp => exp.id !== selectedExpense.id);
             
-            if (!name) {
-                alert('يرجى إدخال اسم المعطي');
+            // حفظ التغييرات
+            saveToLocalStorage();
+            updateSavedExpensesList();
+            selectedExpense = null;
+            
+            alert('تم نقل المصروف إلى المحذوفات');
+        }
+        
+        // تعديل مصروف محفوظ
+        function editSavedExpense() {
+            if (!selectedExpense) {
+                alert('يرجى اختيار مصروف لتعديله');
                 return;
             }
             
-            if (!amount || isNaN(parseFloat(amount)) || parseFloat(amount) <= 0) {
-                alert('يرجى إدخال مبلغ صحيح للمعطي');
+            // تعيين التاريخ من المصروف المحدد
+            currentDate = selectedExpense.date;
+            updateDateDisplay();
+            
+            // ملء حقول المصروفات بقيم المصروف المحدد
+            currentExpenseLines = Math.max(selectedExpense.items.length, 10);
+            initExpenseInputs();
+            
+            selectedExpense.items.forEach((item, index) => {
+                const nameInput = document.getElementById(`expenseName${index + 1}`);
+                const amountInput = document.getElementById(`expenseAmount${index + 1}`);
+                
+                if (nameInput) nameInput.value = item.name;
+                if (amountInput) amountInput.value = item.amount;
+            });
+            
+            updateCalculations();
+            showPanel('expenseRegister');
+            alert('يمكنك الآن تعديل المصروف المحدد');
+        }
+        
+        // مراجعة مصروف محفوظ
+        function reviewSavedExpense() {
+            if (!selectedExpense) {
+                alert('يرجى اختيار مصروف لمراجعته');
                 return;
             }
             
-            givers[selectedGiverIndex] = {
+            let reviewText = `مراجعة مصروف - ${selectedExpense.date}\n`;
+            reviewText += `المعطي: ${selectedExpense.giver}\n`;
+            reviewText += `العملة: ${selectedExpense.currency}\n`;
+            reviewText += '================================\n';
+            
+            selectedExpense.items.forEach(item => {
+                reviewText += `${item.name}: ${item.amount}\n`;
+            });
+            
+            reviewText += '================================\n';
+            reviewText += `المجموع: ${selectedExpense.totalAmount}\n`;
+            
+            alert(reviewText);
+        }
+        
+        // استعادة مصروف محذوف
+        function restoreDeletedExpense() {
+            if (!selectedExpense) {
+                alert('يرجى اختيار مصروف لاستعادته');
+                return;
+            }
+            
+            // نقل المصروف إلى المحفوظات
+            savedExpenses.push(selectedExpense);
+            
+            // حذف المصروف من المحذوفات
+            deletedExpenses = deletedExpenses.filter(exp => exp.id !== selectedExpense.id);
+            
+            // حفظ التغييرات
+            saveToLocalStorage();
+            updateDeletedExpensesList();
+            selectedExpense = null;
+            
+            alert('تم استعادة المصروف إلى المحفوظات');
+        }
+        
+        // حذف مصروف نهائيًا
+        function permanentDeleteExpense() {
+            if (!selectedExpense) {
+                alert('يرجى اختيار مصروف لحذفه نهائيًا');
+                return;
+            }
+            
+            if (confirm('هل أنت متأكد من الحذف النهائي؟ لا يمكن التراجع عن هذا الإجراء')) {
+                // حذف المصروف من المحذوفات
+                deletedExpenses = deletedExpenses.filter(exp => exp.id !== selectedExpense.id);
+                
+                // حفظ التغييرات
+                saveToLocalStorage();
+                updateDeletedExpensesList();
+                selectedExpense = null;
+                
+                alert('تم حذف المصروف نهائيًا');
+            }
+        }
+        
+        // إضافة معطي
+        function addGiver() {
+            const name = document.getElementById('giverName').value.trim();
+            const amount = document.getElementById('giverAmount').value.trim();
+            
+            if (!name || !amount) {
+                alert('يرجى ملء جميع الحقول');
+                return;
+            }
+            
+            const giver = {
+                id: Date.now(),
                 name: name,
                 amount: parseFloat(amount)
             };
             
-            nameInput.value = '';
-            amountInput.value = '';
-            selectedGiverIndex = -1;
-            
-            updateGiversList();
-            updateStatistics();
+            givers.push(giver);
             saveToLocalStorage();
+            updateGiversList();
+            updateCalculations();
+            
+            document.getElementById('giverName').value = '';
+            document.getElementById('giverAmount').value = '';
+            
+            alert('تم إضافة المعطي بنجاح');
         }
         
-        function saveGiverEdit() {
-            editGiver();
-        }
-        
-        function deleteGiver() {
-            if (selectedGiverIndex === -1) {
-                alert('يرجى اختيار معطي للحذف');
+        // تحديث قائمة المعطين
+        function updateGiversList() {
+            const container = document.getElementById('giversList');
+            const message = document.getElementById('giversListMessage');
+            
+            if (givers.length === 0) {
+                container.innerHTML = '';
+                message.innerHTML = `
+                    <p>شاشة المعطين محفوظة</p>
+                    <p>حتى الان لا يوجد أي معطي مضاف حاليًا</p>
+                `;
                 return;
             }
             
-            if (confirm('هل أنت متأكد من حذف هذا المعطي؟')) {
-                givers.splice(selectedGiverIndex, 1);
-                selectedGiverIndex = -1;
-                
-                document.getElementById('giver-name').value = '';
-                document.getElementById('giver-amount').value = '';
-                
-                updateGiversList();
-                updateStatistics();
-                saveToLocalStorage();
-            }
+            message.innerHTML = `<p>شاشة المعطين محفوظة</p><p>تم إضافة ${givers.length} معطي</p>`;
+            container.innerHTML = '';
+            
+            givers.forEach(giver => {
+                const item = document.createElement('div');
+                item.className = 'list-item';
+                item.innerHTML = `
+                    <div>
+                        <strong>${giver.name}</strong>
+                        <div style="font-size: 14px; color: #666;">المبلغ: ${giver.amount}</div>
+                    </div>
+                    <input type="radio" name="selectedGiver" value="${giver.id}" onchange="selectGiver(${giver.id})">
+                `;
+                container.appendChild(item);
+            });
         }
         
-        function removeGiver(index) {
-            if (confirm('هل أنت متأكد من حذف هذا المعطي؟')) {
-                givers.splice(index, 1);
-                
-                if (selectedGiverIndex === index) {
-                    selectedGiverIndex = -1;
-                    document.getElementById('giver-name').value = '';
-                    document.getElementById('giver-amount').value = '';
-                }
-                
-                updateGiversList();
-                updateStatistics();
-                saveToLocalStorage();
-            }
+        // تحديد معطي
+        function selectGiver(id) {
+            selectedGiver = givers.find(giver => giver.id === id);
         }
         
-        // وظائف لوحة تعيين العملة
-        function initializeCountries() {
-            const container = document.getElementById('countries-container');
+        // تعديل معطي
+        function editGiver() {
+            if (!selectedGiver) {
+                alert('يرجى اختيار معطي لتعديله');
+                return;
+            }
+            
+            document.getElementById('giverName').value = selectedGiver.name;
+            document.getElementById('giverAmount').value = selectedGiver.amount;
+            
+            alert('يمكنك الآن تعديل بيانات المعطي');
+        }
+        
+        // حفظ تعديل المعطي
+        function saveGiver() {
+            if (!selectedGiver) {
+                alert('يرجى اختيار معطي لحفظ تعديلاته');
+                return;
+            }
+            
+            const name = document.getElementById('giverName').value.trim();
+            const amount = document.getElementById('giverAmount').value.trim();
+            
+            if (!name || !amount) {
+                alert('يرجى ملء جميع الحقول');
+                return;
+            }
+            
+            selectedGiver.name = name;
+            selectedGiver.amount = parseFloat(amount);
+            
+            saveToLocalStorage();
+            updateGiversList();
+            updateCalculations();
+            
+            document.getElementById('giverName').value = '';
+            document.getElementById('giverAmount').value = '';
+            selectedGiver = null;
+            
+            alert('تم حفظ تعديل المعطي بنجاح');
+        }
+        
+        // تحميل الأعلام مع إمكانية التحديد
+        function loadFlags() {
+            const container = document.getElementById('flagsContainer');
             container.innerHTML = '';
             
             arabCountries.forEach((country, index) => {
-                const countryCard = document.createElement('div');
-                countryCard.className = 'country-card';
-                countryCard.setAttribute('data-index', index);
-                countryCard.onclick = function() {
-                    selectCountry(index);
-                };
-                
-                countryCard.innerHTML = `
-                    <img src="${country.flag}" alt="${country.name}" class="country-flag">
-                    <h4 style="font-weight: 700; margin: 8px 0;">${country.name}</h4>
-                    <p style="color: #666; margin-top: 5px; font-weight: 600;">${country.currency}</p>
+                const flagItem = document.createElement('div');
+                flagItem.className = 'flag-item';
+                flagItem.style.cursor = 'pointer';
+                flagItem.onclick = () => selectCurrency(country);
+                flagItem.innerHTML = `
+                    <img src="${country.flag}" alt="${country.name}" class="flag-img">
+                    <div class="flag-info">
+                        <div class="flag-name">${country.name}</div>
+                        <div class="flag-currency">${country.currency}</div>
+                    </div>
+                    <input type="radio" name="selectedCurrency" value="${index}" style="margin-left: 10px;">
                 `;
-                container.appendChild(countryCard);
+                container.appendChild(flagItem);
+            });
+        }
+        
+        // اختيار العملة
+        function selectCurrency(country) {
+            selectedCurrency = country;
+            updateCurrencyDisplay();
+            
+            // تحديث حالة اختيار الراديو
+            const radioButtons = document.querySelectorAll('input[name="selectedCurrency"]');
+            radioButtons.forEach((radio, index) => {
+                if (arabCountries[index].name === country.name) {
+                    radio.checked = true;
+                } else {
+                    radio.checked = false;
+                }
             });
             
-            // تحميل الدولة المختارة مسبقًا إن وجدت
-            const savedCountry = localStorage.getItem('selectedCountry');
-            if (savedCountry) {
-                const country = JSON.parse(savedCountry);
-                selectedCountry = country;
-                updateSelectedCurrencyDisplay();
-                
-                // تحديد البطاقة المختارة
-                const countryCards = document.querySelectorAll('.country-card');
-                countryCards.forEach(card => {
-                    const index = parseInt(card.getAttribute('data-index'));
-                    if (arabCountries[index].name === country.name) {
-                        card.classList.add('selected');
-                    }
-                });
+            // إضافة تأثير التحديد
+            const flagItems = document.querySelectorAll('.flag-item');
+            flagItems.forEach(item => {
+                item.style.border = '1px solid #e0e0e0';
+                item.style.boxShadow = '0 3px 8px rgba(0, 0, 0, 0.08)';
+            });
+            
+            const selectedItem = Array.from(flagItems).find(item => 
+                item.querySelector('.flag-name').textContent === country.name
+            );
+            
+            if (selectedItem) {
+                selectedItem.style.border = '2px solid #0066ff';
+                selectedItem.style.boxShadow = '0 0 10px rgba(0, 102, 255, 0.3)';
             }
         }
         
-        function selectCountry(index) {
-            selectedCountry = arabCountries[index];
-            
-            // إزالة التحديد من جميع البطاقات
-            const countryCards = document.querySelectorAll('.country-card');
-            countryCards.forEach(card => {
-                card.classList.remove('selected');
-            });
-            
-            // إضافة التحديد للبطاقة المختارة
-            const selectedCard = document.querySelector(`.country-card[data-index="${index}"]`);
-            selectedCard.classList.add('selected');
-            
-            // تحديث عرض العملة المختارة
-            updateSelectedCurrencyDisplay();
-        }
-        
-        function updateSelectedCurrencyDisplay() {
-            const container = document.getElementById('selected-currency-container');
-            
-            if (selectedCountry) {
-                container.classList.add('active');
-                document.getElementById('selected-flag').src = selectedCountry.flag;
-                document.getElementById('selected-country-name').textContent = selectedCountry.name;
-                document.getElementById('selected-currency-name').textContent = selectedCountry.currency;
+        // تحديث عرض العملة المختارة
+        function updateCurrencyDisplay() {
+            const display = document.getElementById('selectedCurrencyDisplay');
+            if (selectedCurrency) {
+                display.textContent = `العملة المختارة: ${selectedCurrency.name} - ${selectedCurrency.currency}`;
+                display.style.color = 'var(--primary-blue)';
+                display.style.fontWeight = '600';
             } else {
-                container.classList.remove('active');
+                display.textContent = 'لم يتم اختيار أي عملة حتى الآن';
+                display.style.color = 'var(--text-light)';
             }
         }
         
-        function saveSelectedCurrency() {
-            if (!selectedCountry) {
-                alert('يرجى اختيار دولة أولاً');
+        // حفظ العملة
+        function saveCurrency() {
+            if (!selectedCurrency) {
+                alert('يرجى اختيار عملة أولاً');
                 return;
             }
             
-            localStorage.setItem('selectedCountry', JSON.stringify(selectedCountry));
-            alert(`تم حفظ العلم والعملة: ${selectedCountry.name} - ${selectedCountry.currency}`);
+            saveToLocalStorage();
+            alert(`تم حفظ العملة: ${selectedCurrency.name} - ${selectedCurrency.currency}`);
         }
         
-        // وظائف لوحة إعدادات الموقع
-        function selectColor(type, color) {
-            selectedColor[type] = color;
+        // إلغاء اختيار العملة
+        function cancelCurrency() {
+            selectedCurrency = null;
             
-            // تحديث المربعات المحددة
-            document.querySelectorAll('.color-box').forEach(box => {
-                box.classList.remove('selected');
+            // إعادة تعيين اختيار الراديو
+            const radioButtons = document.querySelectorAll('input[name="selectedCurrency"]');
+            radioButtons.forEach(radio => {
+                radio.checked = false;
             });
             
-            // تطبيق التحديد على الصناديق المختارة
-            document.querySelectorAll(`.color-box[style*="${color}"]`).forEach(box => {
-                box.classList.add('selected');
+            // إزالة تأثير التحديد
+            const flagItems = document.querySelectorAll('.flag-item');
+            flagItems.forEach(item => {
+                item.style.border = '1px solid #e0e0e0';
+                item.style.boxShadow = '0 3px 8px rgba(0, 0, 0, 0.08)';
             });
+            
+            updateCurrencyDisplay();
+            alert('تم إلغاء اختيار العملة');
         }
         
-        function applyStyle() {
-            document.documentElement.style.setProperty('--top-bg', selectedColor['top-bg']);
-            document.documentElement.style.setProperty('--bottom-bg', selectedColor['bottom-bg']);
-            document.documentElement.style.setProperty('--text-color', selectedColor['text-color']);
+        // تعيين لون الشريط العلوي
+        function setTopBarColor() {
+            const color = document.getElementById('topBarColor').value;
+            document.documentElement.style.setProperty('--primary-blue', color);
             
-            // حفظ الإعدادات
-            localStorage.setItem('siteColors', JSON.stringify(selectedColor));
+            // تحديث التدرج اللوني للشريط العلوي
+            const header = document.querySelector('.header');
+            header.style.background = `linear-gradient(135deg, ${color}, ${lightenColor(color, 30)})`;
             
-            alert('تم تطبيق النمط الجديد بنجاح');
+            saveToLocalStorage();
         }
         
+        // تعيين لون الخلفية السفلية
+        function setBottomColor() {
+            const color = document.getElementById('bottomColor').value;
+            document.documentElement.style.setProperty('--background-light', color);
+            document.body.style.backgroundColor = color;
+            saveToLocalStorage();
+        }
+        
+        // تعيين لون الخطوط
+        function setTextColor() {
+            const color = document.getElementById('textColor').value;
+            document.documentElement.style.setProperty('--text-dark', color);
+            saveToLocalStorage();
+        }
+        
+        // حفظ النمط
+        function saveStyle() {
+            alert('تم حفظ النمط بنجاح');
+        }
+        
+        // إعادة تعيين النمط
         function resetStyle() {
-            selectedColor = {
-                'top-bg': '#0077FF',
-                'bottom-bg': '#FFFFFF',
-                'text-color': '#000000'
-            };
+            document.documentElement.style.setProperty('--primary-blue', '#0066ff');
+            document.documentElement.style.setProperty('--background-light', '#f8f9fa');
+            document.documentElement.style.setProperty('--text-dark', '#222222');
             
-            document.documentElement.style.setProperty('--top-bg', selectedColor['top-bg']);
-            document.documentElement.style.setProperty('--bottom-bg', selectedColor['bottom-bg']);
-            document.documentElement.style.setProperty('--text-color', selectedColor['text-color']);
+            document.getElementById('topBarColor').value = '#0066ff';
+            document.getElementById('bottomColor').value = '#f8f9fa';
+            document.getElementById('textColor').value = '#222222';
             
-            // حفظ الإعدادات
-            localStorage.setItem('siteColors', JSON.stringify(selectedColor));
+            const header = document.querySelector('.header');
+            header.style.background = 'linear-gradient(135deg, #0066ff, #4d94ff)';
+            document.body.style.backgroundColor = '#f8f9fa';
             
-            // تحديث المربعات المحددة
-            document.querySelectorAll('.color-box').forEach(box => {
-                box.classList.remove('selected');
-            });
-            
-            // تحديد المربعات الافتراضية
-            document.querySelectorAll('.color-box[style*="#0077FF"], .color-box[style*="#FFFFFF"], .color-box[style*="#000000"]').forEach(box => {
-                box.classList.add('selected');
-            });
-            
+            saveToLocalStorage();
             alert('تم إعادة تعيين الألوان إلى الإعدادات الافتراضية');
         }
         
-        // وظائف لوحة أوراق المصروف المحفوظة
-        function deleteSavedExpense() {
-            // في تطبيق حقيقي، سيتم عرض قائمة بالمصروفات المحفوظة واختيار واحد للحذف
-            alert('في التطبيق الكامل، سيتم عرض قائمة بالمصروفات المحفوظة واختيار واحد للحذف');
+        // الاتصال برقم هاتف
+        function callNumber(number) {
+            if (confirm(`هل تريد الاتصال بالرقم ${number}؟`)) {
+                window.location.href = `tel:${number}`;
+            }
         }
         
-        function editSavedExpense() {
-            alert('في التطبيق الكامل، سيتم عرض قائمة بالمصروفات المحفوظة واختيار واحد للتعديل');
+        // وظيفة مساعدة لتفتيح اللون
+        function lightenColor(color, percent) {
+            const num = parseInt(color.replace("#", ""), 16);
+            const amt = Math.round(2.55 * percent);
+            const R = (num >> 16) + amt;
+            const G = (num >> 8 & 0x00FF) + amt;
+            const B = (num & 0x0000FF) + amt;
+            
+            return "#" + (
+                0x1000000 + 
+                (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 + 
+                (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 + 
+                (B < 255 ? B < 1 ? 0 : B : 255)
+            ).toString(16).slice(1);
         }
         
-        function saveEditedExpense() {
-            alert('في التطبيق الكامل، سيتم حفظ التعديلات على المصروف المحدد');
-        }
-        
-        function reviewExpense() {
-            alert('في التطبيق الكامل، سيتم عرض تفاصيل المصروف المحدد');
-        }
-        
-        // وظائف لوحة أوراق المصروف المحذوفة
-        function restoreExpense() {
-            alert('في التطبيق الكامل، سيتم عرض قائمة بالمصروفات المحذوفة واختيار واحد للاستعادة');
-        }
-        
-        function permanentDeleteExpense() {
-            alert('في التطبيق الكامل، سيتم عرض قائمة بالمصروفات المحذوفة واختيار واحد للحذف النهائي');
-        }
-        
-        // وظائف التخزين المحلي
+        // حفظ البيانات في التخزين المحلي
         function saveToLocalStorage() {
             const data = {
-                givers: givers,
                 savedExpenses: savedExpenses,
-                deletedExpenses: deletedExpenses
+                deletedExpenses: deletedExpenses,
+                givers: givers,
+                selectedCurrency: selectedCurrency,
+                style: {
+                    primaryColor: getComputedStyle(document.documentElement).getPropertyValue('--primary-blue').trim(),
+                    backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--background-light').trim(),
+                    textColor: getComputedStyle(document.documentElement).getPropertyValue('--text-dark').trim()
+                }
             };
             
-            localStorage.setItem('smartExpenseBook', JSON.stringify(data));
+            localStorage.setItem('smartExpenseApp', JSON.stringify(data));
         }
         
+        // تحميل البيانات من التخزين المحلي
         function loadFromLocalStorage() {
-            const savedData = localStorage.getItem('smartExpenseBook');
+            const savedData = localStorage.getItem('smartExpenseApp');
             
             if (savedData) {
                 const data = JSON.parse(savedData);
-                givers = data.givers || [];
+                
                 savedExpenses = data.savedExpenses || [];
                 deletedExpenses = data.deletedExpenses || [];
+                givers = data.givers || [];
+                selectedCurrency = data.selectedCurrency || null;
+                
+                if (data.style) {
+                    document.documentElement.style.setProperty('--primary-blue', data.style.primaryColor);
+                    document.documentElement.style.setProperty('--background-light', data.style.backgroundColor);
+                    document.documentElement.style.setProperty('--text-dark', data.style.textColor);
+                    
+                    document.getElementById('topBarColor').value = data.style.primaryColor;
+                    document.getElementById('bottomColor').value = data.style.backgroundColor;
+                    document.getElementById('textColor').value = data.style.textColor;
+                    
+                    const header = document.querySelector('.header');
+                    header.style.background = `linear-gradient(135deg, ${data.style.primaryColor}, ${lightenColor(data.style.primaryColor, 30)})`;
+                    document.body.style.backgroundColor = data.style.backgroundColor;
+                }
                 
                 updateGiversList();
-            }
-            
-            // تحميل ألوان الموقع
-            const savedColors = localStorage.getItem('siteColors');
-            if (savedColors) {
-                selectedColor = JSON.parse(savedColors);
-                
-                document.documentElement.style.setProperty('--top-bg', selectedColor['top-bg']);
-                document.documentElement.style.setProperty('--bottom-bg', selectedColor['bottom-bg']);
-                document.documentElement.style.setProperty('--text-color', selectedColor['text-color']);
-                
-                // تحديث المربعات المحددة
-                document.querySelectorAll('.color-box').forEach(box => {
-                    box.classList.remove('selected');
-                });
-                
-                // تحديد المربعات المحفوظة
-                Object.values(selectedColor).forEach(color => {
-                    document.querySelectorAll(`.color-box[style*="${color}"]`).forEach(box => {
-                        box.classList.add('selected');
-                    });
-                });
+                updateCalculations();
+                updateCurrencyDisplay();
             }
         }
-        
-        // إغلاق النوافذ عند النقر خارجها
-        window.onclick = function(event) {
-            const modals = document.querySelectorAll('.modal');
-            modals.forEach(modal => {
-                if (event.target === modal) {
-                    modal.style.display = 'none';
-                }
-            });
-        };
-        
-        // إغلاق النوافذ بالزر Escape
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                const modals = document.querySelectorAll('.modal');
-                modals.forEach(modal => {
-                    modal.style.display = 'none';
-                });
-            }
-        });
     </script>
 </body>
-    </html>
+                </html>
